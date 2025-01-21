@@ -1,5 +1,4 @@
 using BusinessLogicLayer;
-using DataAccessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
