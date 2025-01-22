@@ -29,11 +29,6 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
     }
     public void Remove(TEntity entity)
     {
-        if (_dbContext.Entry(entity).State == EntityState.Detached) 
-        {
-            _entities.Attach(entity);
-        }
-
         _entities.Remove(entity);
     }
     public async Task RemoveByIdAsync(int id) 
@@ -47,7 +42,6 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
     }
     public void Update(TEntity entity)
     {
-        _entities.Attach(entity);
         _dbContext.Entry(entity).State = EntityState.Modified;
     }
     public Task SaveAsync() 
