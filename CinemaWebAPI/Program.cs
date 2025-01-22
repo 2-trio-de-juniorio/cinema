@@ -1,5 +1,6 @@
 using System.Reflection;
 using BusinessLogicLayer;
+using DataAccessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,10 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
+
+builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
+builder.Services.AddIdentity();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
