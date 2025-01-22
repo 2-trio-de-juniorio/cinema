@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Artem\\source\\repos\\cinema\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\cinemawebapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\cinemawebapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\services\\sessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\services\\sessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\services\\isessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\services\\isessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0DE0D8E-F08D-4945-A6F9-762DC4C045B9}|BusinessLogicLayer\\BusinessLogic.csproj|c:\\users\\artem\\source\\repos\\cinema\\businesslogiclayer\\businesslogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A0DE0D8E-F08D-4945-A6F9-762DC4C045B9}|BusinessLogicLayer\\BusinessLogic.csproj|solutionrelative:businesslogiclayer\\businesslogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\cinemawebapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\cinemawebapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,31 +38,95 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CinemaWebAPI",
-              "DocumentMoniker": "C:\\Users\\Artem\\Source\\Repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
-              "RelativeDocumentMoniker": "CinemaWebAPI\\CinemaWebAPI.csproj",
-              "ToolTip": "C:\\Users\\Artem\\Source\\Repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
-              "RelativeToolTip": "CinemaWebAPI\\CinemaWebAPI.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-21T17:07:49.783Z",
+              "DocumentIndex": 0,
+              "Title": "SessionController.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SessionController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\SessionController.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SessionController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\SessionController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAcwDgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T17:25:27.556Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "SessionService.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Services\\SessionService.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Services\\SessionService.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Services\\SessionService.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Services\\SessionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T17:19:01.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DataAccess.csproj",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\DataAccess.csproj",
+              "RelativeDocumentMoniker": "DataAccessLayer\\DataAccess.csproj",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\DataAccess.csproj",
+              "RelativeToolTip": "DataAccessLayer\\DataAccess.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-22T15:05:40.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BusinessLogic.csproj",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\BusinessLogicLayer\\BusinessLogic.csproj",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\BusinessLogic.csproj",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\BusinessLogicLayer\\BusinessLogic.csproj",
+              "RelativeToolTip": "BusinessLogicLayer\\BusinessLogic.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-22T14:54:33.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CinemaWebAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\CinemaWebAPI.csproj",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
+              "RelativeToolTip": "CinemaWebAPI\\CinemaWebAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-22T14:53:02.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs",
               "RelativeDocumentMoniker": "CinemaWebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs",
-              "RelativeToolTip": "CinemaWebAPI\\Program.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABgAAAAAAAAA",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs*",
+              "RelativeToolTip": "CinemaWebAPI\\Program.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-21T17:07:13.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ISessionService.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Services\\ISessionService.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Services\\ISessionService.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Services\\ISessionService.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Services\\ISessionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T17:17:33.376Z",
               "EditorCaption": ""
             }
           ]

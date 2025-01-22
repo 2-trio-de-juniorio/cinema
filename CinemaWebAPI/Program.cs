@@ -1,5 +1,6 @@
 using System.Reflection;
 using BusinessLogicLayer;
+using CinemaWebAPI.Services;
 using DataAccessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,17 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISessionService, SessionService>();
+
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
 builder.Services.AddIdentity();
 
@@ -30,6 +42,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllers();
