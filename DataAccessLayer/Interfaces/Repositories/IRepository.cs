@@ -7,6 +7,7 @@ public interface IRepository<TEntity> : IDisposable
     Task<TEntity?> GetByIdAsync(int id);
     Task<List<TEntity>> GetAllAsync();
     void Add(TEntity entity);
+    Task AddAsync(TEntity entity);
     void Update(TEntity entity);
     void Remove(TEntity entity);
     Task RemoveByIdAsync(int id);

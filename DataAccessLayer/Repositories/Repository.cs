@@ -27,6 +27,10 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
     {
         _entities.Add(entity);
     }
+    public Task AddAsync(TEntity entity) 
+    {
+        return _entities.AddAsync(entity).AsTask();
+    }
     public void Remove(TEntity entity)
     {
         _entities.Remove(entity);
