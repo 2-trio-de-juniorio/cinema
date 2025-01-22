@@ -1,5 +1,5 @@
-﻿using DataAccessLayer.Data;
-using DataAccessLayer.Models;
+﻿using DataAccess.Models.Users;
+using DataAccessLayer.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
