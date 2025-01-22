@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,11 +14,12 @@
         <PackageReference Include="Hangfire.SqlServer" Version="1.8.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BusinessLogicLayer\BusinessLogic.csproj" />
+        <ProjectReference Include="..\BusinessLogicLayer\BusinessLogic.csproj" />
     </ItemGroup>
 
 </Project>
