@@ -1,6 +1,7 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+
 namespace DataAccessLayer.Repositories;
 
 internal sealed class Repository<TEntity> : IRepository<TEntity>
@@ -47,27 +48,5 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
     public void Update(TEntity entity)
     {
         _dbContext.Entry(entity).State = EntityState.Modified;
-    }
-    public Task SaveAsync() 
-    {
-        return _dbContext.SaveChangesAsync();
-    }
-
-    public void Dispose() 
-    {
-        Dispose(disposing: true);
-    }
-    private bool _disposed = false;
-    private void Dispose(bool disposing) 
-    {
-        if (!_disposed) 
-        {
-            if (disposing) 
-            {
-                _dbContext.Dispose();
-            }
-
-            _disposed = true;
-        }
     }
 }
