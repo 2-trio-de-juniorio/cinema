@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
 builder.Services.AddIdentity();
 
+builder.Services.AddRepository();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
