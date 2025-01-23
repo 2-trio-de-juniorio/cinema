@@ -1,4 +1,4 @@
-﻿namespace DataAccessLayer.Models
+﻿namespace DataAccess.Models.Movies
 {
     public class Genre
     {

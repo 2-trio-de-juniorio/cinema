@@ -1,4 +1,7 @@
-﻿namespace DataAccessLayer.Models
+﻿using DataAccess.Models.Sessions;
+using DataAccess.Models.Users;
+
+namespace DataAccess.Models.Tickets
 {
     public class Ticket
     {

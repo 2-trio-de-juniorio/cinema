@@ -1,4 +1,4 @@
-﻿namespace DataAccessLayer.Models
+﻿namespace DataAccess.Models.Movies.Actors
 {
     public class Actor
     {

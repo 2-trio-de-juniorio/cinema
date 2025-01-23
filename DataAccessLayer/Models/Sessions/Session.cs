@@ -1,4 +1,7 @@
-﻿namespace DataAccessLayer.Models
+﻿using DataAccess.Models.Movies;
+using DataAccess.Models.Tickets;
+
+namespace DataAccess.Models.Sessions
 {
     public class Session
     {

@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models
+﻿using DataAccess.Models.Tickets;
+
+namespace DataAccess.Models.Sessions
 {
     public class Seat
     {
