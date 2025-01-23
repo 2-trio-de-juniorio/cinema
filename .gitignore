@@ -4,8 +4,13 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 
+/.idea/.idea.CinemaWebAPI/.idea
+.vs/
+
+
 .vs/
 
 /.idea/.idea.CinemaWebAPI/.idea
 /.vs
+
 
