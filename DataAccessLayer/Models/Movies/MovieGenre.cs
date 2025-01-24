@@ -1,4 +1,6 @@
-﻿namespace DataAccess.Models.Movies
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataAccess.Models.Movies
 {
     public class MovieGenre
     {

@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models.Movies;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Models.Movies.Actors
 {

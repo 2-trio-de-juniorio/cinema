@@ -1,46 +1,57 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\",
+  "WorkspaceRootPath": "C:\\Users\\Artem\\source\\repos\\cinema\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\movies\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\movies\\actors\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\actors\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\tickets\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\tickets\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\movies\\moviegenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\moviegenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\movies\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\users\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\users\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\movies\\actors\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\movies\\actors\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\actors\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\sessions\\seat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\movies\\actors\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\actors\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\movies\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\movies\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\movies\\moviegenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\movies\\moviegenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\sessions\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\sessions\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\sessions\\seat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\sessions\\seat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\asus\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\softserve\\cinema\\dataaccesslayer\\models\\sessions\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\sessions\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\tickets\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\tickets\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|c:\\users\\artem\\source\\repos\\cinema\\dataaccesslayer\\models\\users\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F06F41B5-429E-484E-A67C-7819F6E0F20E}|DataAccessLayer\\DataAccess.csproj|solutionrelative:dataaccesslayer\\models\\users\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\controllers\\actorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\controllers\\actorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|c:\\users\\artem\\source\\repos\\cinema\\cinemawebapi\\cinemawebapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FC4D8604-3DFE-4D32-BE04-68DFE600AC52}|CinemaWebAPI\\CinemaWebAPI.csproj|solutionrelative:cinemawebapi\\cinemawebapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Artem\\AppData\\Local\\SourceServer\\51791e7d37cbdf2aeafbb32d4e059e59f3155992c809cc7026e27f907a20921c\\BusinessLogicLayer\\ServiceExtension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,150 +64,173 @@
           "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Genre.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Genre.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Genre.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:44:13.889Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Actor.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:43:53.601Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MovieGenre.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs*",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\MovieGenre.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:43:36.29Z"
+              "WhenOpened": "2025-01-24T16:21:27.432Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MovieActor.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs*",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:43:08.803Z",
+              "WhenOpened": "2025-01-24T16:18:06.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Seat.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Seat.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Seat.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Seat.cs*",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Seat.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:39:29.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Hall.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Hall.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Hall.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Hall.cs",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Hall.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:26:57.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Movie.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Movie.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Movie.cs",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Movie.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwAsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:13:20.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Genre.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Genre.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Genre.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:03:42.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Actor.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T14:41:55.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Session.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Session.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Sessions\\Session.cs*",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Session.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:41:05.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Tickets\\Ticket.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Tickets\\Ticket.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Tickets\\Ticket.cs*",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Tickets\\Ticket.cs*",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T15:45:59.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Hall.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Hall.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Hall.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Hall.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Hall.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:42:33.453Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Movie.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Movie.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Movie.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Movies\\Movie.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Movies\\Movie.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAwwBUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:42:05.513Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Session.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Session.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Session.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Session.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Session.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:41:11.551Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Seat.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Seat.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Sessions\\Seat.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Sessions\\Seat.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Sessions\\Seat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:38:52.198Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Ticket.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Tickets\\Ticket.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Tickets\\Ticket.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Tickets\\Ticket.cs",
-              "RelativeToolTip": "DataAccessLayer\\Models\\Tickets\\Ticket.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:38:05.525Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "AppUser.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Users\\AppUser.cs",
-              "ToolTip": "C:\\Users\\asus\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\SoftServe\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs",
               "RelativeToolTip": "DataAccessLayer\\Models\\Users\\AppUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T18:19:37.132Z"
+              "WhenOpened": "2025-01-24T16:17:46.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ActorsController.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAIwBgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T16:15:11.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CinemaWebAPI",
+              "DocumentMoniker": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\CinemaWebAPI.csproj",
+              "ToolTip": "C:\\Users\\Artem\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
+              "RelativeToolTip": "CinemaWebAPI\\CinemaWebAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-24T14:51:02.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ServiceExtension.cs",
+              "DocumentMoniker": "C:\\Users\\Artem\\AppData\\Local\\SourceServer\\51791e7d37cbdf2aeafbb32d4e059e59f3155992c809cc7026e27f907a20921c\\BusinessLogicLayer\\ServiceExtension.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\51791e7d37cbdf2aeafbb32d4e059e59f3155992c809cc7026e27f907a20921c\\BusinessLogicLayer\\ServiceExtension.cs",
+              "ToolTip": "C:\\Users\\Artem\\AppData\\Local\\SourceServer\\51791e7d37cbdf2aeafbb32d4e059e59f3155992c809cc7026e27f907a20921c\\BusinessLogicLayer\\ServiceExtension.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\51791e7d37cbdf2aeafbb32d4e059e59f3155992c809cc7026e27f907a20921c\\BusinessLogicLayer\\ServiceExtension.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-24T16:04:48.528Z",
+              "EditorCaption": ""
             }
           ]
         }
