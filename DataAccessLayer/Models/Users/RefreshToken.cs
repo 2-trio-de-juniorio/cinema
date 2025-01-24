@@ -1,4 +1,4 @@
-namespace DataAccessLayer.Models.Users
+namespace DataAccess.Models.Users
 {
     public class RefreshToken
     {
