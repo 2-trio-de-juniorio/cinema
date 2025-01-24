@@ -5,20 +5,22 @@ using DataAccessLayer.Interfaces;
 namespace DataAccessLayer.UnitOfWork;
 internal sealed class UnitOfWork : IUnitOfWork
 {
-    private Dictionary<string, object> _repositories;
+    private Dictionary<Type, object> _repositories;
     private readonly AppDbContext _dbContext;
+
     public UnitOfWork(AppDbContext dbContext)
     {
         _dbContext = dbContext;
-        _repositories = new Dictionary<string, object>();
+        _repositories = new Dictionary<Type, object>();
     }
+
     public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
     {
-        if (!_repositories.ContainsKey(typeof(TEntity).Name))
+        if (!_repositories.ContainsKey(typeof(TEntity)))
         {
-            _repositories[typeof(TEntity).Name] = new Repository<TEntity>(_dbContext);
+            _repositories[typeof(TEntity)] = new Repository<TEntity>(_dbContext);
         }
-        return (IRepository<TEntity>)_repositories[typeof(TEntity).Name];
+        return (IRepository<TEntity>)_repositories[typeof(TEntity)];
     }
 
     public Task<int> SaveAsync()
@@ -30,7 +32,9 @@ internal sealed class UnitOfWork : IUnitOfWork
     {
         Dispose(disposing: true);
     }
+
     private bool _disposed = false;
+    
     private void Dispose(bool disposing)
     {
         if (!_disposed)
