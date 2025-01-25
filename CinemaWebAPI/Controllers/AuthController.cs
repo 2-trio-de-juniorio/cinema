@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using BusinessLogicLayer;
 using DataAccessLayer.Data;
 using DataAccess.Models.Users;
+using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Services;
+using BusinessLogicLayer.DTOs;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -15,6 +18,7 @@ namespace CinemaWebAPI.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly TokenService _tokenService;
         private readonly AppDbContext _context;
+        private readonly IAuthService _authService;
 
         public AuthController(UserManager<AppUser> userManager, TokenService tokenService, AppDbContext context)
         {
@@ -23,46 +27,44 @@ namespace CinemaWebAPI.Controllers
             _context = context;
         }
 
+
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, password))
+            var user = await _userManager.FindByNameAsync(loginRequest.Username);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginRequest.Password))
                 return Unauthorized("Invalid username or password");
 
             var accessToken = _tokenService.GenerateAccessToken(user.Id, "User");
             var refreshToken = _tokenService.GenerateRefreshToken();
 
+            await _authService.SaveRefreshTokenAsync(refreshToken, user.Id);
 
-            var refreshTokenEntity = new RefreshToken
+            var response = new LoginDTO
             {
-                Token = refreshToken,
-                UserId = user.Id,
-                Expires = DateTime.UtcNow.AddDays(7),
-                IsRevoked = false
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
             };
-            _context.RefreshTokens.Add(refreshTokenEntity);
-            await _context.SaveChangesAsync();
 
-            return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
+            return Ok(response);
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh(string refreshToken)
+        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
         {
-            var tokenEntity = _context.RefreshTokens.SingleOrDefault(t => t.Token == refreshToken && !t.IsRevoked);
-
-            if (tokenEntity == null || tokenEntity.Expires < DateTime.UtcNow)
-                return Unauthorized("Invalid or expired refresh token");
-
-            var user = await _userManager.FindByIdAsync(tokenEntity.UserId);
-            if (user == null)
-                return Unauthorized("User not found");
-
-  
-            var newAccessToken = _tokenService.GenerateAccessToken(user.Id, "User");
-
-            return Ok(new { AccessToken = newAccessToken });
+            try
+            {
+                var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
+                return Ok(new
+                {
+                    AccessToken = tokens.AccessToken,
+                    RefreshToken = tokens.RefreshToken
+                });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
     }
 }
