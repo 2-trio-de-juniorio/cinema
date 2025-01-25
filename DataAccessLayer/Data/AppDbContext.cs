@@ -1,6 +1,7 @@
 using DataAccess.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using DataAccess.Models.Movies.Actors;
 
 namespace DataAccessLayer.Data;
 

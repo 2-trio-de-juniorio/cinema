@@ -16,23 +16,45 @@ namespace CinemaWebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly TokenService _tokenService;
+        private readonly ITokenService _tokenService;
         private readonly AppDbContext _context;
         private readonly IAuthService _authService;
 
-        public AuthController(UserManager<AppUser> userManager, TokenService tokenService, AppDbContext context)
+        public AuthController(UserManager<AppUser> userManager, ITokenService tokenService, IAuthService authService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
-            _context = context;
+            _authService = authService;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
+        {
+            if (registerDTO.Password != registerDTO.ConfirmPassword)
+                return BadRequest("Passwords do not match");
+
+            var user = new AppUser
+            {
+                UserName = registerDTO.Username,
+                Email = registerDTO.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDTO.Password);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                return BadRequest($"Registration failed: {errors}");
+            }
+
+            return Ok("User registered successfully");
         }
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-            var user = await _userManager.FindByNameAsync(loginRequest.Username);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, loginRequest.Password))
+            var user = await _userManager.FindByNameAsync(loginDTO.Username);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
                 return Unauthorized("Invalid username or password");
 
             var accessToken = _tokenService.GenerateAccessToken(user.Id, "User");
@@ -40,7 +62,7 @@ namespace CinemaWebAPI.Controllers
 
             await _authService.SaveRefreshTokenAsync(refreshToken, user.Id);
 
-            var response = new LoginDTO
+            var response = new LoginResponseDTO
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
