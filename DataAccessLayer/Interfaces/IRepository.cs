@@ -1,7 +1,7 @@
 namespace DataAccessLayer.Interfaces;
 
 // Currently implemented as an interface. In future, class-based repositories might be used
-public interface IRepository<TEntity> : IDisposable
+public interface IRepository<TEntity>
     where TEntity : class 
 {
     Task<TEntity?> GetByIdAsync(int id);
@@ -11,5 +11,4 @@ public interface IRepository<TEntity> : IDisposable
     void Update(TEntity entity);
     void Remove(TEntity entity);
     Task RemoveByIdAsync(int id);
-    Task SaveAsync();
 }

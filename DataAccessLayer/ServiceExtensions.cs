@@ -1,6 +1,5 @@
 using DataAccessLayer.Data;
 using DataAccessLayer.Interfaces;
-using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,8 +12,8 @@ public static class ServiceExtensions
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(connectionString));
     }
-    public static void AddRepository(this IServiceCollection services) 
+    public static void AddUnitOfWork(this IServiceCollection services) 
     {
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
     }
 }
