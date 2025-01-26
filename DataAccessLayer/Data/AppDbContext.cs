@@ -25,6 +25,8 @@ namespace DataAccessLayer.Data
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<MovieActor> MovieActors { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
