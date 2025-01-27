@@ -11,6 +11,8 @@ namespace BusinessLogicLayer.Services
 {
     public class AuthService : IAuthService
     {
+        private const int RefreshTokenExpiryDays = 7;
+
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
         private readonly ITokenGeneratorService _tokenService;
@@ -28,7 +30,7 @@ namespace BusinessLogicLayer.Services
             {
                 Token = refreshToken,
                 UserId = userId,
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(RefreshTokenExpiryDays),
                 IsRevoked = false
             };
 
@@ -63,6 +65,24 @@ namespace BusinessLogicLayer.Services
             return await _userManager.CheckPasswordAsync(user, userCredentials.Password);
         }
 
+        public async Task<LoginResponseDTO> AuthenticateUserAsync(LoginDTO loginDTO)
+        {
+            var user = await _userManager.FindByNameAsync(loginDTO.Username);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
+                throw new UnauthorizedAccessException("Invalid username or password");
+
+            var accessToken = _tokenService.GenerateAccessToken(user.Id, "User");
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            await SaveRefreshTokenAsync(refreshToken, user.Id);
+
+            return new LoginResponseDTO
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            };
+        }
+
         public async Task<LoginResponseDTO> RefreshAccessTokenAsync(string refreshToken)
         {
             var tokenEntity = _context.RefreshTokens
@@ -79,7 +99,7 @@ namespace BusinessLogicLayer.Services
             var newRefreshToken = _tokenService.GenerateRefreshToken();
 
             tokenEntity.Token = newRefreshToken;
-            tokenEntity.Expires = DateTime.UtcNow.AddDays(7);
+            tokenEntity.Expires = DateTime.UtcNow.AddDays(RefreshTokenExpiryDays);
             tokenEntity.IsRevoked = false;
 
             _context.RefreshTokens.Update(tokenEntity);

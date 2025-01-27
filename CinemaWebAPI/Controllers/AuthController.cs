@@ -34,29 +34,27 @@ namespace CinemaWebAPI.Controllers
             if (!string.IsNullOrEmpty(errorMessage))
                 return BadRequest(errorMessage);
 
-            return Ok("Registration successful");
-        }
+            var loginResponse = await _authService.AuthenticateUserAsync(new LoginDTO
+            {
+                Username = registerDTO.Username,
+                Password = registerDTO.Password
+            });
 
+            return Ok(loginResponse);
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-            var user = await _userManager.FindByNameAsync(loginDTO.Username);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
-                return Unauthorized("Invalid username or password");
-
-            var accessToken = _tokenService.GenerateAccessToken(user.Id, "User");
-            var refreshToken = _tokenService.GenerateRefreshToken();
-
-            await _authService.SaveRefreshTokenAsync(refreshToken, user.Id);
-
-            var response = new LoginResponseDTO
+            try
             {
-                AccessToken = accessToken,
-                RefreshToken = refreshToken
-            };
-
-            return Ok(response);
+                var response = await _authService.AuthenticateUserAsync(loginDTO);
+                return Ok(response);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
 
         [HttpPost("refresh")]

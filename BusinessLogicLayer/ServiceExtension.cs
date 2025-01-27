@@ -2,6 +2,8 @@
 using DataAccessLayer.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Services;
 
 namespace BusinessLogicLayer
 {
@@ -17,6 +19,12 @@ namespace BusinessLogicLayer
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
+        }
+
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }

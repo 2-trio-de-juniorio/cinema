@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.Services
 {
     public class TokenGeneratorService : ITokenGeneratorService
     {
+        private const int TokenExpirationMinutes = 15;
         private readonly IConfiguration _configuration;
 
         public TokenGeneratorService(IConfiguration configuration)
@@ -20,7 +21,6 @@ namespace BusinessLogicLayer.Services
         public string GenerateAccessToken(string userId, string role)
         {
             var key = Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]);
-            var tokenExpiration = int.Parse(_configuration["JWT:TokenExpirationMinutes"]);
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -42,10 +42,10 @@ namespace BusinessLogicLayer.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.NameIdentifier, userId),
-            new Claim(ClaimTypes.Role, role)
-        }),
-                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["JWT:TokenExpirationMinutes"])),
+                    new Claim(ClaimTypes.NameIdentifier, userId),
+                    new Claim(ClaimTypes.Role, role)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(TokenExpirationMinutes),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(signingKey),
                     SecurityAlgorithms.HmacSha256Signature)
