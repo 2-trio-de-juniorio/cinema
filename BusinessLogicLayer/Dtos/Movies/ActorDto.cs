@@ -1,6 +1,6 @@
 namespace BusinessLogicLayer.Dtos;
 
-public class ActorDto 
+public class ActorDto // replace with normal dto instead
 {
     public string Firstname {get; set;}
     public string Lastname {get; set;}

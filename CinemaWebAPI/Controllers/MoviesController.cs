@@ -2,6 +2,8 @@ using BusinessLogicLayer.Dtos;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+namespace CinemaWebAPI.Controllers;
+
 /// <summary>
 /// API controller responsible for managing movie-related operations.
 /// This controller provides endpoints for CRUD operations for movie records.

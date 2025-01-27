@@ -1,8 +1,9 @@
 using DataAccess.Models.Movies;
+using DataAccess.Models.Movies.Actors;
 
 namespace BusinessLogicLayer.Dtos;
 
-public class MovieDto // replace with validated dto when DTO task is merged
+public class MovieDto // replace with normal dto instead
 {
     public string Title { get; set; }
     public string Description { get; set; }

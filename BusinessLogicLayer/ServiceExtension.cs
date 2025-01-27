@@ -20,9 +20,11 @@ namespace BusinessLogicLayer
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
         }
+        
         public static void AddCinemaServices(this IServiceCollection services) 
         {
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ISessionService, SessionService>();
         }
     }
 }

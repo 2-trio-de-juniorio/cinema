@@ -6,7 +6,8 @@ using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services;
 
-internal sealed class MovieService : IMovieService
+// delete later
+internal sealed class MovieService : IMovieService 
 {
     private readonly IUnitOfWork _unitOfWork;
 
