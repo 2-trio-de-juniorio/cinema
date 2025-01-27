@@ -20,7 +20,7 @@ namespace BusinessLogicLayer
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
         }
-        public static void addFluentValidator(this IServiceCollection services)
+        public static void AddFluentValidator(this IServiceCollection services)
         {
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<ActorValidator>();
