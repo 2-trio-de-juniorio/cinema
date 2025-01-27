@@ -5,7 +5,8 @@ namespace BusinessLogicLayer.Interfaces
 	public interface IAuthService
 	{
 		Task SaveRefreshTokenAsync(string refreshToken, string userId);
-		Task<bool> IsUserValid(string username, string password);
-		Task<(string AccessToken, string RefreshToken)> RefreshAccessTokenAsync(string refreshToken);
+        Task<bool> IsUserValid(LoginDTO userCredentials);
+        Task<string> RegisterUser(RegisterDTO registerDTO);
+        Task<LoginResponseDTO> RefreshAccessTokenAsync(string refreshToken);
 	}
 }

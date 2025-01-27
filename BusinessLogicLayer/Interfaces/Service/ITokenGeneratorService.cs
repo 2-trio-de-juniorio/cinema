@@ -2,7 +2,7 @@ using BusinessLogicLayer.DTOs;
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface ITokenService
+    public interface ITokenGeneratorService
     {
         string GenerateAccessToken(string userId, string role);
         string GenerateRefreshToken();

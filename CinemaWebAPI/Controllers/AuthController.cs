@@ -16,11 +16,11 @@ namespace CinemaWebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly ITokenService _tokenService;
+        private readonly ITokenGeneratorService _tokenService;
         private readonly AppDbContext _context;
         private readonly IAuthService _authService;
 
-        public AuthController(UserManager<AppUser> userManager, ITokenService tokenService, IAuthService authService)
+        public AuthController(UserManager<AppUser> userManager, ITokenGeneratorService tokenService, IAuthService authService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
@@ -30,23 +30,11 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
-            if (registerDTO.Password != registerDTO.ConfirmPassword)
-                return BadRequest("Passwords do not match");
+            var errorMessage = await _authService.RegisterUser(registerDTO);
+            if (!string.IsNullOrEmpty(errorMessage))
+                return BadRequest(errorMessage);
 
-            var user = new AppUser
-            {
-                UserName = registerDTO.Username,
-                Email = registerDTO.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, registerDTO.Password);
-            if (!result.Succeeded)
-            {
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                return BadRequest($"Registration failed: {errors}");
-            }
-
-            return Ok("User registered successfully");
+            return Ok("Registration successful");
         }
 
 
@@ -77,11 +65,7 @@ namespace CinemaWebAPI.Controllers
             try
             {
                 var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
-                return Ok(new
-                {
-                    AccessToken = tokens.AccessToken,
-                    RefreshToken = tokens.RefreshToken
-                });
+                return Ok(tokens);
             }
             catch (UnauthorizedAccessException ex)
             {

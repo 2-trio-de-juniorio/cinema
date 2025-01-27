@@ -5,6 +5,7 @@ using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using BusinessLogicLayer.DTOs;
 
 namespace BusinessLogicLayer.Services
 {
@@ -12,9 +13,9 @@ namespace BusinessLogicLayer.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
-        private readonly ITokenService _tokenService;
+        private readonly ITokenGeneratorService _tokenService;
 
-        public AuthService(UserManager<AppUser> userManager, AppDbContext context, ITokenService tokenService)
+        public AuthService(UserManager<AppUser> userManager, AppDbContext context, ITokenGeneratorService tokenService)
         {
             _userManager = userManager;
             _context = context;
@@ -35,16 +36,34 @@ namespace BusinessLogicLayer.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsUserValid(string username, string password)
+        public async Task<string> RegisterUser(RegisterDTO registerDTO)
         {
-            var user = await _userManager.FindByNameAsync(username);
+            var user = new AppUser
+            {
+                UserName = registerDTO.Username,
+                Email = registerDTO.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDTO.Password);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                return $"Registration failed: {errors}";
+            }
+
+            return null;
+        }
+
+        public async Task<bool> IsUserValid(LoginDTO userCredentials)
+        {
+            var user = await _userManager.FindByNameAsync(userCredentials.Username);
             if (user == null)
                 return false;
 
-            return await _userManager.CheckPasswordAsync(user, password);
+            return await _userManager.CheckPasswordAsync(user, userCredentials.Password);
         }
 
-        public async Task<(string AccessToken, string RefreshToken)> RefreshAccessTokenAsync(string refreshToken)
+        public async Task<LoginResponseDTO> RefreshAccessTokenAsync(string refreshToken)
         {
             var tokenEntity = _context.RefreshTokens
                 .SingleOrDefault(t => t.Token == refreshToken && !t.IsRevoked);
@@ -57,7 +76,6 @@ namespace BusinessLogicLayer.Services
                 throw new UnauthorizedAccessException("User not found");
 
             var newAccessToken = _tokenService.GenerateAccessToken(user.Id, "User");
-
             var newRefreshToken = _tokenService.GenerateRefreshToken();
 
             tokenEntity.Token = newRefreshToken;
@@ -67,7 +85,11 @@ namespace BusinessLogicLayer.Services
             _context.RefreshTokens.Update(tokenEntity);
             await _context.SaveChangesAsync();
 
-            return (newAccessToken, newRefreshToken);
+            return new LoginResponseDTO
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
+            };
         }
     }
 }

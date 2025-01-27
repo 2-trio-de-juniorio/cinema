@@ -56,8 +56,7 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
 builder.Services.AddIdentity();
 
-
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddRepository();

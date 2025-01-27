@@ -8,27 +8,28 @@ using BusinessLogicLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
 {
-    public class TokenService : ITokenService
+    public class TokenGeneratorService : ITokenGeneratorService
     {
-        private const string JwtSigningKeyPath = "JWT:SigningKey";
-        private const int TokenExpirationMinutes = 15; 
         private readonly IConfiguration _configuration;
 
-        public TokenService(IConfiguration configuration)
+        public TokenGeneratorService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
         public string GenerateAccessToken(string userId, string role)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var signingKey = Encoding.UTF8.GetBytes(_configuration[JwtSigningKeyPath]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]);
+            var tokenExpiration = int.Parse(_configuration["JWT:TokenExpirationMinutes"]);
 
-            var tokenDescriptor = CreateTokenDescriptor(userId, role, signingKey);
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var tokenDescriptor = CreateTokenDescriptor(userId, role, key);
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
 
         public string GenerateRefreshToken()
         {
@@ -41,10 +42,10 @@ namespace BusinessLogicLayer.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Role, role)
-                }),
-                Expires = DateTime.UtcNow.AddMinutes(TokenExpirationMinutes),
+            new Claim(ClaimTypes.NameIdentifier, userId),
+            new Claim(ClaimTypes.Role, role)
+        }),
+                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["JWT:TokenExpirationMinutes"])),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(signingKey),
                     SecurityAlgorithms.HmacSha256Signature)
