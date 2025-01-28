@@ -1,4 +1,6 @@
-﻿using DataAccess.Models.Users;
+﻿using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Services;
+using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using FluentValidation.AspNetCore;
 using FluentValidation;
@@ -20,11 +22,18 @@ namespace BusinessLogicLayer
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
         }
+ 
         public static void AddFluentValidator(this IServiceCollection services)
         {
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<ActorValidator>();
             services.AddValidatorsFromAssemblyContaining<GenreValidator>();
+        }
+        
+        public static void AddCinemaServices(this IServiceCollection services) 
+        {
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ISessionService, SessionService>();
         }
     }
 }

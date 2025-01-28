@@ -25,6 +25,7 @@ builder.Services.AddDbContext(builder.Configuration.GetConnectionString("Default
 builder.Services.AddIdentity();
 
 builder.Services.AddUnitOfWork();
+builder.Services.AddCinemaServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
