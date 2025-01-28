@@ -3,6 +3,7 @@ using DataAccessLayer.Repositories;
 using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.UnitOfWork;
+
 internal sealed class UnitOfWork : IUnitOfWork
 {
     private Dictionary<Type, object> _repositories;
