@@ -1,5 +1,3 @@
-using BusinessLogicLayer.DTOs;
-
 namespace BusinessLogicLayer.Interfaces
 {
     public interface ITokenGeneratorService

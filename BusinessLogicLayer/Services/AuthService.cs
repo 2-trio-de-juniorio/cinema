@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using BusinessLogicLayer.Interfaces;
@@ -38,7 +35,7 @@ namespace BusinessLogicLayer.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<string> RegisterUser(RegisterDTO registerDTO)
+        public async Task<string?> RegisterUser(RegisterDTO registerDTO)
         {
             var user = new AppUser
             {
@@ -47,6 +44,7 @@ namespace BusinessLogicLayer.Services
             };
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
+
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
@@ -59,6 +57,7 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> IsUserValid(LoginDTO userCredentials)
         {
             var user = await _userManager.FindByNameAsync(userCredentials.Username);
+            
             if (user == null)
                 return false;
 
