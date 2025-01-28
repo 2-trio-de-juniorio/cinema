@@ -5,22 +5,21 @@ using DataAccess.Models.Movies.Actors;
 
 namespace BusinessLogic.MappingProfiles.Movies
 {
-    public class SessionProfile : Profile
+    public class MovieProfile : Profile
     {
-        public SessionProfile()
+        public MovieProfile()
         {
             CreateMap<Movie, MovieModel>()
-                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src =>
-                    src.MovieGenres.Select(mg => new GenreModel { Name = mg.Genre.Name })))
-                .ForMember(dest => dest.Actors, opt => opt.MapFrom(src =>
-                    src.MovieActors.Select(ma => new ActorModel { Firstname = ma.Actor.Firstname, Lastname = ma.Actor.Lastname })));
+                .ForMember(dest => dest.GenreIds, opt => opt.MapFrom(src =>
+                    src.MovieGenres.Select(mg => mg.GenreId)))
+                .ForMember(dest => dest.ActorIds, opt => opt.MapFrom(src =>
+                    src.MovieActors.Select(ma => ma.ActorId)));
 
             CreateMap<MovieModel, Movie>()
                 .ForMember(dest => dest.MovieGenres, opt => opt.MapFrom(src =>
-                    src.Genres.Select(g => new MovieGenre { Genre = new Genre { Name = g.Name } })))
+                    src.GenreIds.Select(genreId => new MovieGenre { GenreId = genreId })))
                 .ForMember(dest => dest.MovieActors, opt => opt.MapFrom(src =>
-                    src.Actors.Select(a => new MovieActor { Actor = new Actor { Firstname = a.Firstname, Lastname = a.Lastname } })));
+                    src.ActorIds.Select(actorId => new MovieActor { ActorId = actorId })));
         }
     }
-
 }

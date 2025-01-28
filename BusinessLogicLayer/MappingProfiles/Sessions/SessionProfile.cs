@@ -9,10 +9,8 @@ namespace BusinessLogic.MappingProfiles.Sessions
         public SessionProfile()
         {
             CreateMap<Session, SessionModel>()
-                .ForMember(dest => dest.Movie, opt => opt.MapFrom(src => src.Movie))
-                .ForMember(dest => dest.Hall, opt => opt.MapFrom(src => src.Hall))
-                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
+                .ForMember(dest => dest.HallName, opt => opt.MapFrom(src => src.Hall.Name))
                 .ReverseMap();
         }
     }
