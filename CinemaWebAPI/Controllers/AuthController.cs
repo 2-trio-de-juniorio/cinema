@@ -1,15 +1,10 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
-using BusinessLogicLayer;
 using DataAccessLayer.Data;
 using DataAccess.Models.Users;
 using BusinessLogicLayer.Interfaces;
-using BusinessLogicLayer.Services;
 using BusinessLogicLayer.DTOs;
-using BusinessLogicLayer.Profiles;
 
 namespace CinemaWebAPI.Controllers
 {

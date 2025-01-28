@@ -1,4 +1,3 @@
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -20,7 +19,7 @@ namespace BusinessLogicLayer.Services
 
         public string GenerateAccessToken(string userId, string role)
         {
-            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"] ?? string.Empty);
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

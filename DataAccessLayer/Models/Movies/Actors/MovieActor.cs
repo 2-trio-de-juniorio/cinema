@@ -1,6 +1,4 @@
-﻿using DataAccess.Models.Movies;
-
-namespace DataAccess.Models.Movies.Actors
+﻿namespace DataAccess.Models.Movies.Actors
 {
     public class MovieActor
     {

@@ -1,15 +1,24 @@
-﻿using DataAccess.Models.Users;
+﻿using BusinessLogicLayer.Profiles;
+using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BusinessLogicLayer.Interfaces;
-using BusinessLogicLayer.Services;
 
 namespace BusinessLogicLayer
 {
     public static class ServiceExtension
     {
-        public static void AddIdentity(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            return services
+                .AddAuthenticationDependencies(configuration)
+                .AddIdentity()
+                .AddAutoMapper();
+        }
+
+        private static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
@@ -19,6 +28,14 @@ namespace BusinessLogicLayer
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddAutoMapper(this IServiceCollection services)
+        {
+            return services.AddAutoMapper(typeof(AuthProfile));
+            //other di here
         }
     }
 }
