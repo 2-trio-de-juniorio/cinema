@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Services;
 
 namespace BusinessLogicLayer
 {
@@ -32,6 +34,19 @@ namespace BusinessLogicLayer
                 };
             });
 
+            return services;
+        }
+
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+            services.AddScoped<IAuthService, AuthService>();
+        }
+
+        public static IServiceCollection AddAuthenticationAndServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddJwtAuthentication(configuration);
+            services.AddApplicationServices();
             return services;
         }
     }

@@ -20,11 +20,5 @@ namespace BusinessLogicLayer
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
         }
-
-        public static void AddApplicationServices(this IServiceCollection services)
-        {
-            services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
-            services.AddScoped<IAuthService, AuthService>();
-        }
     }
 }

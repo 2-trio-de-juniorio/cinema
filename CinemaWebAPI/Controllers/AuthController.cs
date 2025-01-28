@@ -2,12 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 using BusinessLogicLayer;
 using DataAccessLayer.Data;
 using DataAccess.Models.Users;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.DTOs;
+using BusinessLogicLayer.Profiles;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -19,12 +21,14 @@ namespace CinemaWebAPI.Controllers
         private readonly ITokenGeneratorService _tokenService;
         private readonly AppDbContext _context;
         private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
-        public AuthController(UserManager<AppUser> userManager, ITokenGeneratorService tokenService, IAuthService authService)
+        public AuthController(UserManager<AppUser> userManager, ITokenGeneratorService tokenService, IAuthService authService, IMapper mapper)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _authService = authService;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -34,11 +38,8 @@ namespace CinemaWebAPI.Controllers
             if (!string.IsNullOrEmpty(errorMessage))
                 return BadRequest(errorMessage);
 
-            var loginResponse = await _authService.AuthenticateUserAsync(new LoginDTO
-            {
-                Username = registerDTO.Username,
-                Password = registerDTO.Password
-            });
+            var loginDTO = _mapper.Map<LoginDTO>(registerDTO);
+            var loginResponse = await _authService.AuthenticateUserAsync(loginDTO);
 
             return Ok(loginResponse);
         }

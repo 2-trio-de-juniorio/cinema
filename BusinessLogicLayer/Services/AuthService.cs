@@ -71,7 +71,12 @@ namespace BusinessLogicLayer.Services
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
                 throw new UnauthorizedAccessException("Invalid username or password");
 
-            var accessToken = _tokenService.GenerateAccessToken(user.Id, "User");
+            var roles = await _userManager.GetRolesAsync(user);
+            if (!roles.Any())
+                throw new UnauthorizedAccessException("User has no roles assigned");
+
+            var role = roles.First();
+            var accessToken = _tokenService.GenerateAccessToken(user.Id, role);
             var refreshToken = _tokenService.GenerateRefreshToken();
 
             await SaveRefreshTokenAsync(refreshToken, user.Id);
@@ -95,7 +100,12 @@ namespace BusinessLogicLayer.Services
             if (user == null)
                 throw new UnauthorizedAccessException("User not found");
 
-            var newAccessToken = _tokenService.GenerateAccessToken(user.Id, "User");
+            var roles = await _userManager.GetRolesAsync(user);
+            if (!roles.Any())
+                throw new UnauthorizedAccessException("User has no roles assigned");
+
+            var role = roles.First();
+            var newAccessToken = _tokenService.GenerateAccessToken(user.Id, role);
             var newRefreshToken = _tokenService.GenerateRefreshToken();
 
             tokenEntity.Token = newRefreshToken;

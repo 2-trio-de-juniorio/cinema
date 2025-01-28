@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddJwtAuthentication(builder.Configuration);
 
+builder.Services.AddAutoMapper(typeof(AuthProfile));
 
 builder.Services.AddSwaggerGen(option =>
 {
@@ -56,7 +57,8 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
 builder.Services.AddIdentity();
 
-builder.Services.AddApplicationServices();
+builder.Services.AddAuthenticationAndServices(builder.Configuration);
+
 
 builder.Services.AddRepository();
 var app = builder.Build();
