@@ -2,6 +2,7 @@
 {
     public class MovieModel
     {
+        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Duration { get; set; }
@@ -10,7 +11,7 @@
         public string PosterUrl { get; set; } = string.Empty;
         public double Rating { get; set; }
 
-        public List<ActorModel> Actors { get; set; } = new List<ActorModel>();
-        public List<GenreModel> Genres { get; set; } = new List<GenreModel>();
+        public List<int> ActorIds { get; set; } = new List<int>();
+        public List<int> GenreIds { get; set; } = new List<int>();
     }
 }

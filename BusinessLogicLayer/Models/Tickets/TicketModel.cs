@@ -1,13 +1,15 @@
-﻿using BusinessLogic.Models.Sessions;
-using BusinessLogic.Models.Users;
-
-namespace BusinessLogic.Models.Tickets
+﻿namespace BusinessLogic.Models.Tickets
 {
     public class TicketModel
     {
-        public AppUserProfile? User { get; set; }
-        public SessionModel? Session { get; set; }
-        public SeatModel? Seat { get; set; }
-        public DateTime BookingDate { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public int SessionId { get; set; }
+        public DateTime StartTime { get; set; } 
+        public string MovieTitle { get; set; } = string.Empty; 
+        public int SeatId { get; set; }
+        public int RowNumber { get; set; }
+        public int SeatNumber { get; set; }
+        public DateTime BookingDate { get; set; } 
     }
 }
