@@ -1,6 +1,8 @@
 using System.Reflection;
 using BusinessLogicLayer;
 using DataAccessLayer;
+using DataAccessLayer.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,10 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
-builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
+builder.Configuration.AddUserSecrets<Program>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+
 builder.Services.AddIdentity();
 
 builder.Services.AddUnitOfWork();

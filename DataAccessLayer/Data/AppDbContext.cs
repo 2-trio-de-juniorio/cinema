@@ -28,14 +28,6 @@ namespace DataAccessLayer.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CinemaDB;Trusted_Connection=True;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
