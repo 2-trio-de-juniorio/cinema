@@ -1,4 +1,3 @@
-using System.Numerics;
 using DataAccess.Models.Sessions;
 
 namespace BusinessLogicLayer.Dtos;

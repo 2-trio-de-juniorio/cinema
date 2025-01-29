@@ -1,5 +1,4 @@
-﻿using DataAccess.Models.Movies;
-using DataAccess.Models.Movies.Actors;
+﻿using DataAccess.Models.Movies.Actors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

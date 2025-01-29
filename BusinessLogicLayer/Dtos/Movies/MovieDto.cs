@@ -1,5 +1,4 @@
 using DataAccess.Models.Movies;
-using DataAccess.Models.Movies.Actors;
 
 namespace BusinessLogicLayer.Dtos;
 

@@ -1,17 +1,30 @@
-﻿using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Profiles;
+using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
 using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BusinessLogicLayer
 {
     public static class ServiceExtension
     {
-        public static void AddIdentity(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            return services
+                .AddAuthenticationDependencies(configuration)
+                .AddIdentity()
+                .AddAutoMapper()
+                .AddFluentValidator()
+                .AddCinemaServices();
+        }
+
+        private static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
@@ -21,19 +34,29 @@ namespace BusinessLogicLayer
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<AppDbContext>();
+
+            return services;
         }
- 
-        public static void AddFluentValidator(this IServiceCollection services)
+
+        private static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            services.AddFluentValidationAutoValidation();
-            services.AddValidatorsFromAssemblyContaining<ActorValidator>();
-            services.AddValidatorsFromAssemblyContaining<GenreValidator>();
+            return services.AddAutoMapper(typeof(AuthProfile));
+            //other di here
         }
-        
-        public static void AddCinemaServices(this IServiceCollection services) 
+
+        private static IServiceCollection AddFluentValidator(this IServiceCollection services)
         {
-            services.AddScoped<IMovieService, MovieService>();
-            services.AddScoped<ISessionService, SessionService>();
+            return services
+                .AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<ActorValidator>()
+                .AddValidatorsFromAssemblyContaining<GenreValidator>();
+        }
+
+        private static IServiceCollection AddCinemaServices(this IServiceCollection services)
+        {
+            return services
+                .AddScoped<IMovieService, MovieService>()
+                .AddScoped<ISessionService, SessionService>();
         }
     }
 }

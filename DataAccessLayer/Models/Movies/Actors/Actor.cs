@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DataAccess.Models.Movies.Actors
+﻿namespace DataAccess.Models.Movies.Actors
 {
     public class Actor
     {

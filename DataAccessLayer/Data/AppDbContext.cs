@@ -27,10 +27,11 @@ namespace DataAccessLayer.Data
         public DbSet<MovieActor> MovieActors { get; set; }
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new AppUserConfiguration());
             builder.ApplyConfiguration(new TicketConfiguration());

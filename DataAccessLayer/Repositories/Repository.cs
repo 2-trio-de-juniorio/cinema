@@ -3,6 +3,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
+
 namespace DataAccessLayer.Repositories;
 
 internal sealed class Repository<TEntity> : IRepository<TEntity>
@@ -10,7 +11,6 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
 {
     private readonly AppDbContext _dbContext;
     private readonly DbSet<TEntity> _entities;
-
     public Repository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
