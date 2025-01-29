@@ -1,6 +1,10 @@
-﻿using BusinessLogicLayer.Profiles;
+using BusinessLogicLayer.Profiles;
+using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Services;
 using DataAccess.Models.Users;
 using DataAccessLayer.Data;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +19,9 @@ namespace BusinessLogicLayer
             return services
                 .AddAuthenticationDependencies(configuration)
                 .AddIdentity()
-                .AddAutoMapper();
+                .AddAutoMapper()
+                .AddFluentValidator()
+                .AddCinemaServices();
         }
 
         private static IServiceCollection AddIdentity(this IServiceCollection services)
@@ -36,6 +42,21 @@ namespace BusinessLogicLayer
         {
             return services.AddAutoMapper(typeof(AuthProfile));
             //other di here
+        }
+
+        private static IServiceCollection AddFluentValidator(this IServiceCollection services)
+        {
+            return services
+                .AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<ActorValidator>()
+                .AddValidatorsFromAssemblyContaining<GenreValidator>();
+        }
+        
+        public static IServiceCollection AddCinemaServices(this IServiceCollection services) 
+        {
+            return services
+                .AddScoped<IMovieService, MovieService>()
+                .AddScoped<ISessionService, SessionService>();
         }
     }
 }

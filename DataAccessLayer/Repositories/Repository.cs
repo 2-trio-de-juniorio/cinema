@@ -1,6 +1,8 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
 
 namespace DataAccessLayer.Repositories;
 
@@ -9,7 +11,6 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
 {
     private readonly AppDbContext _dbContext;
     private readonly DbSet<TEntity> _entities;
-
     public Repository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -17,14 +18,43 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
     }
 
 
-    public Task<TEntity?> GetByIdAsync(int id)
+    public Task<TEntity?> GetByIdAsync(int id, params string[] includes) 
     {
-        return _entities.FindAsync(id).AsTask();
+        if (typeof(TEntity).GetProperty("Id") == null) 
+        {
+            throw new InvalidOperationException($"Entity type '{typeof(TEntity).Name}' does not have an Id property.");
+        }
+
+        IQueryable<TEntity> query = _entities;
+
+        foreach(string include in includes) 
+        {
+            query = query.Include(include);
+        }
+
+        ParameterExpression parameter = Expression.Parameter(typeof(TEntity));
+
+        return query.FirstOrDefaultAsync(
+            (Expression<Func<TEntity, bool>>)
+            Expression.Lambda(
+                Expression.Equal(
+                    Expression.MakeMemberAccess(parameter, typeof(TEntity).GetProperty("Id")!), 
+                    Expression.Constant(id)
+                ), 
+                parameter
+            )
+        );
     }
 
-    public Task<List<TEntity>> GetAllAsync()
+    public Task<List<TEntity>> GetAllAsync(params string[] includes) 
     {
-        return _entities.ToListAsync();
+        IQueryable<TEntity> query = _entities;
+
+        foreach(string include in includes) 
+        {
+            query = query.Include(include);
+        }
+        return query.ToListAsync();
     }
 
     public void Add(TEntity entity)
@@ -34,7 +64,7 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
 
     public Task AddAsync(TEntity entity)
     {
-        return _entities.AddAsync(entity).AsTask();
+        return _entities.AddAsync(entity).AsTask(); 
     }
 
     public void Remove(TEntity entity)
@@ -42,43 +72,18 @@ internal sealed class Repository<TEntity> : IRepository<TEntity>
         _entities.Remove(entity);
     }
 
-    public async Task RemoveByIdAsync(int id)
+    public async Task RemoveByIdAsync(int id) 
     {
         TEntity? entity = await GetByIdAsync(id).ConfigureAwait(false);
 
-        if (entity != null)
+        if (entity != null) 
         {
             Remove(entity);
         }
     }
-
+    
     public void Update(TEntity entity)
     {
         _dbContext.Entry(entity).State = EntityState.Modified;
-    }
-
-    public Task SaveAsync()
-    {
-        return _dbContext.SaveChangesAsync();
-    }
-
-    public void Dispose()
-    {
-        Dispose(disposing: true);
-    }
-
-    private bool _disposed = false;
-
-    private void Dispose(bool disposing)
-    {
-        if (!_disposed)
-        {
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            _disposed = true;
-        }
     }
 }

@@ -6,7 +6,7 @@ namespace DataAccess.Models.Tickets
     public class Ticket
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public AppUser User { get; set; }
         public int SessionId { get; set; }
         public Session Session { get; set; }

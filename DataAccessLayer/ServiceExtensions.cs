@@ -20,9 +20,8 @@ public static class ServiceExtensions
         return services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(connectionString));
     }
-
-    private static IServiceCollection AddRepository(this IServiceCollection services)
+    public static void AddUnitOfWork(this IServiceCollection services) 
     {
-        return services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
     }
 }
