@@ -1,3 +1,4 @@
+using AutoMapper;
 using BusinessLogicLayer.DTOs;
 
 namespace BusinessLogicLayer.Profiles

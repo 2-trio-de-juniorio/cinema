@@ -13,8 +13,9 @@ namespace BusinessLogicLayer
         public static IServiceCollection AddAuthenticationDependencies(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddJwtAuthentication(configuration).AddAuthenticationServices();
-            return services;
+            return services
+                .AddJwtAuthentication(configuration)
+                .AddAuthenticationServices();
         }
 
         private static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
@@ -45,10 +46,11 @@ namespace BusinessLogicLayer
             return services;
         }
 
-        private static void AddAuthenticationServices(this IServiceCollection services)
+        private static IServiceCollection AddAuthenticationServices(this IServiceCollection services)
         {
-            services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
-            services.AddScoped<IAuthService, AuthService>();
+            return services
+                .AddScoped<ITokenGeneratorService, TokenGeneratorService>()
+                .AddScoped<IAuthService, AuthService>();
         }
     }
 }

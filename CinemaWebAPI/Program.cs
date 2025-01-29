@@ -2,8 +2,6 @@ using System.Reflection;
 using BusinessLogicLayer;
 using DataAccessLayer;
 using Microsoft.OpenApi.Models;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,11 +36,11 @@ builder.Services.AddSwaggerGen(option =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
                 }
             },
-            new string[]{}
+            new string[] { }
         }
     });
 });
@@ -50,8 +48,6 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDataAccessDependencies(builder.Configuration);
 
-builder.Services.AddUnitOfWork();
-builder.Services.AddCinemaServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

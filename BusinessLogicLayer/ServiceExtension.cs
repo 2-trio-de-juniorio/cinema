@@ -51,8 +51,8 @@ namespace BusinessLogicLayer
                 .AddValidatorsFromAssemblyContaining<ActorValidator>()
                 .AddValidatorsFromAssemblyContaining<GenreValidator>();
         }
-        
-        public static IServiceCollection AddCinemaServices(this IServiceCollection services) 
+
+        private static IServiceCollection AddCinemaServices(this IServiceCollection services)
         {
             return services
                 .AddScoped<IMovieService, MovieService>()

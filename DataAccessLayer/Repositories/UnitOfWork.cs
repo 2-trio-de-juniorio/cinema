@@ -6,7 +6,7 @@ namespace DataAccessLayer.UnitOfWork;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {
-    private Dictionary<Type, object> _repositories;
+    private readonly Dictionary<Type, object> _repositories;
     private readonly AppDbContext _dbContext;
 
     public UnitOfWork(AppDbContext dbContext)
@@ -21,6 +21,7 @@ internal sealed class UnitOfWork : IUnitOfWork
         {
             _repositories[typeof(TEntity)] = new Repository<TEntity>(_dbContext);
         }
+        
         return (IRepository<TEntity>)_repositories[typeof(TEntity)];
     }
 
