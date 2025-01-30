@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.Profiles
         public CinemaProfile()
         {
             CreateMap<Hall, HallDTO>().ReverseMap();
-            CreateMap<Seat, SeatModel>().ReverseMap();
+            CreateMap<Seat, SeatDTO>().ReverseMap();
             
             CreateMap<Session, SessionDTO>()
                 .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))

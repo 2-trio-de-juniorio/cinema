@@ -1,13 +1,13 @@
-﻿using BusinessLogicLayer.Dtos;
+﻿using BusinessLogic.Models.Sessions;
 
 namespace BusinessLogicLayer.Interfaces
 {
     public interface ISeatService
     {
-        Task<int> CreateSeatAsync(SeatDto seatDto);
-        Task<List<SeatDto>> GetAllSeatsAsync();
-        Task<SeatDto?> GetSeatByIdAsync(int id);
-        Task<bool> UpdateSeatAsync(int id, SeatDto seatDto);
+        Task<int> CreateSeatAsync(SeatDTO seatDto);
+        Task<List<SeatDTO>> GetAllSeatsAsync();
+        Task<SeatDTO?> GetSeatByIdAsync(int id);
+        Task<bool> UpdateSeatAsync(int id, SeatDTO seatDto);
         Task RemoveSeatAsync(int id);
     }
 }

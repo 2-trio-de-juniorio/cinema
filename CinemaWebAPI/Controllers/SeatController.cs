@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Dtos;
+﻿using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +20,10 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of seats</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(List<SeatDto>), 200)]
+        [ProducesResponseType(typeof(List<SeatDTO>), 200)]
         public async Task<IActionResult> GetAllSeats()
         {
-            List<SeatDto> seats = await _seatService.GetAllSeatsAsync();
+            List<SeatDTO> seats = await _seatService.GetAllSeatsAsync();
             return Ok(seats);
         }
 
@@ -33,11 +33,11 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the seat</param>
         /// <returns>The seat details</returns>
         [HttpGet("{id}", Name = "GetSeatById")]
-        [ProducesResponseType(typeof(SeatDto), 200)]
+        [ProducesResponseType(typeof(SeatDTO), 200)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetSeatById([FromRoute] int id)
         {
-            SeatDto? seat = await _seatService.GetSeatByIdAsync(id);
+            SeatDTO? seat = await _seatService.GetSeatByIdAsync(id);
 
             if (seat == null)
             {
@@ -53,8 +53,8 @@ namespace CinemaWebAPI.Controllers
         /// <param name="seatDto">The seat data for creation</param>
         /// <returns>The created seat</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(SeatDto), 201)]
-        public async Task<IActionResult> CreateSeatAsync([FromBody] SeatDto seatDto)
+        [ProducesResponseType(typeof(SeatDTO), 201)]
+        public async Task<IActionResult> CreateSeatAsync([FromBody] SeatDTO seatDto)
         {
             int id = await _seatService.CreateSeatAsync(seatDto);
             return CreatedAtRoute(nameof(GetSeatById), new { id }, seatDto);
@@ -69,7 +69,7 @@ namespace CinemaWebAPI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] SeatDto seatDto)
+        public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] SeatDTO seatDto)
         {
             if (!await _seatService.UpdateSeatAsync(id, seatDto))
             {

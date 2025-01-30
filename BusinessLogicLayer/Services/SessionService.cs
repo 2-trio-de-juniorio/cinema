@@ -7,7 +7,7 @@ using DataAccessLayer.Interfaces;
 namespace BusinessLogicLayer.Services
 {
     // delete later
-    internal sealed class SessionService// : ISessionService
+    internal sealed class SessionService//: ISessionService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMovieService _movieService;

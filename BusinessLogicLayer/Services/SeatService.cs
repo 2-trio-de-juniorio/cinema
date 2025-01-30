@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.Interfaces;
-using BusinessLogicLayer.Dtos;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Sessions;
+using BusinessLogic.Models.Sessions;
 
 namespace BusinessLogicLayer.Services
 {
@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> CreateSeatAsync(SeatDto seatDto)
+        public async Task<int> CreateSeatAsync(SeatDTO seatDto)
         {
             var seat = new Seat()
             {
@@ -30,10 +30,10 @@ namespace BusinessLogicLayer.Services
             return seat.Id;
         }
 
-        public async Task<List<SeatDto>> GetAllSeatsAsync()
+        public async Task<List<SeatDTO>> GetAllSeatsAsync()
         {
             var seats = await _unitOfWork.GetRepository<Seat>().GetAllAsync();
-            return seats.Select(seat => new SeatDto
+            return seats.Select(seat => new SeatDTO
             {
                 Id = seat.Id,
                 RowNumber = seat.RowNumber,
@@ -44,13 +44,13 @@ namespace BusinessLogicLayer.Services
             }).ToList();
         }
 
-        public async Task<SeatDto?> GetSeatByIdAsync(int id)
+        public async Task<SeatDTO?> GetSeatByIdAsync(int id)
         {
             var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
             if (seat == null)
                 return null;
 
-            return new SeatDto
+            return new SeatDTO
             {
                 Id = seat.Id,
                 RowNumber = seat.RowNumber,
@@ -61,7 +61,7 @@ namespace BusinessLogicLayer.Services
             };
         }
 
-        public async Task<bool> UpdateSeatAsync(int id, SeatDto seatDto)
+        public async Task<bool> UpdateSeatAsync(int id, SeatDTO seatDto)
         {
             var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
             if (seat == null)
