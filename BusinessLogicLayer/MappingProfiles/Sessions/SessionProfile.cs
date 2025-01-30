@@ -8,7 +8,7 @@ namespace BusinessLogic.MappingProfiles.Sessions
     {
         public SessionProfile()
         {
-            CreateMap<Session, SessionModel>()
+            CreateMap<Session, SessionDTO>()
                 .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
                 .ForMember(dest => dest.HallName, opt => opt.MapFrom(src => src.Hall.Name))
                 .ReverseMap();

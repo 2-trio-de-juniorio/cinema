@@ -9,13 +9,13 @@ namespace BusinessLogic.MappingProfiles.Movies
     {
         public MovieProfile()
         {
-            CreateMap<Movie, MovieModel>()
+            CreateMap<Movie, MovieDTO>()
                 .ForMember(dest => dest.GenreIds, opt => opt.MapFrom(src =>
                     src.MovieGenres.Select(mg => mg.GenreId)))
                 .ForMember(dest => dest.ActorIds, opt => opt.MapFrom(src =>
                     src.MovieActors.Select(ma => ma.ActorId)));
 
-            CreateMap<MovieModel, Movie>()
+            CreateMap<MovieDTO, Movie>()
                 .ForMember(dest => dest.MovieGenres, opt => opt.MapFrom(src =>
                     src.GenreIds.Select(genreId => new MovieGenre { GenreId = genreId })))
                 .ForMember(dest => dest.MovieActors, opt => opt.MapFrom(src =>

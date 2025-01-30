@@ -1,3 +1,4 @@
+using BusinessLogic.MappingProfiles.Sessions;
 using BusinessLogicLayer.Profiles;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
@@ -40,7 +41,16 @@ namespace BusinessLogicLayer
 
         private static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            return services.AddAutoMapper(typeof(AuthProfile));
+            return services
+                .AddAutoMapper(typeof(AuthProfile))
+                .AddAutoMapper(typeof(SessionProfile))
+                .AddAutoMapper(typeof(HallProfile))
+                .AddAutoMapper(typeof(SessionProfile))
+                .AddAutoMapper(typeof(SessionProfile))
+                .AddAutoMapper(typeof(SessionProfile))
+                .AddAutoMapper(typeof(SessionProfile))
+                .AddAutoMapper(typeof(SessionProfile));
+
             //other di here
         }
 
@@ -54,9 +64,10 @@ namespace BusinessLogicLayer
 
         private static IServiceCollection AddCinemaServices(this IServiceCollection services)
         {
-            return services
+            return services/*
                 .AddScoped<IMovieService, MovieService>()
-                .AddScoped<ISessionService, SessionService>();
+                .AddScoped<ISessionService, SessionService>()*/
+                .AddScoped<IHallService, HallService>();
         }
     }
 }

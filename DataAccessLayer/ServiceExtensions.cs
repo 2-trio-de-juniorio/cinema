@@ -24,7 +24,7 @@ namespace DataAccessLayer
 
         private static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
-            return services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            return services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

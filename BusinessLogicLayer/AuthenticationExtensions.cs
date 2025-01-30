@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
+using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer
 {
@@ -15,7 +16,8 @@ namespace BusinessLogicLayer
         {
             return services
                 .AddJwtAuthentication(configuration)
-                .AddAuthenticationServices();
+                .AddAuthenticationServices()
+                .AddAuthorizationAccess();
         }
 
         private static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
@@ -51,6 +53,19 @@ namespace BusinessLogicLayer
             return services
                 .AddScoped<ITokenGeneratorService, TokenGeneratorService>()
                 .AddScoped<IAuthService, AuthService>();
+        }
+
+        private static IServiceCollection AddAuthorizationAccess(this IServiceCollection services)
+        {
+            return services
+                .AddAuthorization(options =>
+                {
+                    options.AddPolicy(UserRole.Admin, policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                        policy.RequireRole(UserRole.Admin);
+                    });
+                });
         }
     }
 }

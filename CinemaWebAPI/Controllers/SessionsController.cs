@@ -1,6 +1,6 @@
-using BusinessLogicLayer.Dtos;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Models.Sessions;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -10,9 +10,9 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class SessionsController : ControllerBase 
+    public class SessionsController : ControllerBase
     {
-        private readonly ISessionService _sessionService; 
+        private readonly ISessionService _sessionService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionsController"/> class.
@@ -26,11 +26,11 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Retrieves a list of all sessions.
         /// </summary>
-        /// <returns>A list of <see cref="SessionDto"/> objects representing all sessions.</returns>
+        /// <returns>A list of <see cref="SessionDTO"/> objects representing all sessions.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllSessions() 
+        public async Task<IActionResult> GetAllSessions()
         {
-            List<SessionDto> sessions = await _sessionService.GetAllSessionsAsync();
+            List<SessionDTO> sessions = await _sessionService.GetAllSessionsAsync();
 
             return Ok(sessions);
         }
@@ -39,15 +39,15 @@ namespace CinemaWebAPI.Controllers
         /// Retrieves details of a session by its identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the session.</param>
-        /// <returns>A <see cref="SessionDto"/> object representing the session, or HTTP 404 if not found.</returns>
+        /// <returns>A <see cref="SessionDTO"/> object representing the session, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetSessionById")]
-        public async Task<IActionResult> GetSessionById([FromRoute]int id) 
+        public async Task<IActionResult> GetSessionById([FromRoute] int id)
         {
-            SessionDto? session = await _sessionService.GetSessionByIdAsync(id);
+            SessionDTO? session = await _sessionService.GetSessionByIdAsync(id);
 
-            if (session == null) 
+            if (session == null)
             {
-                return NotFound(new {Message = $"Session with ID {id} not found."});
+                return NotFound(new { Message = $"Session with ID {id} not found." });
             }
 
             return Ok(session);
@@ -56,48 +56,50 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Creates a new session.
         /// </summary>
-        /// <param name="sessionDto">A <see cref="SessionDto"/> object containing the details of the session to create.</param>
+        /// <param name="SessionDTO">A <see cref="SessionDTO"/> object containing the details of the session to create.</param>
         /// <returns>An HTTP 201 response if the session is created successfully.</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateSessionAsync([FromBody]SessionDto sessionDto) 
+        public async Task<IActionResult> CreateSessionAsync([FromBody] SessionDTO SessionDTO)
         {
-            int id = await _sessionService.CreateSessionAsync(sessionDto);
-            return CreatedAtRoute(nameof(GetSessionById), new { id }, sessionDto); 
+            int id = await _sessionService.CreateSessionAsync(SessionDTO);
+            return CreatedAtRoute(nameof(GetSessionById), new { id }, SessionDTO);
         }
 
         /// <summary>
         /// Updates the details of an existing session.
         /// </summary>
         /// <param name="id">The unique identifier of the session to update.</param>
-        /// <param name="sessionDto">A <see cref="SessionDto"/> object containing the updated details of the session.</param>
+        /// <param name="SessionDTO">A <see cref="SessionDTO"/> object containing the updated details of the session.</param>
         /// <returns>
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSessionAsync([FromRoute]int id, [FromBody]SessionDto sessionDto) 
+        public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] SessionDTO SessionDTO)
         {
-            if (!await _sessionService.UpdateSessionAsync(id, sessionDto)) 
+            if (!await _sessionService.UpdateSessionAsync(id, SessionDTO))
             {
-                return NotFound(new {Message = $"Session with ID {id} not found."});
+                return NotFound(new { Message = $"Session with ID {id} not found." });
             }
+
             return NoContent();
         }
 
-    /// <summary>
-    /// Deletes a session by its identifier.
-    /// </summary>
-    /// <param name="id">The unique identifier of the session to delete.</param>
-    /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
-    {
-        var session = await _sessionService.GetSessionByIdAsync(id);
-        if (session == null)
+        /// <summary>
+        /// Deletes a session by its identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the session to delete.</param>
+        /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
         {
-            return NotFound(new { Message = $"Session with ID {id} not found." });
-        }
+            var session = await _sessionService.GetSessionByIdAsync(id);
+            if (session == null)
+            {
+                return NotFound(new { Message = $"Session with ID {id} not found." });
+            }
 
-        await _sessionService.RemoveSessionAsync(id);
-        return NoContent();
+            await _sessionService.RemoveSessionAsync(id);
+            return NoContent();
+        }
     }
 }

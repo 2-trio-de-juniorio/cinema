@@ -1,8 +1,7 @@
-using DataAccessLayer.Data;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Interfaces;
 
-namespace DataAccessLayer.UnitOfWork
+namespace DataAccessLayer.Data
 {
     internal sealed class UnitOfWork : IUnitOfWork
     {
@@ -21,7 +20,7 @@ namespace DataAccessLayer.UnitOfWork
             {
                 _repositories[typeof(TEntity)] = new Repository<TEntity>(_dbContext);
             }
-        
+
             return (IRepository<TEntity>)_repositories[typeof(TEntity)];
         }
 
@@ -36,7 +35,7 @@ namespace DataAccessLayer.UnitOfWork
         }
 
         private bool _disposed = false;
-    
+
         private void Dispose(bool disposing)
         {
             if (!_disposed)

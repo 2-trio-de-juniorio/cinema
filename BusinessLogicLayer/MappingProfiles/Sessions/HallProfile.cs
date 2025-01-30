@@ -8,7 +8,7 @@ namespace BusinessLogic.MappingProfiles.Sessions
     {
         public HallProfile()
         {
-            CreateMap<Hall, HallModel>().ReverseMap();
+            CreateMap<Hall, HallDTO>().ReverseMap();
         }
     }
 }
