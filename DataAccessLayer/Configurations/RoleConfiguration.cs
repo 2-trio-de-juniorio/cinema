@@ -13,12 +13,14 @@ namespace DataAccessLayer.Configurations
             [
                 new()
                 {
+                    Id = "bb815bab-2485-47b1-b460-0639a8ba967b",
                     Name = UserRole.Admin,
                     NormalizedName = UserRole.Admin.ToUpper()
                 },
 
                 new()
                 {
+                    Id = "26eeb29f-7bc2-4fae-a926-a59fc11c5dfe",
                     Name = UserRole.User,
                     NormalizedName = UserRole.User.ToUpper()
                 }

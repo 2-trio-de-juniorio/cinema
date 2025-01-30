@@ -19,8 +19,7 @@ namespace DataAccessLayer
         private static IServiceCollection AddDbContext(this IServiceCollection services, string? connectionString)
         {
             return services.AddDbContext<AppDbContext>(options =>
-                //options.UseSqlServer(connectionString));
-                options.UseInMemoryDatabase("TestDb"));
+                options.UseSqlServer(connectionString));
         }
 
         private static IServiceCollection AddUnitOfWork(this IServiceCollection services)
