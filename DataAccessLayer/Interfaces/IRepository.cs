@@ -10,6 +10,6 @@ namespace DataAccessLayer.Interfaces
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         void Remove(TEntity entity);
-        Task RemoveByIdAsync(int id);
+        Task<bool> RemoveByIdAsync(int id);
     }
 }

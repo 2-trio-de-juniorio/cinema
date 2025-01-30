@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Models.Sessions
 {
-    public class SeatModel
+    public class SeatDTO
     {
         public int Id { get; set; }
         public int HallId { get; set; }

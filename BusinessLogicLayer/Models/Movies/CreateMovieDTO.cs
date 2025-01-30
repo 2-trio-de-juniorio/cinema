@@ -1,8 +1,7 @@
-﻿namespace BusinessLogic.Models.Movies
+namespace BusinessLogic.Models.Movies
 {
-    public class MovieDTO
+    public class CreateMovieDTO
     {
-        public int Id { get; set; } //for admin update or delete
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Duration { get; set; }
@@ -11,7 +10,7 @@
         public string PosterUrl { get; set; } = string.Empty;
         public double Rating { get; set; }
 
-        public List<ActorDTO> ActorIds { get; set; } = [];
-        public List<GenreDTO> Genres { get; set; } = [];
+        public List<int> ActorsIds { get; set; } = [];
+        public List<int> GenresIds { get; set; } = [];
     }
 }

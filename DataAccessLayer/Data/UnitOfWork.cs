@@ -7,8 +7,8 @@ namespace DataAccessLayer.Data
     {
         private readonly Dictionary<Type, object> _repositories;
         private readonly AppDbContext _dbContext;
-
-        public UnitOfWork(AppDbContext dbContext)
+        
+       public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             _repositories = new Dictionary<Type, object>();

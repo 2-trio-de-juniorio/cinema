@@ -63,7 +63,7 @@ namespace CinemaWebAPI.Controllers
         /// <returns>An HTTP 201 response if the movie is created successfully.</returns>
         [HttpPost]
         //[Authorize(Policy = UserRole.Admin)]
-        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieDTO MovieDTO)
+        public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO MovieDTO)
         {
             int id = await _movieService.CreateMovieAsync(MovieDTO);
             return CreatedAtRoute(nameof(GetMovieById), new { id }, MovieDTO);
@@ -79,7 +79,7 @@ namespace CinemaWebAPI.Controllers
         /// </returns>
         [HttpPut("{id}")]
         //[Authorize(Policy = UserRole.Admin)]
-        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] MovieDTO MovieDTO)
+        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] CreateMovieDTO MovieDTO)
         {
             if (!await _movieService.UpdateMovieAsync(id, MovieDTO))
             {

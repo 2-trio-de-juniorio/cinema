@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Models.Movies
 {
-    public class ActorModel
+    public class ActorDTO
     {
         public int Id { get; set; }
         public string Firstname { get; set; } = string.Empty;
