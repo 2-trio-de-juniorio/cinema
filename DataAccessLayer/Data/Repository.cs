@@ -11,22 +11,24 @@ namespace DataAccessLayer.Repositories
     {
         private readonly AppDbContext _dbContext;
         private readonly DbSet<TEntity> _entities;
+
         public Repository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             _entities = dbContext.Set<TEntity>();
         }
 
-        public Task<TEntity?> GetByIdAsync(int id, params string[] includes) 
+        public Task<TEntity?> GetByIdAsync(int id, params string[] includes)
         {
-            if (typeof(TEntity).GetProperty("Id") == null) 
+            if (typeof(TEntity).GetProperty("Id") == null)
             {
-                throw new InvalidOperationException($"Entity type '{typeof(TEntity).Name}' does not have an Id property.");
+                throw new InvalidOperationException(
+                    $"Entity type '{typeof(TEntity).Name}' does not have an Id property.");
             }
 
             IQueryable<TEntity> query = _entities;
 
-            foreach(string include in includes) 
+            foreach (string include in includes)
             {
                 query = query.Include(include);
             }
@@ -37,22 +39,23 @@ namespace DataAccessLayer.Repositories
                 (Expression<Func<TEntity, bool>>)
                 Expression.Lambda(
                     Expression.Equal(
-                        Expression.MakeMemberAccess(parameter, typeof(TEntity).GetProperty("Id")!), 
+                        Expression.MakeMemberAccess(parameter, typeof(TEntity).GetProperty("Id")!),
                         Expression.Constant(id)
-                    ), 
+                    ),
                     parameter
                 )
             );
         }
 
-        public Task<List<TEntity>> GetAllAsync(params string[] includes) 
+        public Task<List<TEntity>> GetAllAsync(params string[] includes)
         {
             IQueryable<TEntity> query = _entities;
 
-            foreach(string include in includes) 
+            foreach (string include in includes)
             {
                 query = query.Include(include);
             }
+
             return query.ToListAsync();
         }
 
@@ -63,7 +66,7 @@ namespace DataAccessLayer.Repositories
 
         public Task AddAsync(TEntity entity)
         {
-            return _entities.AddAsync(entity).AsTask(); 
+            return _entities.AddAsync(entity).AsTask();
         }
 
         public void Remove(TEntity entity)
@@ -71,16 +74,16 @@ namespace DataAccessLayer.Repositories
             _entities.Remove(entity);
         }
 
-        public async Task RemoveByIdAsync(int id) 
+        public async Task RemoveByIdAsync(int id)
         {
             TEntity? entity = await GetByIdAsync(id).ConfigureAwait(false);
 
-            if (entity != null) 
+            if (entity != null)
             {
                 Remove(entity);
             }
         }
-    
+
         public void Update(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;

@@ -1,5 +1,4 @@
-﻿using BusinessLogicLayer.Dtos;
-using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaWebAPI.Controllers;
@@ -26,11 +25,11 @@ public class HallsController : ControllerBase
     /// <summary>
     /// Retrieves a list of all halls.
     /// </summary>
-    /// <returns>A list of <see cref="HallDto"/> objects representing all halls.</returns>
+    /// <returns>A list of <see cref="BusinessLogic.Models.Sessions.HallDTO"/> objects representing all halls.</returns>
     [HttpGet]
     public async Task<IActionResult> GetAllHalls()
     {
-        List<HallDto> halls = await _hallService.GetAllHallsAsync();
+        List<BusinessLogic.Models.Sessions.HallDTO> halls = await _hallService.GetAllHallsAsync();
         return Ok(halls);
     }
 
@@ -38,11 +37,11 @@ public class HallsController : ControllerBase
     /// Retrieves details of a specific hall by its identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the hall.</param>
-    /// <returns>A <see cref="HallDto"/> object representing the hall, or HTTP 404 if not found.</returns>
+    /// <returns>A <see cref="BusinessLogic.Models.Sessions.HallDTO"/> object representing the hall, or HTTP 404 if not found.</returns>
     [HttpGet("{id}", Name = "GetHallById")]
     public async Task<IActionResult> GetHallById([FromRoute] int id)
     {
-        HallDto? hall = await _hallService.GetHallByIdAsync(id);
+        BusinessLogic.Models.Sessions.HallDTO? hall = await _hallService.GetHallByIdAsync(id);
 
         if (hall == null)
         {
@@ -55,27 +54,27 @@ public class HallsController : ControllerBase
     /// <summary>
     /// Creates a new hall.
     /// </summary>
-    /// <param name="hallDto">A <see cref="HallDto"/> object containing the details of the hall to create.</param>
+    /// <param name="HallDTO">A <see cref="HallDTO"/> object containing the details of the hall to create.</param>
     /// <returns>An HTTP 201 response if the hall is created successfully.</returns>
     [HttpPost]
-    public async Task<IActionResult> CreateHallAsync([FromBody] HallDto hallDto)
+    public async Task<IActionResult> CreateHallAsync([FromBody] BusinessLogic.Models.Sessions.HallDTO HallDTO)
     {
-        int id = await _hallService.CreateHallAsync(hallDto);
-        return CreatedAtRoute(nameof(GetHallById), new { id }, hallDto);
+        int id = await _hallService.CreateHallAsync(HallDTO);
+        return CreatedAtRoute(nameof(GetHallById), new { id }, HallDTO);
     }
 
     /// <summary>
     /// Updates the details of an existing hall.
     /// </summary>
     /// <param name="id">The unique identifier of the hall to update.</param>
-    /// <param name="hallDto">A <see cref="HallDto"/> object containing the updated details of the hall.</param>
+    /// <param name="HallDTO">A <see cref="HallDTO"/> object containing the updated details of the hall.</param>
     /// <returns>
     /// An HTTP 204 response if the hall was updated successfully, or HTTP 404 if the hall was not found.
     /// </returns>
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] HallDto hallDto)
+    public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] BusinessLogic.Models.Sessions.HallDTO HallDTO)
     {
-        if (!await _hallService.UpdateHallAsync(id, hallDto))
+        if (!await _hallService.UpdateHallAsync(id, HallDTO))
         {
             return NotFound(new { Message = $"Hall with ID {id} not found." });
         }

@@ -1,6 +1,7 @@
-using BusinessLogicLayer.Dtos;
 using BusinessLogicLayer.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Models.Movies;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -26,11 +27,12 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Retrieves a list of all movies.
         /// </summary>
-        /// <returns>A list of <see cref="MovieDto"/> objects representing all movies.</returns>
+        /// <returns>A list of <see cref="MovieDTO"/> objects representing all movies.</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllMovies()
         {
-            List<MovieDto> movies = await _movieService.GetAllMoviesAsync();
+            List<MovieDTO> movies = await _movieService.GetAllMoviesAsync();
 
             return Ok(movies);
         }
@@ -39,11 +41,12 @@ namespace CinemaWebAPI.Controllers
         /// Retrieves details of a movie by its identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the movie.</param>
-        /// <returns>A <see cref="MovieDto"/> object representing the movie, or HTTP 404 if not found.</returns>
+        /// <returns>A <see cref="MovieDTO"/> object representing the movie, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetMovieById")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetMovieById([FromRoute] int id)
         {
-            MovieDto? movie = await _movieService.GetMovieByIdAsync(id);
+            MovieDTO? movie = await _movieService.GetMovieByIdAsync(id);
 
             if (movie == null)
             {
@@ -56,30 +59,33 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Creates a new movie.
         /// </summary>
-        /// <param name="movieDto">A <see cref="MovieDto"/> object containing the details of the movie to create.</param>
+        /// <param name="MovieDTO">A <see cref="MovieDTO"/> object containing the details of the movie to create.</param>
         /// <returns>An HTTP 201 response if the movie is created successfully.</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieDto movieDto)
+        //[Authorize(Policy = UserRole.Admin)]
+        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieDTO MovieDTO)
         {
-            int id = await _movieService.CreateMovieAsync(movieDto);
-            return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDto);
+            int id = await _movieService.CreateMovieAsync(MovieDTO);
+            return CreatedAtRoute(nameof(GetMovieById), new { id }, MovieDTO);
         }
 
         /// <summary>
         /// Updates the details of an existing movie.
         /// </summary>
         /// <param name="id">The unique identifier of the movie to update.</param>
-        /// <param name="movieDto">A <see cref="MovieDto"/> object containing the updated details of the movie.</param>
+        /// <param name="MovieDTO">A <see cref="MovieDTO"/> object containing the updated details of the movie.</param>
         /// <returns>
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] MovieDto movieDto)
+        //[Authorize(Policy = UserRole.Admin)]
+        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] MovieDTO MovieDTO)
         {
-            if (!await _movieService.UpdateMovieAsync(id, movieDto))
+            if (!await _movieService.UpdateMovieAsync(id, MovieDTO))
             {
                 return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
+
             return NoContent();
         }
 
@@ -89,6 +95,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the movie to delete.</param>
         /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
         [HttpDelete("{id}")]
+        //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> DeleteMovieAsync([FromRoute] int id)
         {
             var movie = await _movieService.GetMovieByIdAsync(id);

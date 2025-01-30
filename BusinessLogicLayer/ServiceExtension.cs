@@ -40,8 +40,10 @@ namespace BusinessLogicLayer
 
         private static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            return services.AddAutoMapper(typeof(AuthProfile));
-            //other di here
+            return services
+                .AddAutoMapper(typeof(ContentProfiles))
+                .AddAutoMapper(typeof(CinemaProfile))
+                .AddAutoMapper(typeof(UsersProfile));
         }
 
         private static IServiceCollection AddFluentValidator(this IServiceCollection services)
@@ -54,11 +56,10 @@ namespace BusinessLogicLayer
 
         private static IServiceCollection AddCinemaServices(this IServiceCollection services)
         {
-            return services
+            return services/*
                 .AddScoped<IMovieService, MovieService>()
-                .AddScoped<ISessionService, SessionService>()
-                .AddScoped<IHallService, HallService>()
-                .AddScoped<ISeatService, SeatService>();
+                .AddScoped<ISessionService, SessionService>()*/
+                .AddScoped<IHallService, HallService>();
         }
     }
 }
