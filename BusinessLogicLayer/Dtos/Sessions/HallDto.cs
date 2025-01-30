@@ -1,19 +1,20 @@
 using DataAccess.Models.Sessions;
 
-namespace BusinessLogicLayer.Dtos;
-
-public class HallDto // replace with normal dto instead
+namespace BusinessLogicLayer.Dtos
 {
-    public List<SeatDto> Seats { get; set; }
-    public string Name { get; set; }
-
-    public static explicit operator HallDto(Hall hall)
+    public class HallDto // replace with normal dto instead
     {
-        return new HallDto()
+        public List<SeatDto> Seats { get; set; }
+        public string Name { get; set; }
+
+        public static explicit operator HallDto(Hall hall)
         {
-            Name = hall.Name,
-            Seats = hall.Seats.Select(seat => new SeatDto() { IsBooked = seat.IsBooked, RowNumber = seat.RowNumber, SeatNumber = seat.SeatNumber })
-            .ToList()
-        };
+            return new HallDto()
+            {
+                Name = hall.Name,
+                Seats = hall.Seats.Select(seat => new SeatDto() { IsBooked = seat.IsBooked, RowNumber = seat.RowNumber, SeatNumber = seat.SeatNumber })
+                    .ToList()
+            };
+        }
     }
 }
