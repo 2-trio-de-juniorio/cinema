@@ -8,7 +8,7 @@ namespace DataAccess.Configurations.Sessions
     {
         public void Configure(EntityTypeBuilder<Seat> builder)
         {
-            builder.ToTable("seats");
+            builder.ToTable("Seats");
 
             builder.HasKey(s => s.Id);
 
