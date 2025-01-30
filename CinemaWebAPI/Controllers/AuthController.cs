@@ -1,8 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using AutoMapper;
-using DataAccessLayer.Data;
-using DataAccess.Models.Users;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.DTOs;
 
