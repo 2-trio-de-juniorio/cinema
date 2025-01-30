@@ -1,6 +1,5 @@
 ﻿using BusinessLogicLayer.Dtos;
 using BusinessLogicLayer.Interfaces;
-using DataAccess;
 using DataAccess.Models.Sessions;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;

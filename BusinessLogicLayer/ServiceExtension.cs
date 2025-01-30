@@ -56,7 +56,9 @@ namespace BusinessLogicLayer
         {
             return services
                 .AddScoped<IMovieService, MovieService>()
-                .AddScoped<ISessionService, SessionService>();
+                .AddScoped<ISessionService, SessionService>()
+                .AddScoped<IHallService, HallService>()
+                .AddScoped<ISeatService, SeatService>();
         }
     }
 }

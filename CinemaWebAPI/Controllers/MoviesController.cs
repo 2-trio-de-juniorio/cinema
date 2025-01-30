@@ -10,9 +10,9 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class MoviesController : ControllerBase 
+    public class MoviesController : ControllerBase
     {
-        private readonly IMovieService _movieService; 
+        private readonly IMovieService _movieService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MoviesController"/> class.
@@ -28,7 +28,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of <see cref="MovieDto"/> objects representing all movies.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllMovies() 
+        public async Task<IActionResult> GetAllMovies()
         {
             List<MovieDto> movies = await _movieService.GetAllMoviesAsync();
 
@@ -41,13 +41,13 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the movie.</param>
         /// <returns>A <see cref="MovieDto"/> object representing the movie, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetMovieById")]
-        public async Task<IActionResult> GetMovieById([FromRoute]int id) 
+        public async Task<IActionResult> GetMovieById([FromRoute] int id)
         {
             MovieDto? movie = await _movieService.GetMovieByIdAsync(id);
 
-            if (movie == null) 
+            if (movie == null)
             {
-                return NotFound(new {Message = $"Movie with ID {id} not found."});
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
 
             return Ok(movie);
@@ -59,10 +59,10 @@ namespace CinemaWebAPI.Controllers
         /// <param name="movieDto">A <see cref="MovieDto"/> object containing the details of the movie to create.</param>
         /// <returns>An HTTP 201 response if the movie is created successfully.</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateMovieAsync([FromBody]MovieDto movieDto) 
+        public async Task<IActionResult> CreateMovieAsync([FromBody] MovieDto movieDto)
         {
             int id = await _movieService.CreateMovieAsync(movieDto);
-            return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDto); 
+            return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDto);
         }
 
         /// <summary>
@@ -74,30 +74,31 @@ namespace CinemaWebAPI.Controllers
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMovieAsync([FromRoute]int id, [FromBody]MovieDto movieDto) 
+        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] MovieDto movieDto)
         {
-            if (!await _movieService.UpdateMovieAsync(id, movieDto)) 
+            if (!await _movieService.UpdateMovieAsync(id, movieDto))
             {
-                return NotFound(new {Message = $"Movie with ID {id} not found."});
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
             return NoContent();
         }
 
-    /// <summary>
-    /// Deletes a movie by its identifier.
-    /// </summary>
-    /// <param name="id">The unique identifier of the movie to delete.</param>
-    /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMovieAsync([FromRoute] int id)
-    {
-        var movie = await _movieService.GetMovieByIdAsync(id);
-        if (movie == null)
+        /// <summary>
+        /// Deletes a movie by its identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the movie to delete.</param>
+        /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMovieAsync([FromRoute] int id)
         {
-            return NotFound(new { Message = $"Movie with ID {id} not found." });
-        }
+            var movie = await _movieService.GetMovieByIdAsync(id);
+            if (movie == null)
+            {
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
+            }
 
-        await _movieService.RemoveMovieAsync(id);
-        return NoContent();
+            await _movieService.RemoveMovieAsync(id);
+            return NoContent();
+        }
     }
 }
