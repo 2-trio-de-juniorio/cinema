@@ -16,12 +16,22 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateSeatAsync(SeatDTO seatDto)
         {
+            // Находим зал по названию
+            var hallRepository = _unitOfWork.GetRepository<Hall>();
+            var hallList = await hallRepository.GetAllAsync(); // Загружаем все залы
+            var hall = hallList.FirstOrDefault(h => h.Name == seatDto.HallName);
+
+            if (hall == null)
+            {
+                throw new ArgumentException($"Hall with name '{seatDto.HallName}' does not exist.");
+            }
+
             var seat = new Seat()
             {
                 RowNumber = seatDto.RowNumber,
                 SeatNumber = seatDto.SeatNumber,
                 IsBooked = seatDto.IsBooked,
-                HallId = seatDto.HallId
+                HallId = hall.Id // Используем найденный ID зала
             };
 
             await _unitOfWork.GetRepository<Seat>().AddAsync(seat);
@@ -39,8 +49,7 @@ namespace BusinessLogicLayer.Services
                 RowNumber = seat.RowNumber,
                 SeatNumber = seat.SeatNumber,
                 IsBooked = seat.IsBooked,
-                HallId = seat.HallId,
-                HallName = seat.Hall?.Name 
+                HallName = seat.Hall?.Name  // Подгружаем имя зала
             }).ToList();
         }
 
@@ -56,7 +65,6 @@ namespace BusinessLogicLayer.Services
                 RowNumber = seat.RowNumber,
                 SeatNumber = seat.SeatNumber,
                 IsBooked = seat.IsBooked,
-                HallId = seat.HallId,
                 HallName = seat.Hall?.Name
             };
         }
@@ -70,13 +78,28 @@ namespace BusinessLogicLayer.Services
             seat.RowNumber = seatDto.RowNumber;
             seat.SeatNumber = seatDto.SeatNumber;
             seat.IsBooked = seatDto.IsBooked;
-            seat.HallId = seatDto.HallId;
+
+            // Если передано новое название зала, обновляем привязку
+            if (!string.IsNullOrEmpty(seatDto.HallName))
+            {
+                var hallRepository = _unitOfWork.GetRepository<Hall>();
+                var hallList = await hallRepository.GetAllAsync();
+                var hall = hallList.FirstOrDefault(h => h.Name == seatDto.HallName);
+
+                if (hall == null)
+                {
+                    throw new ArgumentException($"Hall with name '{seatDto.HallName}' does not exist.");
+                }
+
+                seat.HallId = hall.Id;
+            }
 
             _unitOfWork.GetRepository<Seat>().Update(seat);
             await _unitOfWork.SaveAsync();
 
             return true;
         }
+
         public async Task RemoveSeatAsync(int id)
         {
             await _unitOfWork.GetRepository<Seat>().RemoveByIdAsync(id);

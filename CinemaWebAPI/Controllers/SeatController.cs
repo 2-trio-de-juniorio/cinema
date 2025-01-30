@@ -57,8 +57,11 @@ namespace CinemaWebAPI.Controllers
         public async Task<IActionResult> CreateSeatAsync([FromBody] SeatDTO seatDto)
         {
             int id = await _seatService.CreateSeatAsync(seatDto);
-            return CreatedAtRoute(nameof(GetSeatById), new { id }, seatDto);
+            var createdSeat = await _seatService.GetSeatByIdAsync(id); // Отримати створене місце
+
+            return CreatedAtRoute(nameof(GetSeatById), new { id }, createdSeat);
         }
+
 
         /// <summary>
         /// Update a seat's details.
