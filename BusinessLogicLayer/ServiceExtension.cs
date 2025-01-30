@@ -1,4 +1,3 @@
-using BusinessLogic.MappingProfiles.Sessions;
 using BusinessLogicLayer.Profiles;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
@@ -42,16 +41,9 @@ namespace BusinessLogicLayer
         private static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
             return services
-                .AddAutoMapper(typeof(AuthProfile))
-                .AddAutoMapper(typeof(SessionProfile))
-                .AddAutoMapper(typeof(HallProfile))
-                .AddAutoMapper(typeof(SessionProfile))
-                .AddAutoMapper(typeof(SessionProfile))
-                .AddAutoMapper(typeof(SessionProfile))
-                .AddAutoMapper(typeof(SessionProfile))
-                .AddAutoMapper(typeof(SessionProfile));
-
-            //other di here
+                .AddAutoMapper(typeof(ContentProfiles))
+                .AddAutoMapper(typeof(CinemaProfile))
+                .AddAutoMapper(typeof(UsersProfile));
         }
 
         private static IServiceCollection AddFluentValidator(this IServiceCollection services)

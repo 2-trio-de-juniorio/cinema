@@ -1,14 +1,17 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BusinessLogic.Models.Movies;
 using DataAccess.Models.Movies;
 using DataAccess.Models.Movies.Actors;
 
-namespace BusinessLogic.MappingProfiles.Movies
+namespace BusinessLogicLayer.Profiles
 {
-    public class MovieProfile : Profile
+    public class ContentProfiles : Profile
     {
-        public MovieProfile()
+        public ContentProfiles()
         {
+            CreateMap<Actor, ActorModel>().ReverseMap();
+            CreateMap<Genre, GenreModel>().ReverseMap();
+
             CreateMap<Movie, MovieDTO>()
                 .ForMember(dest => dest.GenreIds, opt => opt.MapFrom(src =>
                     src.MovieGenres.Select(mg => mg.GenreId)))
@@ -20,6 +23,7 @@ namespace BusinessLogic.MappingProfiles.Movies
                     src.GenreIds.Select(genreId => new MovieGenre { GenreId = genreId })))
                 .ForMember(dest => dest.MovieActors, opt => opt.MapFrom(src =>
                     src.ActorIds.Select(actorId => new MovieActor { ActorId = actorId })));
+            
         }
     }
 }
