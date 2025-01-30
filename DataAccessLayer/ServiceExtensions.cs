@@ -1,19 +1,29 @@
 using DataAccessLayer.Data;
 using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAccessLayer;
 
 public static class ServiceExtensions
 {
-    public static void AddDbContext(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddDataAccessDependencies(this IServiceCollection services,
+        IConfiguration configuration)
     {
-        services.AddDbContext<AppDbContext>(options =>
+        return services
+            .AddDbContext(configuration.GetConnectionString("DefaultConnection"))
+            .AddUnitOfWork();
+    }
+
+    private static IServiceCollection AddDbContext(this IServiceCollection services, string? connectionString)
+    {
+        return services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(connectionString));
     }
-    public static void AddUnitOfWork(this IServiceCollection services) 
+
+    private static IServiceCollection AddUnitOfWork(this IServiceCollection services)
     {
-        services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+        return services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
     }
 }

@@ -46,8 +46,6 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 builder.Configuration.AddUserSecrets<Program>();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 builder.Services.AddInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDataAccessDependencies(builder.Configuration);
