@@ -87,10 +87,16 @@ public class SessionsController : ControllerBase
     /// Deletes a session by its identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the session to delete.</param>
-    /// <returns>An HTTP 204 response.</returns>
+    /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteSessionAsync([FromRoute]int id) 
+    public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
     {
+        var session = await _sessionService.GetSessionByIdAsync(id);
+        if (session == null)
+        {
+            return NotFound(new { Message = $"Session with ID {id} not found." });
+        }
+
         await _sessionService.RemoveSessionAsync(id);
         return NoContent();
     }

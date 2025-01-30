@@ -87,10 +87,16 @@ public class MoviesController : ControllerBase
     /// Deletes a movie by its identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the movie to delete.</param>
-    /// <returns>An HTTP 204 response.</returns>
+    /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMovieAsync([FromRoute]int id) 
+    public async Task<IActionResult> DeleteMovieAsync([FromRoute] int id)
     {
+        var movie = await _movieService.GetMovieByIdAsync(id);
+        if (movie == null)
+        {
+            return NotFound(new { Message = $"Movie with ID {id} not found." });
+        }
+
         await _movieService.RemoveMovieAsync(id);
         return NoContent();
     }
