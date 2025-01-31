@@ -4,6 +4,6 @@ namespace BusinessLogic.Models.Users
 {
     public class AppUserModel
     {
-        public List<TicketModel> Tickets { get; set; } = new List<TicketModel>();
+        public List<TicketDTO> Tickets { get; set; } = new List<TicketDTO>();
     }
 }

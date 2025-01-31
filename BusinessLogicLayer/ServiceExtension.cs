@@ -61,6 +61,8 @@ namespace BusinessLogicLayer
                 .AddScoped<IActorService, ActorService>()
                 .AddScoped<IGenreService, GenreService>()
                 .AddScoped<ISessionService, SessionService>()
+                .AddScoped<ISeatService, SeatService>()
+                .AddScoped<ITicketService,TicketService>()
                 .AddScoped<IHallService, HallService>();
         }
     }

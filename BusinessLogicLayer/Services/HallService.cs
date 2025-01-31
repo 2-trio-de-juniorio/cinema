@@ -2,46 +2,44 @@
 using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Sessions;
-using DataAccessLayer.Data;
-using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services;
 
-public class HallService : IHallService
+internal sealed class HallService : IHallService
 {
-    private readonly AppDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public HallService(AppDbContext context, IMapper mapper)
+    private readonly string[] HallEntityIncludes =
+    [
+        nameof(Hall.Seats)
+    ];
+
+    public HallService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
     public async Task<List<HallDTO>> GetAllHallsAsync()
     {
-        var halls = await _context.Halls
-            .Include(h => h.Seats)
-            .ToListAsync();
-
-        return halls.Select(hall => _mapper.Map<HallDTO>(hall)).ToList();
+        var halls = await _unitOfWork.GetRepository<Hall>().GetAllAsync(HallEntityIncludes);
+        return halls.Select(h => _mapper.Map<HallDTO>(h)).ToList();
     }
 
     public async Task<HallDTO?> GetHallByIdAsync(int id)
     {
-        var hall = await _context.Halls
-            .Include(h => h.Seats)
-            .FirstOrDefaultAsync(h => h.Id == id);
-
+        var hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
         return hall != null ? _mapper.Map<HallDTO>(hall) : null;
     }
 
-    public async Task<int> CreateHallAsync(HallDTO HallDTO)
+    public async Task<int> CreateHallAsync(HallDTO hallDTO)
     {
         var hall = new Hall
         {
-            Name = HallDTO.Name,
-            Seats = HallDTO.Seats.Select(seatDto => new Seat
+            Name = hallDTO.Name,
+            Seats = hallDTO.Seats.Select(seatDto => new Seat
             {
                 RowNumber = seatDto.RowNumber,
                 SeatNumber = seatDto.SeatNumber,
@@ -49,45 +47,33 @@ public class HallService : IHallService
             }).ToList()
         };
 
-        _context.Halls.Add(hall);
-        await _context.SaveChangesAsync();
+        await _unitOfWork.GetRepository<Hall>().AddAsync(hall);
+        await _unitOfWork.SaveAsync();
         return hall.Id;
     }
 
-    public async Task<bool> UpdateHallAsync(int id, HallDTO HallDTO)
+    public async Task<bool> UpdateHallAsync(int id, HallDTO hallDTO)
     {
-        var hall = await _context.Halls
-            .Include(h => h.Seats)
-            .FirstOrDefaultAsync(h => h.Id == id);
+        var hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+        if (hall == null) return false;
 
-        if (hall == null)
-        {
-            return false;
-        }
-
-        hall.Name = HallDTO.Name;
-        hall.Seats = HallDTO.Seats.Select(seatDto => new Seat
+        hall.Name = hallDTO.Name;
+        hall.Seats = hallDTO.Seats.Select(seatDto => new Seat
         {
             RowNumber = seatDto.RowNumber,
             SeatNumber = seatDto.SeatNumber,
             IsBooked = seatDto.IsBooked
         }).ToList();
 
-        await _context.SaveChangesAsync();
+        _unitOfWork.GetRepository<Hall>().Update(hall);
+        await _unitOfWork.SaveAsync();
         return true;
     }
 
     public async Task<bool> DeleteHallAsync(int id)
     {
-        var hall = await _context.Halls.FindAsync(id);
-
-        if (hall == null)
-        {
-            return false;
-        }
-
-        _context.Halls.Remove(hall);
-        await _context.SaveChangesAsync();
-        return true;
+        bool success = await _unitOfWork.GetRepository<Hall>().RemoveByIdAsync(id);
+        await _unitOfWork.SaveAsync();
+        return success;
     }
 }

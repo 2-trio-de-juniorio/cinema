@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Models.Tickets
 {
-    public class TicketModel
+    public class TicketDTO
     {
         public int Id { get; set; }
         public string UserId { get; set; } = string.Empty;
