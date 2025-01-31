@@ -89,7 +89,6 @@ namespace BusinessLogicLayer.Services
             {
                 "price_asc" => sessions.OrderBy(m => m.Price).ToList(),
                 "price_desc" => sessions.OrderByDescending(m => m.Price).ToList(),
-                _ => sessions.OrderByDescending(m => m.Price).ToList()
             };
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
