@@ -97,6 +97,7 @@ namespace BusinessLogicLayer.Services
 
             return new LoginResponseDTO
             {
+                Id = user.Id,
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
@@ -131,6 +132,7 @@ namespace BusinessLogicLayer.Services
 
             return new LoginResponseDTO
             {
+                Id = user.Id,
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken
             };
