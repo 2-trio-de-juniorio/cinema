@@ -1,10 +1,12 @@
 using AutoMapper;
+using BusinessLogic.Models.Movies;
 using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;
 using DataAccess.Models.Movies.Actors;
 using DataAccess.Models.Sessions;
 using DataAccessLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer.Services
 {
@@ -71,5 +73,19 @@ namespace BusinessLogicLayer.Services
         {
             return await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
         }
+
+
+        public async Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filterDate)
+        {
+            var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
+
+            if (filterDate?.Date.HasValue == true)
+            {
+                sessions = sessions.Where(s => s.StartTime.Date == filterDate.Date.Value.Date).ToList();
+            }
+
+            return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
+        }
+
     }
 }

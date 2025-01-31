@@ -18,10 +18,10 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="MoviesController"/> class.
         /// </summary>
-        /// <param name="movieService">The service responsible for movie-related business logic.</param>
-        public MoviesController(IMovieService movieService)
+        /// <param name="MockMovieService">The service responsible for movie-related business logic.</param>
+        public MoviesController(IMovieService MockMovieService)
         {
-            _movieService = movieService;
+            _movieService = MockMovieService;
         }
 
         /// <summary>
@@ -110,5 +110,25 @@ namespace CinemaWebAPI.Controllers
             await _movieService.RemoveMovieAsync(id);
             return NoContent();
         }
+
+        /// <summary>
+        /// Get a list of movies with filtering and sorting.
+        /// </summary>
+        /// <param name="filter">Filters to search for movies.</param>
+        /// <returns>List of movies that match filters.</returns>
+        [HttpGet("filter")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetFilteredMovies([FromQuery] MovieFilterDTO filter)
+        {
+            List<MovieDTO> movies = await _movieService.GetFilteredMoviesAsync(filter);
+
+            if (!movies.Any())
+            {
+                return NotFound(new { Message = "No movies found for the specified filters." });
+            }
+
+            return Ok(movies);
+        }
+
     }
 }
