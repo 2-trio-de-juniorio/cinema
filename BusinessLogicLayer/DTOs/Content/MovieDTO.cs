@@ -11,7 +11,7 @@
         public string PosterUrl { get; set; } = string.Empty;
         public double Rating { get; set; }
 
-        public List<ActorDTO> ActorIds { get; set; } = [];
+        public List<ActorDTO> Actors { get; set; } = [];
         public List<GenreDTO> Genres { get; set; } = [];
     }
 }

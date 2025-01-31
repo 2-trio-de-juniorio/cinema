@@ -18,7 +18,7 @@ namespace BusinessLogicLayer.Profiles
             CreateMap<Movie, MovieDTO>()
                 .ForMember(dest => dest.Genres, opt => opt.MapFrom(src =>
                     src.MovieGenres.Select(mg => mg.Genre)))
-                .ForMember(dest => dest.ActorIds, opt => opt.MapFrom(src =>
+                .ForMember(dest => dest.Actors, opt => opt.MapFrom(src =>
                     src.MovieActors.Select(ma => ma.Actor)));
 
             CreateMap<CreateMovieDTO, Movie>()

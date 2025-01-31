@@ -6,12 +6,12 @@ using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
 {
-    public class ActorsService : IActorsService
+    public class ActorService : IActorService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ActorsService(IMapper mapper, IUnitOfWork unitOfWork)
+        public ActorService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -20,7 +20,8 @@ namespace BusinessLogicLayer.Services
         public async Task<List<ActorDTO>> GetAllActorsAsync()
         {
             return (await _unitOfWork.GetRepository<Actor>().GetAllAsync())
-                .Select(actor => _mapper.Map<ActorDTO>(actor)).ToList();
+                .Select(actor => _mapper.Map<ActorDTO>(actor))
+                .ToList();
         }
 
         public async Task<ActorDTO?> GetActorByIdAsync(int id)
@@ -29,9 +30,9 @@ namespace BusinessLogicLayer.Services
             return actor == null ? null : _mapper.Map<ActorDTO>(actor);
         }
 
-        public async Task<int> CreateActorAsync(CreateActorDTO movieDto)
+        public async Task<int> CreateActorAsync(CreateActorDTO actorDTO)
         {
-            Actor actor = _mapper.Map<Actor>(movieDto);
+            Actor actor = _mapper.Map<Actor>(actorDTO);
 
             await _unitOfWork.GetRepository<Actor>().AddAsync(actor);
             await _unitOfWork.SaveAsync();
@@ -39,14 +40,14 @@ namespace BusinessLogicLayer.Services
             return actor.Id;
         }
 
-        public async Task<bool> UpdateActorAsync(int id, CreateActorDTO movieDto)
+        public async Task<bool> UpdateActorAsync(int id, CreateActorDTO actorDTO)
         {
             Actor? actor = await _unitOfWork.GetRepository<Actor>().GetByIdAsync(id);
-            
+
             if (actor == null) return false;
-            
-            _mapper.Map(movieDto, actor);
-            
+
+            _mapper.Map(actorDTO, actor);
+
             _unitOfWork.GetRepository<Actor>().Update(actor);
             await _unitOfWork.SaveAsync();
 

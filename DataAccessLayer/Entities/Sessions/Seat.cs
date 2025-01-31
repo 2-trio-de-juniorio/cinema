@@ -9,7 +9,7 @@ namespace DataAccess.Models.Sessions
         public Hall Hall { get; set; }
         public int RowNumber { get; set; }
         public int SeatNumber { get; set; }
-        public bool IsBooked { get; set; }
+        public bool IsBooked { get; set; }//need to remove
 
         public ICollection<Ticket> Tickets { get; set; }
     }

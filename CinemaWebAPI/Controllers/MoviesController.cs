@@ -65,6 +65,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO MovieDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+                
             int id = await _movieService.CreateMovieAsync(MovieDTO);
             return CreatedAtRoute(nameof(GetMovieById), new { id }, MovieDTO);
         }

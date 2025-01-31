@@ -12,15 +12,15 @@ namespace CinemaWebAPI.Controllers
     [Route("api/[controller]")]
     public class ActorsController : ControllerBase
     {
-        private readonly IActorsService _actorsService;
+        private readonly IActorService _actorService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActorsController"/> class.
         /// </summary>
         /// <param name="actorService">The service responsible for actor-related business logic.</param>
-        public ActorsController(IActorsService actorService)
+        public ActorsController(IActorService actorService)
         {
-            _actorsService = actorService;
+            _actorService = actorService;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace CinemaWebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllActors()
         {
-            List<BusinessLogic.Models.Movies.ActorDTO> actors = await _actorsService.GetAllActorsAsync();
+            List<BusinessLogic.Models.Movies.ActorDTO> actors = await _actorService.GetAllActorsAsync();
 
             return Ok(actors);
         }
@@ -45,7 +45,7 @@ namespace CinemaWebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetActorById([FromRoute] int id)
         {
-            BusinessLogic.Models.Movies.ActorDTO? actor = await _actorsService.GetActorByIdAsync(id);
+            BusinessLogic.Models.Movies.ActorDTO? actor = await _actorService.GetActorByIdAsync(id);
 
             if (actor == null)
             {
@@ -64,7 +64,7 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateActorAsync([FromBody] CreateActorDTO ActorDTO)
         {
-            int id = await _actorsService.CreateActorAsync(ActorDTO);
+            int id = await _actorService.CreateActorAsync(ActorDTO);
             return CreatedAtRoute(nameof(GetActorById), new { id }, ActorDTO);
         }
 
@@ -80,7 +80,7 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateActorAsync([FromRoute] int id, [FromBody] CreateActorDTO createActorDto)
         {
-            if (!await _actorsService.UpdateActorAsync(id, createActorDto))
+            if (!await _actorService.UpdateActorAsync(id, createActorDto))
             {
                 return NotFound(new { Message = $"Actor with ID {id} not found." });
             }
@@ -97,7 +97,7 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> DeleteActorAsync([FromRoute] int id)
         {
-            bool successfully = await _actorsService.RemoveActorAsync(id);
+            bool successfully = await _actorService.RemoveActorAsync(id);
 
             if (!successfully)
             {
