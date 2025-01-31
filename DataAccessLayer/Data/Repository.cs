@@ -74,14 +74,14 @@ namespace DataAccessLayer.Repositories
             _entities.Remove(entity);
         }
 
-        public async Task RemoveByIdAsync(int id)
+        public async Task<bool> RemoveByIdAsync(int id)
         {
             TEntity? entity = await GetByIdAsync(id).ConfigureAwait(false);
 
-            if (entity != null)
-            {
-                Remove(entity);
-            }
+            if (entity == null) return false;
+            
+            Remove(entity);
+            return true;
         }
 
         public void Update(TEntity entity)

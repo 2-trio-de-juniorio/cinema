@@ -39,7 +39,7 @@ namespace CinemaWebAPI.Controllers
         /// Retrieves details of a session by its identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the session.</param>
-        /// <returns>A <see cref="SessionDTO"/> object representing the session, or HTTP 404 if not found.</returns>
+        /// <returns>A <see cref="CreateSessionDTO"/> object representing the session, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetSessionById")]
         public async Task<IActionResult> GetSessionById([FromRoute] int id)
         {
@@ -56,27 +56,27 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Creates a new session.
         /// </summary>
-        /// <param name="SessionDTO">A <see cref="SessionDTO"/> object containing the details of the session to create.</param>
+        /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the details of the session to create.</param>
         /// <returns>An HTTP 201 response if the session is created successfully.</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateSessionAsync([FromBody] SessionDTO SessionDTO)
+        public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
-            int id = await _sessionService.CreateSessionAsync(SessionDTO);
-            return CreatedAtRoute(nameof(GetSessionById), new { id }, SessionDTO);
+            int id = await _sessionService.CreateSessionAsync(createSessionDto);
+            return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
         }
 
         /// <summary>
         /// Updates the details of an existing session.
         /// </summary>
         /// <param name="id">The unique identifier of the session to update.</param>
-        /// <param name="SessionDTO">A <see cref="SessionDTO"/> object containing the updated details of the session.</param>
+        /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
         /// <returns>
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] SessionDTO SessionDTO)
+        public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
-            if (!await _sessionService.UpdateSessionAsync(id, SessionDTO))
+            if (!await _sessionService.UpdateSessionAsync(id, createSessionDto))
             {
                 return NotFound(new { Message = $"Session with ID {id} not found." });
             }
@@ -92,13 +92,13 @@ namespace CinemaWebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
         {
-            var session = await _sessionService.GetSessionByIdAsync(id);
-            if (session == null)
+            bool result = await _sessionService.RemoveSessionAsync(id);
+            
+            if (!result)
             {
                 return NotFound(new { Message = $"Session with ID {id} not found." });
             }
 
-            await _sessionService.RemoveSessionAsync(id);
             return NoContent();
         }
     }

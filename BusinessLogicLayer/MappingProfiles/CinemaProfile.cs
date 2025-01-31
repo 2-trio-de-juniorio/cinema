@@ -1,10 +1,8 @@
 using AutoMapper;
 using BusinessLogic.Models.Sessions;
 using BusinessLogic.Models.Tickets;
-using BusinessLogic.Models.Users;
 using DataAccess.Models.Sessions;
 using DataAccess.Models.Tickets;
-using DataAccess.Models.Users;
 
 namespace BusinessLogicLayer.Profiles
 {
@@ -14,11 +12,11 @@ namespace BusinessLogicLayer.Profiles
         {
             CreateMap<Hall, HallDTO>().ReverseMap();
             CreateMap<Seat, SeatDTO>().ReverseMap();
-            
+
+            CreateMap<CreateSessionDTO, Session>();
             CreateMap<Session, SessionDTO>()
-                .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
-                .ForMember(dest => dest.HallName, opt => opt.MapFrom(src => src.Hall.Name))
-                .ReverseMap();
+                .ForMember(dest => dest.Hall, opt => opt.MapFrom(src => src.Hall))
+                .ForMember(dest => dest.Movie, opt => opt.MapFrom(src => src.Movie));
             
             CreateMap<Ticket, TicketModel>()
                 .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Session.Movie.Title))

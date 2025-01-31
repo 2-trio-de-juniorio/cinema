@@ -57,9 +57,10 @@ namespace BusinessLogicLayer
         private static IServiceCollection AddCinemaServices(this IServiceCollection services)
         {
             return services
-                //.AddScoped<IMovieService, MovieService>()
-                //.AddScoped<ISessionService, SessionService>()
-                .AddScoped<ISeatService, SeatService>()
+                .AddScoped<IMovieService, MovieService>()
+                .AddScoped<IActorService, ActorService>()
+                .AddScoped<IGenreService, GenreService>()
+                .AddScoped<ISessionService, SessionService>()
                 .AddScoped<IHallService, HallService>();
         }
     }

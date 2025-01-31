@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<List<SessionDTO>> GetAllSessionsAsync();
         Task<SessionDTO?> GetSessionByIdAsync(int id);
-        Task<int> CreateSessionAsync(SessionDTO sessionDto);
-        Task<bool> UpdateSessionAsync(int id, SessionDTO sessionDto);
-        Task RemoveSessionAsync(int id);
+        Task<int> CreateSessionAsync(CreateSessionDTO createSessionDto);
+        Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto);
+        Task<bool> RemoveSessionAsync(int id);
     }
 }
