@@ -75,14 +75,22 @@ namespace BusinessLogicLayer.Services
         }
 
 
-        public async Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filterDate)
+        public async Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filter)
         {
             var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
 
-            if (filterDate?.Date.HasValue == true)
+            if (filter?.Date.HasValue == true)
             {
-                sessions = sessions.Where(s => s.StartTime.Date == filterDate.Date.Value.Date).ToList();
+                sessions = sessions.Where(s => s.StartTime.Date == filter.Date.Value.Date).ToList();
             }
+
+            // Sorting
+            sessions = filter?.SortBy?.ToLower() switch
+            {
+                "price_asc" => sessions.OrderBy(m => m.Price).ToList(),
+                "price_desc" => sessions.OrderByDescending(m => m.Price).ToList(),
+                _ => sessions.OrderByDescending(m => m.Price).ToList()
+            };
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
         }

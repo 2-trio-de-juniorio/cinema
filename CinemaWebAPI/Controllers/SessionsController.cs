@@ -2,6 +2,8 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Sessions;
 using DataAccess.Models.Sessions;
+using BusinessLogic.Models.Movies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -110,12 +112,19 @@ namespace CinemaWebAPI.Controllers
         /// <param name="filter">Filters to search for sessions</param>
         /// <returns>List of sessions matching the filters</returns>
         [HttpGet("filter")]
-        public IActionResult GetSessions([FromQuery] SessionFilterDTO filter)
+        [AllowAnonymous]
+
+        public async Task<IActionResult> GetSessions([FromQuery] SessionFilterDTO filter)
         {
-            var sessions = _sessionService.GetFilteredSessionsAsync(filter);
+            List<SessionDTO> sessions = await _sessionService.GetFilteredSessionsAsync(filter);
+
+            if (!sessions.Any())
+            {
+                return NotFound(new { Message = "No sessions found for the specified filters." });
+            }
             return Ok(sessions);
         }
-      
+        
 
     }
 }
