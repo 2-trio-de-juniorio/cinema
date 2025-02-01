@@ -239,9 +239,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("SeatId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SeatId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
 
@@ -252,8 +249,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SeatId");
-
-                    b.HasIndex("SeatId1");
 
                     b.HasIndex("SessionId");
 
@@ -327,6 +322,33 @@ namespace DataAccess.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("DataAccess.Models.Users.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -352,6 +374,20 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bb815bab-2485-47b1-b460-0639a8ba967b",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "26eeb29f-7bc2-4fae-a926-a59fc11c5dfe",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -531,14 +567,10 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Models.Tickets.Ticket", b =>
                 {
                     b.HasOne("DataAccess.Models.Sessions.Seat", "Seat")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("DataAccess.Models.Sessions.Seat", null)
-                        .WithMany("Tickets")
-                        .HasForeignKey("SeatId1");
 
                     b.HasOne("DataAccess.Models.Sessions.Session", "Session")
                         .WithMany("Tickets")

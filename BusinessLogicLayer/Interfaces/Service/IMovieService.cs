@@ -1,12 +1,13 @@
-using BusinessLogicLayer.Dtos;
+using BusinessLogic.Models.Movies;
 
-namespace BusinessLogicLayer.Interfaces;
-
-public interface IMovieService 
+namespace BusinessLogicLayer.Interfaces
 {
-    Task<List<MovieDto>> GetAllMoviesAsync();
-    Task<MovieDto?> GetMovieByIdAsync(int id);
-    Task<int> CreateMovieAsync(MovieDto movieDto);
-    Task<bool> UpdateMovieAsync(int id, MovieDto movieDto);
-    Task RemoveMovieAsync(int id);
+    public interface IMovieService 
+    {
+        Task<List<MovieDTO>> GetAllMoviesAsync();
+        Task<MovieDTO?> GetMovieByIdAsync(int id);
+        Task<int> CreateMovieAsync(CreateMovieDTO movieDto);
+        Task<bool> UpdateMovieAsync(int id, CreateMovieDTO movieDto);
+        Task RemoveMovieAsync(int id);
+    }
 }

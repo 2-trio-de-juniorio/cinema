@@ -2,20 +2,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.Configurations;
-
-public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
+namespace DataAccess.Configurations
 {
-    public void Configure(EntityTypeBuilder<AppUser> builder)
+    public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        builder.ToTable("Users");
+        public void Configure(EntityTypeBuilder<AppUser> builder)
+        {
+            builder.ToTable("Users");
 
-        builder
-            .HasMany(u => u.Tickets)
-            .WithOne(t => t.User)
-            .HasForeignKey(t => t.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            builder
+                .HasMany(u => u.Tickets)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+        }
     }
 }
 

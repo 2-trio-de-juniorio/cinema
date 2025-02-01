@@ -1,7 +1,8 @@
-namespace DataAccessLayer.Interfaces;
-
-public interface IUnitOfWork : IDisposable
+namespace DataAccessLayer.Interfaces
 {
-    IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
-    Task<int> SaveAsync();
+    public interface IUnitOfWork : IDisposable
+    {
+        IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
+        Task<int> SaveAsync();
+    }
 }

@@ -1,8 +1,10 @@
+using AutoMapper;
 using DataAccess.Models.Users;
 using DataAccessLayer.Data;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using BusinessLogicLayer.DTOs;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLogicLayer.Services
 {
@@ -13,12 +15,15 @@ namespace BusinessLogicLayer.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
         private readonly ITokenGeneratorService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AuthService(UserManager<AppUser> userManager, AppDbContext context, ITokenGeneratorService tokenService)
+        public AuthService(UserManager<AppUser> userManager, AppDbContext context, ITokenGeneratorService tokenService,
+            IMapper mapper)
         {
             _userManager = userManager;
             _context = context;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         public async Task SaveRefreshTokenAsync(string refreshToken, string userId)
@@ -35,7 +40,7 @@ namespace BusinessLogicLayer.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<string?> RegisterUser(RegisterDTO registerDTO)
+        public async Task<LoginResponseDTO> RegisterUser(RegisterDTO registerDTO)
         {
             var user = new AppUser
             {
@@ -48,16 +53,26 @@ namespace BusinessLogicLayer.Services
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                return $"Registration failed: {errors}";
+                throw new BadHttpRequestException($"Registration failed: {errors}");
             }
+            
+            IdentityResult rolesResult = await _userManager.AddToRoleAsync(user, "User");
 
-            return null;
+            if (!rolesResult.Succeeded)
+            {
+                var errors = string.Join(", ", rolesResult.Errors.Select(e => e.Description));
+                throw new BadHttpRequestException($"Registration failed: {errors}");
+            }
+            
+            var loginDTO = _mapper.Map<LoginDTO>(registerDTO);
+            
+            return await AuthenticateUserAsync(loginDTO);
         }
 
         public async Task<bool> IsUserValid(LoginDTO userCredentials)
         {
             var user = await _userManager.FindByNameAsync(userCredentials.Username);
-            
+
             if (user == null)
                 return false;
 
@@ -82,6 +97,7 @@ namespace BusinessLogicLayer.Services
 
             return new LoginResponseDTO
             {
+                Id = user.Id,
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
@@ -116,6 +132,7 @@ namespace BusinessLogicLayer.Services
 
             return new LoginResponseDTO
             {
+                Id = user.Id,
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken
             };
