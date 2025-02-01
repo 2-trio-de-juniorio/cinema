@@ -85,14 +85,16 @@ namespace BusinessLogicLayer.Services
             }
 
             // Sorting
-            movies = filter.SortBy?.ToLower() switch
+            if (!string.IsNullOrEmpty(filter.SortBy) && !string.IsNullOrEmpty(filter.SortOrder))
             {
-                "date_asc" => movies.OrderBy(m => m.ReleaseDate).ToList(),
-                "date_desc" => movies.OrderByDescending(m => m.ReleaseDate).ToList(),
-                "rating_asc" => movies.OrderBy(m => m.Rating).ToList(),
-                "rating_desc" => movies.OrderByDescending(m => m.Rating).ToList(),
-                _ => movies.OrderByDescending(m => m.ReleaseDate).ToList()
-            };
+                bool ascending = filter.SortOrder.Equals("asc", StringComparison.OrdinalIgnoreCase);
+                movies = filter.SortBy.ToLower() switch
+                {
+                    "date" => ascending ? movies.OrderBy(m => m.ReleaseDate).ToList() : movies.OrderByDescending(m => m.ReleaseDate).ToList(),
+                    "rating" => ascending ? movies.OrderBy(m => m.Rating).ToList() : movies.OrderByDescending(m => m.Rating).ToList(),
+                    _ => movies.OrderByDescending(m => m.ReleaseDate).ToList()
+                };
+            }
 
             // Pagination
             int pageSize = 6;

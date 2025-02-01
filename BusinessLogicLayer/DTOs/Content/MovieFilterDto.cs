@@ -4,7 +4,8 @@
     {
         public string? Genre { get; set; }
 
-        public string? SortBy { get; set; } // "date_asc", "date_desc", "rating_asc", "rating_desc"
+        public string? SortBy { get; set; } // "date", "rating"
+        public string? SortOrder { get; set; } // "asc", "desc"
         public int? Page { get; set; }
     }
 }

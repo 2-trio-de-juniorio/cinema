@@ -17,9 +17,9 @@ namespace BusinessLogicLayer.Services
 
         private readonly string[] SessionEntityIncludes =
         [
-            nameof(Session.Movie), 
+            nameof(Session.Movie),
             nameof(Session.Hall),
-            $"{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}", 
+            $"{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}",
             $"{nameof(Session.Movie)}.{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}"
         ];//this is more save way, but also more 
 
@@ -52,9 +52,9 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto)
         {
             Session? session = await GetSessionEntityByIdAsync(id);
-            
+
             if (session == null) return false;
-            
+
             _mapper.Map(createSessionDto, session);
 
             _unitOfWork.GetRepository<Session>().Update(session);
@@ -85,14 +85,16 @@ namespace BusinessLogicLayer.Services
             }
 
             // Sorting
-            sessions = filter?.SortBy?.ToLower() switch
+            if (!string.IsNullOrEmpty(filter?.SortBy) && !string.IsNullOrEmpty(filter?.SortOrder))
             {
-                "price_asc" => sessions.OrderBy(m => m.Price).ToList(),
-                "price_desc" => sessions.OrderByDescending(m => m.Price).ToList(),
-                "Time_asc" => sessions.OrderBy(m => m.StartTime).ToList(),
-                "Time_desc" => sessions.OrderByDescending(m => m.StartTime).ToList(),
-                _ => sessions.OrderByDescending(m => m.StartTime).ToList()
-            };
+                bool ascending = filter.SortOrder.Equals("asc", StringComparison.OrdinalIgnoreCase);
+                sessions = filter.SortBy.ToLower() switch
+                {
+                    "price" => ascending ? sessions.OrderBy(m => m.Price).ToList() : sessions.OrderByDescending(m => m.Price).ToList(),
+                    "time" => ascending ? sessions.OrderBy(m => m.StartTime).ToList() : sessions.OrderByDescending(m => m.StartTime).ToList(),
+                    _ => sessions.OrderByDescending(m => m.StartTime).ToList()
+                };
+            }
 
             // Pagination
             int pageSize = 6;
@@ -108,6 +110,5 @@ namespace BusinessLogicLayer.Services
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
         }
-
     }
 }
