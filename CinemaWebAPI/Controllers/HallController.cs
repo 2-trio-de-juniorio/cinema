@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Models.Sessions;
 
 namespace CinemaWebAPI.Controllers;
 
@@ -9,15 +10,15 @@ namespace CinemaWebAPI.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class HallsController : ControllerBase
+public class HallController : ControllerBase
 {
     private readonly IHallService _hallService;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="HallsController"/> class.
+    /// Initializes a new instance of the <see cref="HallController"/> class.
     /// </summary>
     /// <param name="hallService">The service responsible for hall-related business logic.</param>
-    public HallsController(IHallService hallService)
+    public HallController(IHallService hallService)
     {
         _hallService = hallService;
     }
@@ -25,11 +26,11 @@ public class HallsController : ControllerBase
     /// <summary>
     /// Retrieves a list of all halls.
     /// </summary>
-    /// <returns>A list of <see cref="BusinessLogic.Models.Sessions.HallDTO"/> objects representing all halls.</returns>
+    /// <returns>A list of <see cref="HallDTO"/> objects representing all halls.</returns>
     [HttpGet]
     public async Task<IActionResult> GetAllHalls()
     {
-        List<BusinessLogic.Models.Sessions.HallDTO> halls = await _hallService.GetAllHallsAsync();
+        List<HallDTO> halls = await _hallService.GetAllHallsAsync();
         return Ok(halls);
     }
 
@@ -37,11 +38,11 @@ public class HallsController : ControllerBase
     /// Retrieves details of a specific hall by its identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the hall.</param>
-    /// <returns>A <see cref="BusinessLogic.Models.Sessions.HallDTO"/> object representing the hall, or HTTP 404 if not found.</returns>
+    /// <returns>A <see cref="HallDTO"/> object representing the hall, or HTTP 404 if not found.</returns>
     [HttpGet("{id}", Name = "GetHallById")]
     public async Task<IActionResult> GetHallById([FromRoute] int id)
     {
-        BusinessLogic.Models.Sessions.HallDTO? hall = await _hallService.GetHallByIdAsync(id);
+        HallDTO? hall = await _hallService.GetHallByIdAsync(id);
 
         if (hall == null)
         {
@@ -54,27 +55,27 @@ public class HallsController : ControllerBase
     /// <summary>
     /// Creates a new hall.
     /// </summary>
-    /// <param name="HallDTO">A <see cref="HallDTO"/> object containing the details of the hall to create.</param>
+    /// <param name="createHallDTO">A <see cref="CreateHallDTO"/> object containing the details of the hall to create.</param>
     /// <returns>An HTTP 201 response if the hall is created successfully.</returns>
     [HttpPost]
-    public async Task<IActionResult> CreateHallAsync([FromBody] BusinessLogic.Models.Sessions.HallDTO HallDTO)
+    public async Task<IActionResult> CreateHallAsync([FromBody] CreateHallDTO createHallDTO)
     {
-        int id = await _hallService.CreateHallAsync(HallDTO);
-        return CreatedAtRoute(nameof(GetHallById), new { id }, HallDTO);
+        int id = await _hallService.CreateHallAsync(createHallDTO);
+        return CreatedAtRoute(nameof(GetHallById), new { id }, createHallDTO);
     }
 
     /// <summary>
     /// Updates the details of an existing hall.
     /// </summary>
     /// <param name="id">The unique identifier of the hall to update.</param>
-    /// <param name="HallDTO">A <see cref="HallDTO"/> object containing the updated details of the hall.</param>
+    /// <param name="createHallDTO">A <see cref="CreateHallDTO"/> object containing the updated details of the hall.</param>
     /// <returns>
     /// An HTTP 204 response if the hall was updated successfully, or HTTP 404 if the hall was not found.
     /// </returns>
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] BusinessLogic.Models.Sessions.HallDTO HallDTO)
+    public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] CreateHallDTO createHallDTO)
     {
-        if (!await _hallService.UpdateHallAsync(id, HallDTO))
+        if (!await _hallService.UpdateHallAsync(id, createHallDTO))
         {
             return NotFound(new { Message = $"Hall with ID {id} not found." });
         }

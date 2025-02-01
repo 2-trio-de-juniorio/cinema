@@ -10,15 +10,15 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class SessionsController : ControllerBase
+    public class SessionController : ControllerBase
     {
         private readonly ISessionService _sessionService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SessionsController"/> class.
+        /// Initializes a new instance of the <see cref="SessionController"/> class.
         /// </summary>
         /// <param name="sessionService">The service responsible for session-related business logic.</param>
-        public SessionsController(ISessionService sessionService)
+        public SessionController(ISessionService sessionService)
         {
             _sessionService = sessionService;
         }
