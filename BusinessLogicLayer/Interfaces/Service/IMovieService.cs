@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<List<MovieDTO>> GetAllMoviesAsync();
         Task<MovieDTO?> GetMovieByIdAsync(int id);
-        Task<int> CreateMovieAsync(CreateMovieDTO movieDto);
-        Task<bool> UpdateMovieAsync(int id, CreateMovieDTO movieDto);
+        Task<int> CreateMovieAsync(CreateMovieDTO createMovieDTO);
+        Task<bool> UpdateMovieAsync(int id, CreateMovieDTO createMovieDTO);
         Task RemoveMovieAsync(int id);
     }
 }

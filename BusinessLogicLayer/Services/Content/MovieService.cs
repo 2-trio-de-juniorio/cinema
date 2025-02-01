@@ -31,14 +31,13 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<MovieDTO>> GetAllMoviesAsync()
         {
-            return (await _unitOfWork.GetRepository<Movie>().GetAllAsync(MovieEntityIncludes))
-                .Select(m => _mapper.Map<MovieDTO>(m))
-                .ToList();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(
+                await _unitOfWork.GetRepository<Movie>().GetAllAsync(MovieEntityIncludes));
         }
 
         public async Task<MovieDTO?> GetMovieByIdAsync(int id)
         {
-            Movie? movie = await GetMovieEntityByIdAsync(id);
+            Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
             return movie != null ? _mapper.Map<MovieDTO>(movie) : null;
         }
 
@@ -50,7 +49,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateMovieAsync(int id, CreateMovieDTO MovieDTO)
         {
-            Movie? movie = await GetMovieEntityByIdAsync(id);
+            Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
 
             if (movie == null) return false;
 
@@ -63,11 +62,6 @@ namespace BusinessLogicLayer.Services
             await _unitOfWork.SaveAsync();
 
             return true;
-        }
-
-        private async Task<Movie?> GetMovieEntityByIdAsync(int id)
-        {
-            return await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
         }
     }
 }

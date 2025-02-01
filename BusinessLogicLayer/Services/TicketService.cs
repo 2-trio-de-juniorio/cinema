@@ -12,6 +12,11 @@ namespace BusinessLogicLayer.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
+        private readonly string[] TicketEntityIncludes = 
+        [
+            nameof(Ticket.Session), 
+            nameof(Ticket.Seat)        
+        ];
         public TicketService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -20,13 +25,13 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<TicketDTO>> GetAllTicketsAsync()
         {
-            var tickets = await _unitOfWork.GetRepository<Ticket>().GetAllAsync([nameof(Ticket.Session), nameof(Ticket.Seat)]);
-            return tickets.Select(t => _mapper.Map<TicketDTO>(t)).ToList();
+            return _mapper.Map<List<Ticket>, List<TicketDTO>>(
+                await _unitOfWork.GetRepository<Ticket>().GetAllAsync(TicketEntityIncludes));
         }
 
         public async Task<TicketDTO?> GetTicketByIdAsync(int id)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, [nameof(Ticket.Session), nameof(Ticket.Seat)]);
+            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
             return ticket == null ? null : _mapper.Map<TicketDTO>(ticket);
         }
 

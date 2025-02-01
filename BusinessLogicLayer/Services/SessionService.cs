@@ -29,27 +29,31 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<SessionDTO>> GetAllSessionsAsync()
         {
-            var result = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
-            return result.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
+            return _mapper.Map<List<Session>, List<SessionDTO>>(
+                await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes));
+
         }
 
         public async Task<SessionDTO?> GetSessionByIdAsync(int id)
         {
-            var session = await GetSessionEntityByIdAsync(id);
-            return session == null ? null : _mapper.Map<SessionDTO>(session);
+            Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
+            
+            return session != null ? _mapper.Map<SessionDTO>(session) : null;
         }
 
         public async Task<int> CreateSessionAsync(CreateSessionDTO createSessionDto)
         {
             Session session = _mapper.Map<Session>(createSessionDto);
+
             await _unitOfWork.GetRepository<Session>().AddAsync(session);
             await _unitOfWork.SaveAsync();
+
             return session.Id;
         }
 
         public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto)
         {
-            Session? session = await GetSessionEntityByIdAsync(id);
+            Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
             
             if (session == null) return false;
             
@@ -57,19 +61,17 @@ namespace BusinessLogicLayer.Services
 
             _unitOfWork.GetRepository<Session>().Update(session);
             await _unitOfWork.SaveAsync();
+
             return true;
         }
 
         public async Task<bool> RemoveSessionAsync(int id)
         {
             bool success = await _unitOfWork.GetRepository<Session>().RemoveByIdAsync(id);
-            await _unitOfWork.SaveAsync();
-            return success;
-        }
 
-        private async Task<Session?> GetSessionEntityByIdAsync(int id)
-        {
-            return await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
+            await _unitOfWork.SaveAsync();
+
+            return success;
         }
     }
 }

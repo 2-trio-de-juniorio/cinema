@@ -6,10 +6,10 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface ITicketService
     {
-        Task<int> CreateTicketAsync(CreateTicketDTO ticketDto);
+        Task<int> CreateTicketAsync(CreateTicketDTO ticketDTO);
         Task<TicketDTO?> GetTicketByIdAsync(int id);
         Task<List<TicketDTO>> GetAllTicketsAsync();
-        Task<bool> UpdateTicketAsync(int id, CreateTicketDTO ticketDto);
+        Task<bool> UpdateTicketAsync(int id, CreateTicketDTO ticketDTO);
         Task<bool> RemoveTicketAsync(int id);
     }
 }

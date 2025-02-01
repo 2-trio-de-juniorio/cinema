@@ -24,56 +24,46 @@ internal sealed class HallService : IHallService
 
     public async Task<List<HallDTO>> GetAllHallsAsync()
     {
-        var halls = await _unitOfWork.GetRepository<Hall>().GetAllAsync(HallEntityIncludes);
-        return halls.Select(h => _mapper.Map<HallDTO>(h)).ToList();
+        return _mapper.Map<List<Hall>, List<HallDTO>>(
+            await _unitOfWork.GetRepository<Hall>().GetAllAsync(HallEntityIncludes));
     }
 
     public async Task<HallDTO?> GetHallByIdAsync(int id)
     {
-        var hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+        Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
         return hall != null ? _mapper.Map<HallDTO>(hall) : null;
     }
 
-    public async Task<int> CreateHallAsync(HallDTO hallDTO)
+    public async Task<int> CreateHallAsync(CreateHallDTO createHallDTO)
     {
-        var hall = new Hall
-        {
-            Name = hallDTO.Name,
-            Seats = hallDTO.Seats.Select(seatDto => new Seat
-            {
-                RowNumber = seatDto.RowNumber,
-                SeatNumber = seatDto.SeatNumber,
-                IsBooked = seatDto.IsBooked
-            }).ToList()
-        };
+        Hall hall = _mapper.Map<Hall>(createHallDTO);
 
         await _unitOfWork.GetRepository<Hall>().AddAsync(hall);
         await _unitOfWork.SaveAsync();
+
         return hall.Id;
     }
 
-    public async Task<bool> UpdateHallAsync(int id, HallDTO hallDTO)
+    public async Task<bool> UpdateHallAsync(int id, CreateHallDTO createHallDTO)
     {
-        var hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+        Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+
         if (hall == null) return false;
 
-        hall.Name = hallDTO.Name;
-        hall.Seats = hallDTO.Seats.Select(seatDto => new Seat
-        {
-            RowNumber = seatDto.RowNumber,
-            SeatNumber = seatDto.SeatNumber,
-            IsBooked = seatDto.IsBooked
-        }).ToList();
+        _mapper.Map(createHallDTO, hall);
 
         _unitOfWork.GetRepository<Hall>().Update(hall);
         await _unitOfWork.SaveAsync();
+
         return true;
     }
 
     public async Task<bool> DeleteHallAsync(int id)
     {
         bool success = await _unitOfWork.GetRepository<Hall>().RemoveByIdAsync(id);
+
         await _unitOfWork.SaveAsync();
+
         return success;
     }
 }

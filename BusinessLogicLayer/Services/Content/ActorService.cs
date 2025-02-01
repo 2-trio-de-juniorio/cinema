@@ -19,15 +19,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<ActorDTO>> GetAllActorsAsync()
         {
-            return (await _unitOfWork.GetRepository<Actor>().GetAllAsync())
-                .Select(actor => _mapper.Map<ActorDTO>(actor))
-                .ToList();
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(
+                await _unitOfWork.GetRepository<Actor>().GetAllAsync());
         }
 
         public async Task<ActorDTO?> GetActorByIdAsync(int id)
         {
             Actor? actor = await _unitOfWork.GetRepository<Actor>().GetByIdAsync(id);
-            return actor == null ? null : _mapper.Map<ActorDTO>(actor);
+            return actor != null ? _mapper.Map<ActorDTO>(actor) : null;
         }
 
         public async Task<int> CreateActorAsync(CreateActorDTO actorDTO)
