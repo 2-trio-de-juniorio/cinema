@@ -94,6 +94,18 @@ namespace BusinessLogicLayer.Services
                 _ => movies.OrderByDescending(m => m.ReleaseDate).ToList()
             };
 
+            // Pagination
+            int pageSize = 6;
+            int totalMovies = movies.Count;
+            int totalPages = (int)Math.Ceiling((double)totalMovies / pageSize);
+            int pageNumber = filter.Page ?? 1;
+
+            // Ensure the page number is within valid range
+            if (pageNumber > totalPages) pageNumber = totalPages;
+            if (pageNumber < 1) pageNumber = 1;
+
+            movies = movies.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
             return movies.Select(m => _mapper.Map<MovieDTO>(m)).ToList();
         }
 

@@ -89,7 +89,22 @@ namespace BusinessLogicLayer.Services
             {
                 "price_asc" => sessions.OrderBy(m => m.Price).ToList(),
                 "price_desc" => sessions.OrderByDescending(m => m.Price).ToList(),
+                "Time_asc" => sessions.OrderBy(m => m.StartTime).ToList(),
+                "Time_desc" => sessions.OrderByDescending(m => m.StartTime).ToList(),
+                _ => sessions.OrderByDescending(m => m.Price).ToList()
             };
+
+            // Pagination
+            int pageSize = 6;
+            int totalSessions = sessions.Count;
+            int totalPages = (int)Math.Ceiling((double)totalSessions / pageSize);
+            int pageNumber = filter?.Page ?? 1;
+
+            // Ensure the page number is within valid range
+            if (pageNumber > totalPages) pageNumber = totalPages;
+            if (pageNumber < 1) pageNumber = 1;
+
+            sessions = sessions.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
         }
