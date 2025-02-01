@@ -3,8 +3,6 @@ using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;
 using DataAccessLayer.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BusinessLogicLayer.Services
 {
@@ -110,6 +108,5 @@ namespace BusinessLogicLayer.Services
 
             return movies.Select(m => _mapper.Map<MovieDTO>(m)).ToList();
         }
-
     }
 }

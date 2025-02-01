@@ -4,12 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/tickets")]
     [ApiController]
     public class TicketController : ControllerBase
     {
         private readonly ITicketService _ticketService;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ticketService"></param>
         public TicketController(ITicketService ticketService)
         {
             _ticketService = ticketService;
@@ -52,7 +59,7 @@ namespace WebApi.Controllers
             try
             {
                 var ticketId = await _ticketService.CreateTicketAsync(createTicketDto);
-                return CreatedAtAction(nameof(GetTicketById), new { id = ticketId }, ticketId);
+                return CreatedAtAction(nameof(CreateTicket), new { id = ticketId }, createTicketDto);
             }
             catch (ArgumentException ex)
             {

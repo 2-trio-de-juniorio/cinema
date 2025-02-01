@@ -1,12 +1,10 @@
 using AutoMapper;
-using BusinessLogic.Models.Movies;
 using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;
 using DataAccess.Models.Movies.Actors;
 using DataAccess.Models.Sessions;
 using DataAccessLayer.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer.Services
 {
@@ -17,9 +15,9 @@ namespace BusinessLogicLayer.Services
 
         private readonly string[] SessionEntityIncludes =
         [
-            nameof(Session.Movie),
+            nameof(Session.Movie), 
             nameof(Session.Hall),
-            $"{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}",
+            $"{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}", 
             $"{nameof(Session.Movie)}.{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}"
         ];//this is more save way, but also more 
 
@@ -52,9 +50,9 @@ namespace BusinessLogicLayer.Services
         public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto)
         {
             Session? session = await GetSessionEntityByIdAsync(id);
-
+            
             if (session == null) return false;
-
+            
             _mapper.Map(createSessionDto, session);
 
             _unitOfWork.GetRepository<Session>().Update(session);
@@ -73,8 +71,7 @@ namespace BusinessLogicLayer.Services
         {
             return await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
         }
-
-
+        
         public async Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filter)
         {
             var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);

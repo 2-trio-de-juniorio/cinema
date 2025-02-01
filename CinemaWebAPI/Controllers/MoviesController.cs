@@ -18,10 +18,10 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="MoviesController"/> class.
         /// </summary>
-        /// <param name="MockMovieService">The service responsible for movie-related business logic.</param>
-        public MoviesController(IMovieService MockMovieService)
+        /// <param name="movieService">The service responsible for movie-related business logic.</param>
+        public MoviesController(IMovieService movieService)
         {
-            _movieService = MockMovieService;
+            _movieService = movieService;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace CinemaWebAPI.Controllers
             await _movieService.RemoveMovieAsync(id);
             return NoContent();
         }
-
+        
         /// <summary>
         /// Get a list of movies with filtering and sorting.
         /// </summary>
@@ -129,6 +129,5 @@ namespace CinemaWebAPI.Controllers
 
             return Ok(movies);
         }
-
     }
 }

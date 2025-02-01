@@ -1,5 +1,4 @@
 using BusinessLogic.Models.Movies;
-using DataAccess.Models.Movies;
 
 namespace BusinessLogicLayer.Interfaces
 {
@@ -11,6 +10,5 @@ namespace BusinessLogicLayer.Interfaces
         Task<bool> UpdateMovieAsync(int id, CreateMovieDTO movieDto);
         Task RemoveMovieAsync(int id);
         Task<List<MovieDTO>> GetFilteredMoviesAsync(MovieFilterDTO filter);
-
     }
 }

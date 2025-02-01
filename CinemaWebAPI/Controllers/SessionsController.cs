@@ -1,9 +1,6 @@
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Sessions;
-using DataAccess.Models.Sessions;
-using BusinessLogic.Models.Movies;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -16,7 +13,6 @@ namespace CinemaWebAPI.Controllers
     public class SessionsController : ControllerBase
     {
         private readonly ISessionService _sessionService;
-        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionsController"/> class.
@@ -105,7 +101,7 @@ namespace CinemaWebAPI.Controllers
 
             return NoContent();
         }
-
+        
         /// <summary>
         /// Receives cinema sessions with the filtering option by date.
         /// </summary>
@@ -113,7 +109,6 @@ namespace CinemaWebAPI.Controllers
         /// <returns>List of sessions matching the filters</returns>
         [HttpGet("filter")]
         [AllowAnonymous]
-
         public async Task<IActionResult> GetSessions([FromQuery] SessionFilterDTO filter)
         {
             List<SessionDTO> sessions = await _sessionService.GetFilteredSessionsAsync(filter);
@@ -124,7 +119,5 @@ namespace CinemaWebAPI.Controllers
             }
             return Ok(sessions);
         }
-        
-
     }
 }

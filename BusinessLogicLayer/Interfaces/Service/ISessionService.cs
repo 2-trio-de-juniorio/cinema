@@ -1,4 +1,3 @@
-using BusinessLogic.Models.Movies;
 using BusinessLogic.Models.Sessions;
 
 namespace BusinessLogicLayer.Interfaces
@@ -11,6 +10,5 @@ namespace BusinessLogicLayer.Interfaces
         Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto);
         Task<bool> RemoveSessionAsync(int id);
         Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filter);
-
     }
 }
