@@ -91,7 +91,7 @@ namespace BusinessLogicLayer.Services
                 "price_desc" => sessions.OrderByDescending(m => m.Price).ToList(),
                 "Time_asc" => sessions.OrderBy(m => m.StartTime).ToList(),
                 "Time_desc" => sessions.OrderByDescending(m => m.StartTime).ToList(),
-                _ => sessions.OrderByDescending(m => m.Price).ToList()
+                _ => sessions.OrderByDescending(m => m.StartTime).ToList()
             };
 
             // Pagination
