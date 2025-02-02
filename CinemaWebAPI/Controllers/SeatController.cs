@@ -63,6 +63,9 @@ namespace CinemaWebAPI.Controllers
         [ProducesResponseType(typeof(SeatDTO), 201)]
         public async Task<IActionResult> CreateSeatAsync([FromBody] CreateSeatDTO createSeatDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             int id = await _seatService.CreateSeatAsync(createSeatDTO);
             var createdSeat = await _seatService.GetSeatByIdAsync(id); // Отримати створене місце
 
@@ -81,6 +84,9 @@ namespace CinemaWebAPI.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] CreateSeatDTO createSeatDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             if (!await _seatService.UpdateSeatAsync(id, createSeatDTO))
             {
                 return NotFound(new { Message = $"Seat with ID {id} not found." });

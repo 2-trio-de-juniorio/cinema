@@ -27,6 +27,9 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
                 var response = await _authService.RegisterUser(registerDTO);
@@ -50,6 +53,9 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             try
             {
                 var response = await _authService.AuthenticateUserAsync(loginDTO);

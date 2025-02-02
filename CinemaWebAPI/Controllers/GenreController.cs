@@ -64,6 +64,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateGenreAsync([FromBody] CreateGenreDTO createGenreDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             int id = await _genreService.CreateGenreAsync(createGenreDTO);
             return CreatedAtRoute(nameof(GetGenreById), new { id }, createGenreDTO);
         }
@@ -80,6 +83,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateGenreAsync([FromRoute] int id, [FromBody] CreateGenreDTO createGenreDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (!await _genreService.UpdateGenreAsync(id, createGenreDTO))
             {
                 return NotFound(new { Message = $"Genre with ID {id} not found." });

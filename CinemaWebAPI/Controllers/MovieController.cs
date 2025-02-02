@@ -66,6 +66,9 @@ namespace CinemaWebAPI.Controllers
         public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO movieDTO)
         {
             if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
+            if (!ModelState.IsValid)
                 return BadRequest();
                 
             int id = await _movieService.CreateMovieAsync(movieDTO);
@@ -84,6 +87,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] CreateMovieDTO movieDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (!await _movieService.UpdateMovieAsync(id, movieDTO))
             {
                 return NotFound(new { Message = $"Movie with ID {id} not found." });

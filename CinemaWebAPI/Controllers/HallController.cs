@@ -60,6 +60,9 @@ public class HallController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateHallAsync([FromBody] CreateHallDTO createHallDTO)
     {
+        if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
         int id = await _hallService.CreateHallAsync(createHallDTO);
         return CreatedAtRoute(nameof(GetHallById), new { id }, createHallDTO);
     }
@@ -75,6 +78,9 @@ public class HallController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] CreateHallDTO createHallDTO)
     {
+        if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
         if (!await _hallService.UpdateHallAsync(id, createHallDTO))
         {
             return NotFound(new { Message = $"Hall with ID {id} not found." });

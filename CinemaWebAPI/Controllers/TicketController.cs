@@ -56,6 +56,9 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateTicket([FromBody] CreateTicketDTO createTicketDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             try
             {
                 var ticketId = await _ticketService.CreateTicketAsync(createTicketDto);
@@ -76,6 +79,9 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTicket(int id, [FromBody] CreateTicketDTO updateTicketDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
                 var success = await _ticketService.UpdateTicketAsync(id, updateTicketDto);

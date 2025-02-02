@@ -61,6 +61,9 @@ namespace CinemaWebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             int id = await _sessionService.CreateSessionAsync(createSessionDto);
             return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
         }
@@ -76,6 +79,9 @@ namespace CinemaWebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (!await _sessionService.UpdateSessionAsync(id, createSessionDto))
             {
                 return NotFound(new { Message = $"Session with ID {id} not found." });

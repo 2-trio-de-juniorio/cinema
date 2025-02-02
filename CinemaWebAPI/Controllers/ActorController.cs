@@ -64,6 +64,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateActorAsync([FromBody] CreateActorDTO createActorDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             int id = await _actorService.CreateActorAsync(createActorDTO);
             return CreatedAtRoute(nameof(GetActorById), new { id }, createActorDTO);
         }
@@ -80,6 +83,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateActorAsync([FromRoute] int id, [FromBody] CreateActorDTO createActorDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             if (!await _actorService.UpdateActorAsync(id, createActorDto))
             {
                 return NotFound(new { Message = $"Actor with ID {id} not found." });
