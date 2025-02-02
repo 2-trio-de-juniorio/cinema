@@ -73,5 +73,41 @@ namespace BusinessLogicLayer.Services
 
             return success;
         }
+        
+        public async Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filter)
+        {
+            var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
+
+            if (filter?.Date.HasValue == true)
+            {
+                sessions = sessions.Where(s => s.StartTime.Date == filter.Date.Value.Date).ToList();
+            }
+
+            // Sorting
+            if (!string.IsNullOrEmpty(filter?.SortBy) && !string.IsNullOrEmpty(filter?.SortOrder))
+            {
+                bool ascending = filter.SortOrder.Equals("asc", StringComparison.OrdinalIgnoreCase);
+                sessions = filter.SortBy.ToLower() switch
+                {
+                    "price" => ascending ? sessions.OrderBy(m => m.Price).ToList() : sessions.OrderByDescending(m => m.Price).ToList(),
+                    "time" => ascending ? sessions.OrderBy(m => m.StartTime).ToList() : sessions.OrderByDescending(m => m.StartTime).ToList(),
+                    _ => sessions.OrderByDescending(m => m.StartTime).ToList()
+                };
+            }
+
+            // Pagination
+            int pageSize = 6;
+            int totalSessions = sessions.Count;
+            int totalPages = (int)Math.Ceiling((double)totalSessions / pageSize);
+            int pageNumber = filter?.Page ?? 1;
+
+            // Ensure the page number is within valid range
+            if (pageNumber > totalPages) pageNumber = totalPages;
+            if (pageNumber < 1) pageNumber = 1;
+
+            sessions = sessions.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
+        }
     }
 }

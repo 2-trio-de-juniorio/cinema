@@ -37,24 +37,11 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateTicketAsync(CreateTicketDTO createTicketDto)
         {
-            var session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(createTicketDto.SessionId);
-            if (session == null)
-            {
-                throw new ArgumentException($"Session with ID {createTicketDto.SessionId} does not exist.");
-            }
-
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
-            if (seat == null || seat.IsBooked)
-            {
-                throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
-            }
+            await CheckTicketDTO(createTicketDto);
 
             var ticket = _mapper.Map<Ticket>(createTicketDto);
+            
             await _unitOfWork.GetRepository<Ticket>().AddAsync(ticket);
-            await _unitOfWork.SaveAsync();
-
-            seat.IsBooked = true;
-            _unitOfWork.GetRepository<Seat>().Update(seat);
             await _unitOfWork.SaveAsync();
 
             return ticket.Id;
@@ -66,24 +53,10 @@ namespace BusinessLogicLayer.Services
             if (ticket == null)
                 return false;
 
-            var newSeat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(updateTicketDto.SeatId);
-            if (newSeat == null || newSeat.IsBooked)
-            {
-                throw new ArgumentException($"Seat with ID {updateTicketDto.SeatId} is not available.");
-            }
-
-            var oldSeat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(ticket.SeatId);
-            if (oldSeat != null)
-            {
-                oldSeat.IsBooked = false;
-                _unitOfWork.GetRepository<Seat>().Update(oldSeat);
-            }
+            await CheckTicketDTO(updateTicketDto);
 
             _mapper.Map(updateTicketDto, ticket);
             _unitOfWork.GetRepository<Ticket>().Update(ticket);
-
-            newSeat.IsBooked = true;
-            _unitOfWork.GetRepository<Seat>().Update(newSeat);
 
             await _unitOfWork.SaveAsync();
             return true;
@@ -91,19 +64,25 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> RemoveTicketAsync(int id)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id);
-            if (ticket == null) return false;
+            bool result = await _unitOfWork.GetRepository<Ticket>().RemoveByIdAsync(id);
+            await _unitOfWork.SaveAsync();
+            
+            return result;
+        }
 
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(ticket.SeatId);
-            if (seat != null)
+        private async Task CheckTicketDTO(CreateTicketDTO createTicketDto)
+        {
+            var session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(createTicketDto.SessionId);
+            if (session == null)
             {
-                seat.IsBooked = false;
-                _unitOfWork.GetRepository<Seat>().Update(seat);
+                throw new ArgumentException($"Session with ID {createTicketDto.SessionId} does not exist.");
             }
 
-            await _unitOfWork.GetRepository<Ticket>().RemoveByIdAsync(id);
-            await _unitOfWork.SaveAsync();
-            return true;
+            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
+            if (seat == null || seat.IsBooked)
+            {
+                throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
+            }
         }
     }
 }
