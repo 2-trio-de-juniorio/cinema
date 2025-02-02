@@ -101,5 +101,23 @@ namespace CinemaWebAPI.Controllers
 
             return NoContent();
         }
+        
+        /// <summary>
+        /// Receives cinema sessions with the filtering option by date.
+        /// </summary>
+        /// <param name="filter">Filters to search for sessions</param>
+        /// <returns>List of sessions matching the filters</returns>
+        [HttpGet("filter")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetSessions([FromQuery] SessionFilterDTO filter)
+        {
+            List<SessionDTO> sessions = await _sessionService.GetFilteredSessionsAsync(filter);
+
+            if (!sessions.Any())
+            {
+                return NotFound(new { Message = "No sessions found for the specified filters." });
+            }
+            return Ok(sessions);
+        }
     }
 }

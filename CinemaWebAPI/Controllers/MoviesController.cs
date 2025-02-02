@@ -110,5 +110,24 @@ namespace CinemaWebAPI.Controllers
             await _movieService.RemoveMovieAsync(id);
             return NoContent();
         }
+        
+        /// <summary>
+        /// Get a list of movies with filtering and sorting.
+        /// </summary>
+        /// <param name="filter">Filters to search for movies.</param>
+        /// <returns>List of movies that match filters.</returns>
+        [HttpGet("filter")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetFilteredMovies([FromQuery] MovieFilterDTO filter)
+        {
+            List<MovieDTO> movies = await _movieService.GetFilteredMoviesAsync(filter);
+
+            if (!movies.Any())
+            {
+                return NotFound(new { Message = "No movies found for the specified filters." });
+            }
+
+            return Ok(movies);
+        }
     }
 }

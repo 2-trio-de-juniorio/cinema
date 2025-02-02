@@ -69,5 +69,44 @@ namespace BusinessLogicLayer.Services
         {
             return await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
         }
+
+        public async Task<List<MovieDTO>> GetFilteredMoviesAsync(MovieFilterDTO filter)
+        {
+            var movies = await _unitOfWork.GetRepository<Movie>().GetAllAsync(MovieEntityIncludes);
+
+            // Filtering by genre
+            if (!string.IsNullOrEmpty(filter.Genre))
+            {
+                movies = movies.Where(m => m.MovieGenres
+                .Any(mg => mg.Genre.Name.Equals(filter.Genre, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
+
+            // Sorting
+            if (!string.IsNullOrEmpty(filter.SortBy) && !string.IsNullOrEmpty(filter.SortOrder))
+            {
+                bool ascending = filter.SortOrder.Equals("asc", StringComparison.OrdinalIgnoreCase);
+                movies = filter.SortBy.ToLower() switch
+                {
+                    "date" => ascending ? movies.OrderBy(m => m.ReleaseDate).ToList() : movies.OrderByDescending(m => m.ReleaseDate).ToList(),
+                    "rating" => ascending ? movies.OrderBy(m => m.Rating).ToList() : movies.OrderByDescending(m => m.Rating).ToList(),
+                    _ => movies.OrderByDescending(m => m.ReleaseDate).ToList()
+                };
+            }
+
+            // Pagination
+            int pageSize = 6;
+            int totalMovies = movies.Count;
+            int totalPages = (int)Math.Ceiling((double)totalMovies / pageSize);
+            int pageNumber = filter.Page ?? 1;
+
+            // Ensure the page number is within valid range
+            if (pageNumber > totalPages) pageNumber = totalPages;
+            if (pageNumber < 1) pageNumber = 1;
+
+            movies = movies.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            return movies.Select(m => _mapper.Map<MovieDTO>(m)).ToList();
+        }
     }
 }
