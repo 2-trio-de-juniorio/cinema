@@ -19,6 +19,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateSeatAsync(CreateSeatDTO createSeatDTO)
         {
+            await checkSeatDTO(createSeatDTO);
+
             var seat = _mapper.Map<Seat>(createSeatDTO);
 
             await _unitOfWork.GetRepository<Seat>().AddAsync(seat);
@@ -45,6 +47,8 @@ namespace BusinessLogicLayer.Services
 
             if (seat == null) return false;
 
+            await checkSeatDTO(createSeatDTO);
+            
             _mapper.Map(createSeatDTO, seat);
 
             _unitOfWork.GetRepository<Seat>().Update(seat);
@@ -57,6 +61,13 @@ namespace BusinessLogicLayer.Services
         {
             await _unitOfWork.GetRepository<Seat>().RemoveByIdAsync(id);
             await _unitOfWork.SaveAsync();
+        }
+
+        private async Task checkSeatDTO(CreateSeatDTO createSeatDTO) 
+        {
+            Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(createSeatDTO.HallId);
+            if (hall == null) 
+                throw new ArgumentException($"Hall with id {createSeatDTO.HallId} does not exist");
         }
     }
 }

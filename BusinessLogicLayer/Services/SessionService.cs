@@ -41,9 +41,11 @@ namespace BusinessLogicLayer.Services
             return session != null ? _mapper.Map<SessionDTO>(session) : null;
         }
 
-        public async Task<int> CreateSessionAsync(CreateSessionDTO createSessionDto)
+        public async Task<int> CreateSessionAsync(CreateSessionDTO createSessionDTO)
         {
-            Session session = _mapper.Map<Session>(createSessionDto);
+            await checkSessionDTO(createSessionDTO);
+
+            Session session = _mapper.Map<Session>(createSessionDTO);
 
             await _unitOfWork.GetRepository<Session>().AddAsync(session);
             await _unitOfWork.SaveAsync();
@@ -51,13 +53,15 @@ namespace BusinessLogicLayer.Services
             return session.Id;
         }
 
-        public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto)
+        public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDTO)
         {
             Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
             
             if (session == null) return false;
             
-            _mapper.Map(createSessionDto, session);
+            await checkSessionDTO(createSessionDTO);
+
+            _mapper.Map(createSessionDTO, session);
 
             _unitOfWork.GetRepository<Session>().Update(session);
             await _unitOfWork.SaveAsync();
@@ -108,6 +112,19 @@ namespace BusinessLogicLayer.Services
             sessions = sessions.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
+        }
+
+        private async Task checkSessionDTO(CreateSessionDTO createSessionDTO) 
+        {
+            Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(createSessionDTO.HallId);
+
+            if (hall == null)
+                throw new ArgumentException($"Hall with id {createSessionDTO.HallId} does not exist");
+
+            Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(createSessionDTO.MovieId);
+
+            if (movie == null)
+                throw new ArgumentException($"Movie with id {createSessionDTO.MovieId} does not exist");
         }
     }
 }

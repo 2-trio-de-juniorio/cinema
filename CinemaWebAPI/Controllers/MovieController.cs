@@ -67,12 +67,16 @@ namespace CinemaWebAPI.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-                
-            if (!ModelState.IsValid)
-                return BadRequest();
-                
-            int id = await _movieService.CreateMovieAsync(movieDTO);
-            return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDTO);
+            
+            try 
+            {
+                int id = await _movieService.CreateMovieAsync(movieDTO);
+                return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDTO);
+            }
+            catch (ArgumentException ex) 
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -90,9 +94,16 @@ namespace CinemaWebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!await _movieService.UpdateMovieAsync(id, movieDTO))
+            try 
             {
-                return NotFound(new { Message = $"Movie with ID {id} not found." });
+                if (!await _movieService.UpdateMovieAsync(id, movieDTO))
+                {
+                    return NotFound(new { Message = $"Movie with ID {id} not found." });
+                }
+            } 
+            catch(ArgumentException ex) 
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();

@@ -24,10 +24,6 @@ namespace DataAccess.Configurations.Sessions
                 .HasColumnName("seat_number")
                 .IsRequired();
 
-            builder.Property(s => s.IsBooked)
-                .HasColumnName("is_booked")
-                .IsRequired();
-
             builder.HasOne(s => s.Hall)
                 .WithMany(h => h.Seats)
                 .HasForeignKey(s => s.HallId)

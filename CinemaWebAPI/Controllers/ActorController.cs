@@ -13,7 +13,6 @@ namespace CinemaWebAPI.Controllers
     public class ActorController : ControllerBase
     {
         private readonly IActorService _actorService;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ActorController"/> class.
         /// </summary>
@@ -32,7 +31,6 @@ namespace CinemaWebAPI.Controllers
         public async Task<IActionResult> GetAllActors()
         {
             List<ActorDTO> actors = await _actorService.GetAllActorsAsync();
-
             return Ok(actors);
         }
 

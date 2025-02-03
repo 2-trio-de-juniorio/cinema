@@ -23,11 +23,7 @@ namespace BusinessLogicLayer.Profiles
                 .ForMember(dest => dest.Hall, opt => opt.MapFrom(src => src.Hall))
                 .ForMember(dest => dest.Movie, opt => opt.MapFrom(src => src.Movie));
             
-            CreateMap<Ticket, TicketDTO>()
-                .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Session.Movie.Title))
-                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.Session.StartTime))
-                .ForMember(dest => dest.RowNumber, opt => opt.MapFrom(src => src.Seat.RowNumber))
-                .ForMember(dest => dest.SeatNumber, opt => opt.MapFrom(src => src.Seat.SeatNumber));
+            CreateMap<Ticket, TicketDTO>();
             CreateMap<CreateTicketDTO, Ticket>();
         }
     }

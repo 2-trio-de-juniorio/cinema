@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateTicketAsync(CreateTicketDTO createTicketDto)
         {
-            await CheckTicketDTO(createTicketDto);
+            await checkTicketDTO(createTicketDto);
 
             var ticket = _mapper.Map<Ticket>(createTicketDto);
             
@@ -53,7 +53,7 @@ namespace BusinessLogicLayer.Services
             if (ticket == null)
                 return false;
 
-            await CheckTicketDTO(updateTicketDto);
+            await checkTicketDTO(updateTicketDto);
 
             _mapper.Map(updateTicketDto, ticket);
             _unitOfWork.GetRepository<Ticket>().Update(ticket);
@@ -70,7 +70,7 @@ namespace BusinessLogicLayer.Services
             return result;
         }
 
-        private async Task CheckTicketDTO(CreateTicketDTO createTicketDto)
+        private async Task checkTicketDTO(CreateTicketDTO createTicketDto)
         {
             var session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(createTicketDto.SessionId);
             if (session == null)
@@ -79,7 +79,7 @@ namespace BusinessLogicLayer.Services
             }
 
             var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
-            if (seat == null || seat.IsBooked)
+            if (seat == null)
             {
                 throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
             }

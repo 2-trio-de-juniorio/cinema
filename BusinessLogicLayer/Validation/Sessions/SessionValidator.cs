@@ -7,8 +7,6 @@ namespace BusinessLogicLayer.Validations
     {
         public SessionValidator()
         {
-            RuleFor(s => s.HallId).NotEmpty().WithMessage("Hall id is required");
-            RuleFor(s => s.MovieId).NotEmpty().WithMessage("Movie id is required");
             
             RuleFor(s => s.StartTime).NotEmpty().WithMessage("Start time of a session is required");
 

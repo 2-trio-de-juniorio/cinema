@@ -2,6 +2,7 @@ using AutoMapper;
 using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;
+using DataAccess.Models.Movies.Actors;
 using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
@@ -19,9 +20,11 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<int> CreateMovieAsync(CreateMovieDTO MovieDTO)
+        public async Task<int> CreateMovieAsync(CreateMovieDTO createMovieDTO)
         {
-            Movie movie = _mapper.Map<Movie>(MovieDTO);
+            await checkMovieDTO(createMovieDTO);
+
+            Movie movie = _mapper.Map<Movie>(createMovieDTO);
 
             await _unitOfWork.GetRepository<Movie>().AddAsync(movie);
             await _unitOfWork.SaveAsync();
@@ -47,16 +50,19 @@ namespace BusinessLogicLayer.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<bool> UpdateMovieAsync(int id, CreateMovieDTO MovieDTO)
+        public async Task<bool> UpdateMovieAsync(int id, CreateMovieDTO createMovieDTO)
         {
+            
             Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
 
             if (movie == null) return false;
 
+            await checkMovieDTO(createMovieDTO);
+
             movie.MovieGenres.Clear();
             movie.MovieActors.Clear();
 
-            _mapper.Map(MovieDTO, movie);
+            _mapper.Map(createMovieDTO, movie);
 
             _unitOfWork.GetRepository<Movie>().Update(movie);
             await _unitOfWork.SaveAsync();
@@ -98,8 +104,22 @@ namespace BusinessLogicLayer.Services
             if (pageNumber < 1) pageNumber = 1;
 
             movies = movies.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-
             return movies.Select(m => _mapper.Map<MovieDTO>(m)).ToList();
+        }
+
+        private async Task checkMovieDTO(CreateMovieDTO createMovieDTO) 
+        {
+            foreach(int actorId in createMovieDTO.ActorsIds) 
+            {
+                if (await _unitOfWork.GetRepository<Actor>().GetByIdAsync(actorId) == null)
+                    throw new ArgumentException($"Actor with id {actorId} does not exist");
+            }
+
+            foreach(int genreId in createMovieDTO.GenresIds) 
+            {
+                if (await _unitOfWork.GetRepository<Genre>().GetByIdAsync(genreId) == null)
+                    throw new ArgumentException($"Genre with id {genreId} does not exist");
+            }
         }
     }
 }
