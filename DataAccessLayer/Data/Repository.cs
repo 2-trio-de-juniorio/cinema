@@ -88,5 +88,10 @@ namespace DataAccessLayer.Repositories
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _entities.CountAsync(predicate);
+        }
     }
 }

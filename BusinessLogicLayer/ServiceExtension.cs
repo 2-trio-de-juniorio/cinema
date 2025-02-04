@@ -8,6 +8,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessLogic.Interfaces.Service.Statistics;
+using BusinessLogicLayer.Services.Statistics;
 
 namespace BusinessLogicLayer
 {
@@ -62,8 +64,9 @@ namespace BusinessLogicLayer
                 .AddScoped<IGenreService, GenreService>()
                 .AddScoped<ISessionService, SessionService>()
                 .AddScoped<ISeatService, SeatService>()
-                .AddScoped<ITicketService,TicketService>()
-                .AddScoped<IHallService, HallService>();
+                .AddScoped<ITicketService, TicketService>()
+                .AddScoped<IHallService, HallService>()
+                .AddScoped<IStatisticsService, StatisticsService>();
         }
     }
 }
