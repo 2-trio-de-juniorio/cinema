@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLogic.Models.Tickets;
 using BusinessLogicLayer.Interfaces;
+using DataAccess.Models.Movies;
+using DataAccess.Models.Movies.Actors;
 using DataAccess.Models.Sessions;
 using DataAccess.Models.Tickets;
 using DataAccessLayer.Interfaces;
@@ -14,8 +16,12 @@ namespace BusinessLogicLayer.Services
 
         private readonly string[] TicketEntityIncludes = 
         [
-            nameof(Ticket.Session), 
-            nameof(Ticket.Seat)        
+            $"{nameof(Ticket.Session)}.{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}", 
+            $"{nameof(Ticket.Session)}.{nameof(Session.Movie)}.{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}",
+            $"{nameof(Ticket.Session)}.{nameof(Session.Hall)}",
+
+            nameof(Ticket.Seat)
+
         ];
         public TicketService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -32,7 +38,7 @@ namespace BusinessLogicLayer.Services
         public async Task<TicketDTO?> GetTicketByIdAsync(int id)
         {
             var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
-            return ticket == null ? null : _mapper.Map<TicketDTO>(ticket);
+            return ticket != null ? _mapper.Map<TicketDTO>(ticket) : null;
         }
 
         public async Task<int> CreateTicketAsync(CreateTicketDTO createTicketDto)

@@ -30,19 +30,8 @@ namespace CinemaWebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            try
-            {
-                var response = await _authService.RegisterUser(registerDTO);
-                return Ok(response);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch (BadHttpRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _authService.RegisterUser(registerDTO);
+            return Ok(response);
         }
 
         /// <summary>
@@ -56,15 +45,8 @@ namespace CinemaWebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
                 
-            try
-            {
-                var response = await _authService.AuthenticateUserAsync(loginDTO);
-                return Ok(response);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            var response = await _authService.AuthenticateUserAsync(loginDTO);
+            return Ok(response);
         }
 
         /// <summary>
@@ -75,15 +57,8 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
         {
-            try
-            {
-                var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
-                return Ok(tokens);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
+            return Ok(tokens);
         }
     }
 }

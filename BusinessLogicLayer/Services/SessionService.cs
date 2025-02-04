@@ -15,7 +15,6 @@ namespace BusinessLogicLayer.Services
 
         private readonly string[] SessionEntityIncludes =
         [
-            nameof(Session.Movie), 
             nameof(Session.Hall),
             $"{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}", 
             $"{nameof(Session.Movie)}.{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}"

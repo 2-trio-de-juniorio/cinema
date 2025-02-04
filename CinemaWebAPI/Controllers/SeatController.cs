@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace CinemaWebAPI.Controllers
 {

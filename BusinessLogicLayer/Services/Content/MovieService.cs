@@ -12,7 +12,11 @@ namespace BusinessLogicLayer.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        private readonly string[] MovieEntityIncludes = ["MovieActors.Actor", "MovieGenres.Genre"];
+        private readonly string[] MovieEntityIncludes = 
+        [
+            $"{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}", 
+            $"{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}"
+        ];
 
         public MovieService(IUnitOfWork unitOfWork, IMapper mapper)
         {

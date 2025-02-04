@@ -59,15 +59,8 @@ namespace WebApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
                 
-            try
-            {
-                var ticketId = await _ticketService.CreateTicketAsync(createTicketDto);
-                return CreatedAtAction(nameof(GetTicketById), new { id = ticketId }, ticketId);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var ticketId = await _ticketService.CreateTicketAsync(createTicketDto);
+            return CreatedAtAction(nameof(GetTicketById), new { id = ticketId }, ticketId);
         }
 
         /// <summary>
@@ -82,18 +75,11 @@ namespace WebApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            try
-            {
-                var success = await _ticketService.UpdateTicketAsync(id, updateTicketDto);
-                if (!success)
-                    return NotFound($"Ticket with ID {id} not found.");
+            var success = await _ticketService.UpdateTicketAsync(id, updateTicketDto);
+            if (!success)
+                return NotFound($"Ticket with ID {id} not found.");
 
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return NoContent();
         }
 
         /// <summary>
