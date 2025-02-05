@@ -2,6 +2,7 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Movies;
+using DataAccessLayer.Models;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -49,7 +50,7 @@ namespace CinemaWebAPI.Controllers
 
             if (genre == null)
             {
-                return NotFound(new { Message = $"Genre with ID {id} not found." });
+                throw new KeyNotFoundException($"Genre with ID {id} not found.");
             }
 
             return Ok(genre);
@@ -88,7 +89,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _genreService.UpdateGenreAsync(id, createGenreDTO))
             {
-                return NotFound(new { Message = $"Genre with ID {id} not found." });
+                throw new KeyNotFoundException($"Genre with ID {id} not found.");
             }
 
             return CreatedAtRoute(nameof(GetGenreById), new { id }, createGenreDTO);
@@ -107,7 +108,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!successfully)
             {
-                return NotFound(new { Message = $"Genre with ID {id} not found." });
+                throw new KeyNotFoundException($"Genre with ID {id} not found.");
             }
 
             return NoContent();

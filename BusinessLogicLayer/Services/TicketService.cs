@@ -5,6 +5,7 @@ using DataAccess.Models.Movies;
 using DataAccess.Models.Movies.Actors;
 using DataAccess.Models.Sessions;
 using DataAccess.Models.Tickets;
+using DataAccess.Models.Users;
 using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
@@ -55,13 +56,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateTicketAsync(int id, CreateTicketDTO updateTicketDto)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id);
+            await checkTicketDTO(updateTicketDto);
+
+            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
             if (ticket == null)
                 return false;
 
-            await checkTicketDTO(updateTicketDto);
-
             _mapper.Map(updateTicketDto, ticket);
+            
             _unitOfWork.GetRepository<Ticket>().Update(ticket);
 
             await _unitOfWork.SaveAsync();
@@ -88,6 +90,12 @@ namespace BusinessLogicLayer.Services
             if (seat == null)
             {
                 throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
+            }
+
+            var user = await _unitOfWork.GetRepository<AppUser>().GetByIdAsync(createTicketDto.UserId);
+            if (user == null) 
+            {
+                throw new ArgumentException($"User with ID {createTicketDto.UserId} does not exist");
             }
         }
     }

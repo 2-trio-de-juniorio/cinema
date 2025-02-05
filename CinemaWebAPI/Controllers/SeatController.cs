@@ -1,7 +1,8 @@
 ﻿using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
+using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of seats</returns>
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(List<SeatDTO>), 200)]
         public async Task<IActionResult> GetAllSeats()
         {
@@ -41,6 +43,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the seat</param>
         /// <returns>The seat details</returns>
         [HttpGet("{id}", Name = "GetSeatById")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(SeatDTO), 200)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetSeatById([FromRoute] int id)
@@ -49,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (seat == null)
             {
-                return NotFound(new { Message = $"Seat with ID {id} not found." });
+                throw new KeyNotFoundException($"Seat with ID {id} not found.");
             }
 
             return Ok(seat);
@@ -61,6 +64,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="createSeatDTO">The seat data for creation</param>
         /// <returns>The created seat</returns>
         [HttpPost]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(typeof(SeatDTO), 201)]
         public async Task<IActionResult> CreateSeatAsync([FromBody] CreateSeatDTO createSeatDTO)
         {
@@ -81,6 +85,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="createSeatDTO">The updated seat data</param>
         /// <returns>The result of the update operation</returns>
         [HttpPut("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] CreateSeatDTO createSeatDTO)
@@ -90,7 +95,7 @@ namespace CinemaWebAPI.Controllers
                 
             if (!await _seatService.UpdateSeatAsync(id, createSeatDTO))
             {
-                return NotFound(new { Message = $"Seat with ID {id} not found." });
+                throw new KeyNotFoundException($"Seat with ID {id} not found.");
             }
             return NoContent();
         }
@@ -101,6 +106,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the seat to delete</param>
         /// <returns>The deletion status</returns>
         [HttpDelete("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteSeatAsync([FromRoute] int id)
@@ -108,7 +114,7 @@ namespace CinemaWebAPI.Controllers
             var seat = await _seatService.GetSeatByIdAsync(id);
             if (seat == null)
             {
-                return NotFound(new { Message = $"Seat with ID {id} not found." });
+                throw new KeyNotFoundException($"Seat with ID {id} not found.");
             }
 
             await _seatService.RemoveSeatAsync(id);

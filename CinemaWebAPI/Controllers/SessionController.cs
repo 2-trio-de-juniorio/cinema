@@ -2,6 +2,8 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Sessions;
 using Microsoft.AspNetCore.Authorization;
+using DataAccessLayer.Models;
+
 
 namespace CinemaWebAPI.Controllers
 {
@@ -29,6 +31,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of <see cref="SessionDTO"/> objects representing all sessions.</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllSessions()
         {
             List<SessionDTO> sessions = await _sessionService.GetAllSessionsAsync();
@@ -42,13 +45,14 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the session.</param>
         /// <returns>A <see cref="CreateSessionDTO"/> object representing the session, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetSessionById")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetSessionById([FromRoute] int id)
         {
             SessionDTO? session = await _sessionService.GetSessionByIdAsync(id);
 
             if (session == null)
             {
-                return NotFound(new { Message = $"Session with ID {id} not found." });
+                throw new KeyNotFoundException($"Session with ID {id} not found.");
             }
 
             return Ok(session);
@@ -60,6 +64,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the details of the session to create.</param>
         /// <returns>An HTTP 201 response if the session is created successfully.</returns>
         [HttpPost]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
             if (!ModelState.IsValid)
@@ -78,6 +83,7 @@ namespace CinemaWebAPI.Controllers
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
             if (!ModelState.IsValid)
@@ -85,7 +91,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _sessionService.UpdateSessionAsync(id, createSessionDto))
             {
-                return NotFound(new { Message = $"Session with ID {id} not found." });
+                throw new KeyNotFoundException($"Session with ID {id} not found.");
             }
 
             return NoContent();
@@ -97,13 +103,14 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the session to delete.</param>
         /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
         [HttpDelete("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
         {
             bool result = await _sessionService.RemoveSessionAsync(id);
             
             if (!result)
             {
-                return NotFound(new { Message = $"Session with ID {id} not found." });
+                throw new KeyNotFoundException($"Session with ID {id} not found.");
             }
 
             return NoContent();
@@ -122,6 +129,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!sessions.Any())
             {
+                // todo: probably throw here as well
                 return NotFound(new { Message = "No sessions found for the specified filters." });
             }
             return Ok(sessions);

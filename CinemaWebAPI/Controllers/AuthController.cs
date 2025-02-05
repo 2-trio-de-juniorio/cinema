@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using DataAccessLayer.Models;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -9,6 +11,7 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;

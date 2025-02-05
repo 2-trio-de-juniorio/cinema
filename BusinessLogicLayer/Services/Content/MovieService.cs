@@ -56,12 +56,11 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateMovieAsync(int id, CreateMovieDTO createMovieDTO)
         {
+            await checkMovieDTO(createMovieDTO);
             
             Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
 
             if (movie == null) return false;
-
-            await checkMovieDTO(createMovieDTO);
 
             movie.MovieGenres.Clear();
             movie.MovieActors.Clear();

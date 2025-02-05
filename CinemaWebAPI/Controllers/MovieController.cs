@@ -2,6 +2,8 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Movies;
+using DataAccessLayer.Models;
+
 
 namespace CinemaWebAPI.Controllers
 {
@@ -50,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (movie == null)
             {
-                return NotFound(new { Message = $"Movie with ID {id} not found." });
+                throw new KeyNotFoundException($"Movie with ID {id} not found.");
             }
 
             return Ok(movie);
@@ -65,6 +67,7 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO movieDTO)
         {
+            System.Console.WriteLine(User.IsInRole("Admin"));
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
@@ -89,7 +92,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _movieService.UpdateMovieAsync(id, movieDTO))
             {
-                return NotFound(new { Message = $"Movie with ID {id} not found." });
+                throw new KeyNotFoundException($"Movie with ID {id} not found.");
             }
 
             return NoContent();
@@ -107,7 +110,7 @@ namespace CinemaWebAPI.Controllers
             var movie = await _movieService.GetMovieByIdAsync(id);
             if (movie == null)
             {
-                return NotFound(new { Message = $"Movie with ID {id} not found." });
+                throw new KeyNotFoundException($"Movie with ID {id} not found.");
             }
 
             await _movieService.RemoveMovieAsync(id);
@@ -127,6 +130,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!movies.Any())
             {
+                // todo: probably throw here as well
                 return NotFound(new { Message = "No movies found for the specified filters." });
             }
             return Ok(movies);

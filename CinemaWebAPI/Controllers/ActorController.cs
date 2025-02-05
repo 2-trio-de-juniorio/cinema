@@ -2,6 +2,7 @@ using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using DataAccessLayer.Models;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -47,7 +48,7 @@ namespace CinemaWebAPI.Controllers
 
             if (actorDTO == null)
             {
-                return NotFound(new { Message = $"Actor with ID {id} not found." });
+                throw new KeyNotFoundException($"Actor with ID {id} not found.");
             }
 
             return Ok(actorDTO);
@@ -86,7 +87,7 @@ namespace CinemaWebAPI.Controllers
                 
             if (!await _actorService.UpdateActorAsync(id, createActorDto))
             {
-                return NotFound(new { Message = $"Actor with ID {id} not found." });
+                throw new KeyNotFoundException($"Actor with ID {id} not found.");
             }
 
             return CreatedAtRoute(nameof(GetActorById), new { id }, createActorDto);
@@ -105,7 +106,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!successfully)
             {
-                return NotFound(new { Message = $"Actor with ID {id} not found." });
+                throw new KeyNotFoundException($"Actor with ID {id} not found.");
             }
 
             return NoContent();

@@ -54,12 +54,12 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDTO)
         {
+            await checkSessionDTO(createSessionDTO);
+
             Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
             
             if (session == null) return false;
             
-            await checkSessionDTO(createSessionDTO);
-
             _mapper.Map(createSessionDTO, session);
 
             _unitOfWork.GetRepository<Session>().Update(session);

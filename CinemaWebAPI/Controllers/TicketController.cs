@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Models.Tickets;
 using BusinessLogicLayer.Interfaces;
+using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace CinemaWebAPI.Controllers
 {
     /// <summary>
     /// 
@@ -27,6 +29,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns>A list of all tickets.</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
         {
             var tickets = await _ticketService.GetAllTicketsAsync();
@@ -39,11 +42,12 @@ namespace WebApi.Controllers
         /// <param name="id">The ID of the ticket.</param>
         /// <returns>The ticket details if found, or a 404 response if not.</returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<TicketDTO>> GetTicketById(int id)
         {
             var ticket = await _ticketService.GetTicketByIdAsync(id);
             if (ticket == null)
-                return NotFound($"Ticket with ID {id} not found.");
+                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
 
             return Ok(ticket);
         }
@@ -54,6 +58,7 @@ namespace WebApi.Controllers
         /// <param name="createTicketDto">The ticket data to be created.</param>
         /// <returns>The ID of the newly created ticket.</returns>
         [HttpPost]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<ActionResult<int>> CreateTicket([FromBody] CreateTicketDTO createTicketDto)
         {
             if (!ModelState.IsValid)
@@ -70,6 +75,7 @@ namespace WebApi.Controllers
         /// <param name="updateTicketDto">The updated ticket data.</param>
         /// <returns>A 204 response if the update is successful, or a 404 response if the ticket is not found.</returns>
         [HttpPut("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<ActionResult> UpdateTicket(int id, [FromBody] CreateTicketDTO updateTicketDto)
         {
             if (!ModelState.IsValid)
@@ -77,7 +83,7 @@ namespace WebApi.Controllers
 
             var success = await _ticketService.UpdateTicketAsync(id, updateTicketDto);
             if (!success)
-                return NotFound($"Ticket with ID {id} not found.");
+                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
 
             return NoContent();
         }
@@ -88,11 +94,12 @@ namespace WebApi.Controllers
         /// <param name="id">The ID of the ticket to delete.</param>
         /// <returns>A 204 response if the deletion is successful, or a 404 response if the ticket is not found.</returns>
         [HttpDelete("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         public async Task<ActionResult> DeleteTicket(int id)
         {
             var success = await _ticketService.RemoveTicketAsync(id);
             if (!success)
-                return NotFound($"Ticket with ID {id} not found.");
+                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
 
             return NoContent();
         }

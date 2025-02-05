@@ -43,12 +43,12 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateSeatAsync(int id, CreateSeatDTO createSeatDTO)
         {
+            await checkSeatDTO(createSeatDTO);
+
             Seat? seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
 
             if (seat == null) return false;
 
-            await checkSeatDTO(createSeatDTO);
-            
             _mapper.Map(createSeatDTO, seat);
 
             _unitOfWork.GetRepository<Seat>().Update(seat);

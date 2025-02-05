@@ -35,6 +35,7 @@ namespace CinemaWebAPI
             return ex switch 
             {
                 ArgumentException or BadHttpRequestException => StatusCodes.Status400BadRequest,
+                KeyNotFoundException => StatusCodes.Status404NotFound,
                 UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
 
                 _ => StatusCodes.Status500InternalServerError
@@ -55,7 +56,6 @@ namespace CinemaWebAPI
                 Title = reasonPhrase,
                 Detail = ex.Message
             };
-
 
             return problemDetails;
         }
