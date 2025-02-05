@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.Services
                 throw new BadHttpRequestException($"Registration failed: {errors}");
             }
             
-            IdentityResult rolesResult = await _userManager.AddToRoleAsync(user, "Admin");
+            IdentityResult rolesResult = await _userManager.AddToRoleAsync(user, "User");
 
             if (!rolesResult.Succeeded)
             {
