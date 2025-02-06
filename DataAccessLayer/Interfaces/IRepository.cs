@@ -4,7 +4,7 @@ namespace DataAccessLayer.Interfaces
     public interface IRepository<TEntity>
         where TEntity : class 
     {
-        Task<TEntity?> GetByIdAsync(int id, params string[] includes);
+        Task<TEntity?> GetByIdAsync<TKey>(TKey id, params string[] includes);
         Task<List<TEntity>> GetAllAsync(params string[] includes);
         void Add(TEntity entity);
         Task AddAsync(TEntity entity);

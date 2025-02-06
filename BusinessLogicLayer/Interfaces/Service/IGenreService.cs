@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<List<GenreDTO>> GetAllGenresAsync();
         Task<GenreDTO?> GetGenreByIdAsync(int id);
-        Task<int> CreateGenreAsync(CreateGenreDTO actorDTO);
-        Task<bool> UpdateGenreAsync(int id, CreateGenreDTO actorDTO);
+        Task<int> CreateGenreAsync(CreateGenreDTO createGenreDTO);
+        Task<bool> UpdateGenreAsync(int id, CreateGenreDTO createGenreDTO);
         Task<bool> RemoveGenreAsync(int id);
     }
 }
