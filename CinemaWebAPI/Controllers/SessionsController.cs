@@ -59,6 +59,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the details of the session to create.</param>
         /// <returns>An HTTP 201 response if the session is created successfully.</returns>
         [HttpPost]
+        //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
             int id = await _sessionService.CreateSessionAsync(createSessionDto);
@@ -74,6 +75,7 @@ namespace CinemaWebAPI.Controllers
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
+        //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
             if (!await _sessionService.UpdateSessionAsync(id, createSessionDto))
@@ -90,6 +92,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the session to delete.</param>
         /// <returns>An HTTP 204 response if deleted, or 404 if not found.</returns>
         [HttpDelete("{id}")]
+        //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
         {
             bool result = await _sessionService.RemoveSessionAsync(id);
@@ -107,7 +110,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <param name="filter">Filters to search for sessions</param>
         /// <returns>List of sessions matching the filters</returns>
-        [HttpGet("filter")]
+        /*[HttpGet("filter")]
         [AllowAnonymous]
         public async Task<IActionResult> GetSessions([FromQuery] SessionFilterDTO filter)
         {
@@ -118,6 +121,6 @@ namespace CinemaWebAPI.Controllers
                 return NotFound(new { Message = "No sessions found for the specified filters." });
             }
             return Ok(sessions);
-        }
+        }*/
     }
 }

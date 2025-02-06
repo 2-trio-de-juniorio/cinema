@@ -59,6 +59,7 @@ public class HallsController : ControllerBase
     /// <param name="HallDTO">A <see cref="HallDTO"/> object containing the details of the hall to create.</param>
     /// <returns>An HTTP 201 response if the hall is created successfully.</returns>
     [HttpPost]
+    //[Authorize(Policy = UserRole.Admin)]
     public async Task<IActionResult> CreateHallAsync([FromBody] HallDTO HallDTO)
     {
         int id = await _hallService.CreateHallAsync(HallDTO);
@@ -74,6 +75,7 @@ public class HallsController : ControllerBase
     /// An HTTP 204 response if the hall was updated successfully, or HTTP 404 if the hall was not found.
     /// </returns>
     [HttpPut("{id}")]
+    //[Authorize(Policy = UserRole.Admin)]
     public async Task<IActionResult> UpdateHallAsync([FromRoute] int id, [FromBody] HallDTO HallDTO)
     {
         if (!await _hallService.UpdateHallAsync(id, HallDTO))
@@ -89,6 +91,7 @@ public class HallsController : ControllerBase
     /// <param name="id">The unique identifier of the hall to delete.</param>
     /// <returns>An HTTP 204 response if the hall was deleted successfully, or HTTP 404 if the hall was not found.</returns>
     [HttpDelete("{id}")]
+    //[Authorize(Policy = UserRole.Admin)]
     public async Task<IActionResult> DeleteHall([FromRoute] int id)
     {
         if (!await _hallService.DeleteHallAsync(id))
