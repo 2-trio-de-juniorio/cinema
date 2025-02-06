@@ -48,7 +48,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <param name="registerDTO"></param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = UserRole.Admin)]
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDTO)
         {
