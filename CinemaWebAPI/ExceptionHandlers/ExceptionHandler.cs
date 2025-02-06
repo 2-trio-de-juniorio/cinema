@@ -21,12 +21,9 @@ namespace CinemaWebAPI
         {
             int statusCode = getStatusCode(ex);
 
-            ProblemDetails problemDetails = createProblemDetails(ex, statusCode);
-
-            httpContext.Response.ContentType = "application/problem+json";
             httpContext.Response.StatusCode = statusCode;
-
-            await httpContext.Response.WriteAsJsonAsync(problemDetails, token);
+            var response = new {Message = ex.Message};
+            await httpContext.Response.WriteAsJsonAsync(response, token);
 
             return true;
         }
@@ -40,24 +37,6 @@ namespace CinemaWebAPI
 
                 _ => StatusCodes.Status500InternalServerError
             };
-        }
-        private ProblemDetails createProblemDetails(Exception ex, int statusCode)
-        {
-            string reasonPhrase = ReasonPhrases.GetReasonPhrase(statusCode);
-
-            if (string.IsNullOrEmpty(reasonPhrase))
-            {
-                reasonPhrase = ReasonPhrases.GetReasonPhrase((int)HttpStatusCode.BadRequest);
-            }
-
-            var problemDetails = new ProblemDetails
-            {
-                Status = statusCode,
-                Title = reasonPhrase,
-                Detail = ex.Message
-            };
-
-            return problemDetails;
         }
     }
 }

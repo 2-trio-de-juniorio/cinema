@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateSeatAsync(CreateSeatDTO createSeatDTO)
         {
-            await checkSeatDTO(createSeatDTO);
+            await CheckSeatDTO(createSeatDTO);
 
             var seat = _mapper.Map<Seat>(createSeatDTO);
 
@@ -43,7 +43,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateSeatAsync(int id, CreateSeatDTO createSeatDTO)
         {
-            await checkSeatDTO(createSeatDTO);
+            await CheckSeatDTO(createSeatDTO);
 
             Seat? seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
 
@@ -63,7 +63,7 @@ namespace BusinessLogicLayer.Services
             await _unitOfWork.SaveAsync();
         }
 
-        private async Task checkSeatDTO(CreateSeatDTO createSeatDTO) 
+        private async Task CheckSeatDTO(CreateSeatDTO createSeatDTO) 
         {
             Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(createSeatDTO.HallId);
             if (hall == null) 

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
@@ -26,7 +27,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<int> CreateMovieAsync(CreateMovieDTO createMovieDTO)
         {
-            await checkMovieDTO(createMovieDTO);
+            await CheckMovieDTO(createMovieDTO);
 
             Movie movie = _mapper.Map<Movie>(createMovieDTO);
 
@@ -44,7 +45,7 @@ namespace BusinessLogicLayer.Services
 
         public async Task<MovieDTO?> GetMovieByIdAsync(int id)
         {
-            Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
+            Movie? movie = await GetMovieEntityByIdAsync(id);
             return movie != null ? _mapper.Map<MovieDTO>(movie) : null;
         }
 
@@ -56,9 +57,9 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateMovieAsync(int id, CreateMovieDTO createMovieDTO)
         {
-            await checkMovieDTO(createMovieDTO);
+            await CheckMovieDTO(createMovieDTO);
             
-            Movie? movie = await _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
+            Movie? movie = await GetMovieEntityByIdAsync(id);
 
             if (movie == null) return false;
 
@@ -109,8 +110,11 @@ namespace BusinessLogicLayer.Services
             movies = movies.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             return movies.Select(m => _mapper.Map<MovieDTO>(m)).ToList();
         }
-
-        private async Task checkMovieDTO(CreateMovieDTO createMovieDTO) 
+        private Task<Movie?> GetMovieEntityByIdAsync(int id) 
+        {
+            return _unitOfWork.GetRepository<Movie>().GetByIdAsync(id, MovieEntityIncludes);
+        }
+        private async Task CheckMovieDTO(CreateMovieDTO createMovieDTO) 
         {
             foreach(int actorId in createMovieDTO.ActorsIds) 
             {

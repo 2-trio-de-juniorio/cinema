@@ -30,7 +30,7 @@ internal sealed class HallService : IHallService
 
     public async Task<HallDTO?> GetHallByIdAsync(int id)
     {
-        Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+        Hall? hall = await GetHallEntityByIdAsync(id);
         return hall != null ? _mapper.Map<HallDTO>(hall) : null;
     }
 
@@ -46,7 +46,7 @@ internal sealed class HallService : IHallService
 
     public async Task<bool> UpdateHallAsync(int id, CreateHallDTO createHallDTO)
     {
-        Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
+        Hall? hall = await GetHallEntityByIdAsync(id);
 
         if (hall == null) return false;
 
@@ -65,5 +65,10 @@ internal sealed class HallService : IHallService
         await _unitOfWork.SaveAsync();
 
         return success;
+    }
+
+    private Task<Hall?> GetHallEntityByIdAsync(int id) 
+    {
+        return _unitOfWork.GetRepository<Hall>().GetByIdAsync(id, HallEntityIncludes);
     }
 }

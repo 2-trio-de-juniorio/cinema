@@ -50,7 +50,7 @@ namespace CinemaWebAPI.Controllers
 
             if (genre == null)
             {
-                throw new KeyNotFoundException($"Genre with ID {id} not found.");
+                return NotFound(new { Message = $"Genre with ID {id} not found." });
             }
 
             return Ok(genre);
@@ -89,7 +89,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _genreService.UpdateGenreAsync(id, createGenreDTO))
             {
-                throw new KeyNotFoundException($"Genre with ID {id} not found.");
+                return NotFound(new { Message = $"Genre with ID {id} not found." });
             }
 
             return CreatedAtRoute(nameof(GetGenreById), new { id }, createGenreDTO);
@@ -108,7 +108,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!successfully)
             {
-                throw new KeyNotFoundException($"Genre with ID {id} not found.");
+                return NotFound(new { Message = $"Genre with ID {id} not found." });
             }
 
             return NoContent();

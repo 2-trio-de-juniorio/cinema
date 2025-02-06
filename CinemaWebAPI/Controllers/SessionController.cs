@@ -52,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (session == null)
             {
-                throw new KeyNotFoundException($"Session with ID {id} not found.");
+                return NotFound(new { Message = $"Session with ID {id} not found." });
             }
 
             return Ok(session);
@@ -91,7 +91,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _sessionService.UpdateSessionAsync(id, createSessionDto))
             {
-                throw new KeyNotFoundException($"Session with ID {id} not found.");
+                return NotFound(new { Message = $"Session with ID {id} not found." });
             }
 
             return NoContent();
@@ -110,7 +110,7 @@ namespace CinemaWebAPI.Controllers
             
             if (!result)
             {
-                throw new KeyNotFoundException($"Session with ID {id} not found.");
+                return NotFound(new { Message = $"Session with ID {id} not found." });
             }
 
             return NoContent();
@@ -129,7 +129,6 @@ namespace CinemaWebAPI.Controllers
 
             if (!sessions.Any())
             {
-                // todo: probably throw here as well
                 return NotFound(new { Message = "No sessions found for the specified filters." });
             }
             return Ok(sessions);

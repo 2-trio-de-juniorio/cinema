@@ -52,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (movie == null)
             {
-                throw new KeyNotFoundException($"Movie with ID {id} not found.");
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
 
             return Ok(movie);
@@ -92,7 +92,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _movieService.UpdateMovieAsync(id, movieDTO))
             {
-                throw new KeyNotFoundException($"Movie with ID {id} not found.");
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
 
             return NoContent();
@@ -110,7 +110,7 @@ namespace CinemaWebAPI.Controllers
             var movie = await _movieService.GetMovieByIdAsync(id);
             if (movie == null)
             {
-                throw new KeyNotFoundException($"Movie with ID {id} not found.");
+                return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
 
             await _movieService.RemoveMovieAsync(id);
@@ -130,7 +130,6 @@ namespace CinemaWebAPI.Controllers
 
             if (!movies.Any())
             {
-                // todo: probably throw here as well
                 return NotFound(new { Message = "No movies found for the specified filters." });
             }
             return Ok(movies);

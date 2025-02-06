@@ -47,7 +47,7 @@ namespace CinemaWebAPI.Controllers
         {
             var ticket = await _ticketService.GetTicketByIdAsync(id);
             if (ticket == null)
-                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
+                return NotFound(new { Message = $"Ticket with ID {id} not found." });
 
             return Ok(ticket);
         }
@@ -83,7 +83,7 @@ namespace CinemaWebAPI.Controllers
 
             var success = await _ticketService.UpdateTicketAsync(id, updateTicketDto);
             if (!success)
-                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
+                return NotFound(new { Message = $"Ticket with ID {id} not found." });
 
             return NoContent();
         }
@@ -99,7 +99,7 @@ namespace CinemaWebAPI.Controllers
         {
             var success = await _ticketService.RemoveTicketAsync(id);
             if (!success)
-                throw new KeyNotFoundException($"Ticket with ID {id} not found.");
+                return NotFound(new { Message = $"Ticket with ID {id} not found." });
 
             return NoContent();
         }

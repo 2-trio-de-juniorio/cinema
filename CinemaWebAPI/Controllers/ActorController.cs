@@ -48,7 +48,7 @@ namespace CinemaWebAPI.Controllers
 
             if (actorDTO == null)
             {
-                throw new KeyNotFoundException($"Actor with ID {id} not found.");
+                return NotFound(new { Message = $"Actor with ID {id} not found." });
             }
 
             return Ok(actorDTO);
@@ -87,7 +87,7 @@ namespace CinemaWebAPI.Controllers
                 
             if (!await _actorService.UpdateActorAsync(id, createActorDto))
             {
-                throw new KeyNotFoundException($"Actor with ID {id} not found.");
+                return NotFound(new { Message = $"Actor with ID {id} not found." });
             }
 
             return CreatedAtRoute(nameof(GetActorById), new { id }, createActorDto);
@@ -106,7 +106,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!successfully)
             {
-                throw new KeyNotFoundException($"Actor with ID {id} not found.");
+                return NotFound(new { Message = $"Actor with ID {id} not found." });
             }
 
             return NoContent();

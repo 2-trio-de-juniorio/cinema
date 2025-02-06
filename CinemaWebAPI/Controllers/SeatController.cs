@@ -52,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (seat == null)
             {
-                throw new KeyNotFoundException($"Seat with ID {id} not found.");
+                return NotFound(new { Message = $"Seat with ID {id} not found." });
             }
 
             return Ok(seat);
@@ -95,7 +95,7 @@ namespace CinemaWebAPI.Controllers
                 
             if (!await _seatService.UpdateSeatAsync(id, createSeatDTO))
             {
-                throw new KeyNotFoundException($"Seat with ID {id} not found.");
+                return NotFound(new { Message = $"Seat with ID {id} not found." });
             }
             return NoContent();
         }
@@ -114,7 +114,7 @@ namespace CinemaWebAPI.Controllers
             var seat = await _seatService.GetSeatByIdAsync(id);
             if (seat == null)
             {
-                throw new KeyNotFoundException($"Seat with ID {id} not found.");
+                return NotFound(new { Message = $"Seat with ID {id} not found." });
             }
 
             await _seatService.RemoveSeatAsync(id);

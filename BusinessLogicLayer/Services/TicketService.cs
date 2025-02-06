@@ -38,13 +38,13 @@ namespace BusinessLogicLayer.Services
 
         public async Task<TicketDTO?> GetTicketByIdAsync(int id)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
+            var ticket = await GetTicketEntityByIdAsync(id);
             return ticket != null ? _mapper.Map<TicketDTO>(ticket) : null;
         }
 
         public async Task<int> CreateTicketAsync(CreateTicketDTO createTicketDto)
         {
-            await checkTicketDTO(createTicketDto);
+            await CheckTicketDTO(createTicketDto);
 
             var ticket = _mapper.Map<Ticket>(createTicketDto);
             
@@ -56,9 +56,9 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateTicketAsync(int id, CreateTicketDTO updateTicketDto)
         {
-            await checkTicketDTO(updateTicketDto);
+            await CheckTicketDTO(updateTicketDto);
 
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
+            var ticket = await GetTicketEntityByIdAsync(id);
             if (ticket == null)
                 return false;
 
@@ -78,7 +78,7 @@ namespace BusinessLogicLayer.Services
             return result;
         }
 
-        private async Task checkTicketDTO(CreateTicketDTO createTicketDto)
+        private async Task CheckTicketDTO(CreateTicketDTO createTicketDto)
         {
             var session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(createTicketDto.SessionId);
             if (session == null)
@@ -97,6 +97,10 @@ namespace BusinessLogicLayer.Services
             {
                 throw new ArgumentException($"User with ID {createTicketDto.UserId} does not exist");
             }
+        }
+        private Task<Ticket?> GetTicketEntityByIdAsync(int id) 
+        {
+            return _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
         }
     }
 }

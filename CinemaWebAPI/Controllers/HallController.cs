@@ -52,7 +52,7 @@ namespace CinemaWebAPI.Controllers
 
             if (hall == null)
             {
-                throw new KeyNotFoundException($"Hall with ID {id} not found.");
+                return NotFound(new { Message = $"Hall with ID {id} not found." });
             }
 
             return Ok(hall);
@@ -91,7 +91,7 @@ namespace CinemaWebAPI.Controllers
 
             if (!await _hallService.UpdateHallAsync(id, createHallDTO))
             {
-                throw new KeyNotFoundException($"Hall with ID {id} not found.");
+                return NotFound(new { Message = $"Hall with ID {id} not found." });
             }
             return NoContent();
         }
@@ -107,7 +107,7 @@ namespace CinemaWebAPI.Controllers
         {
             if (!await _hallService.DeleteHallAsync(id))
             {
-                throw new KeyNotFoundException($"Hall with ID {id} not found.");
+                return NotFound(new { Message = $"Hall with ID {id} not found." });
             }
             return NoContent();
         }

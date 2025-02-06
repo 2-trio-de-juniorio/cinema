@@ -35,14 +35,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<SessionDTO?> GetSessionByIdAsync(int id)
         {
-            Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
+            Session? session = await GetSessionEntityByIdAsync(id);
             
             return session != null ? _mapper.Map<SessionDTO>(session) : null;
         }
 
         public async Task<int> CreateSessionAsync(CreateSessionDTO createSessionDTO)
         {
-            await checkSessionDTO(createSessionDTO);
+            await CheckSessionDTO(createSessionDTO);
 
             Session session = _mapper.Map<Session>(createSessionDTO);
 
@@ -54,9 +54,9 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDTO)
         {
-            await checkSessionDTO(createSessionDTO);
+            await CheckSessionDTO(createSessionDTO);
 
-            Session? session = await _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
+            Session? session = await GetSessionEntityByIdAsync(id);
             
             if (session == null) return false;
             
@@ -113,7 +113,7 @@ namespace BusinessLogicLayer.Services
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
         }
 
-        private async Task checkSessionDTO(CreateSessionDTO createSessionDTO) 
+        private async Task CheckSessionDTO(CreateSessionDTO createSessionDTO) 
         {
             Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(createSessionDTO.HallId);
 
@@ -124,6 +124,10 @@ namespace BusinessLogicLayer.Services
 
             if (movie == null)
                 throw new ArgumentException($"Movie with id {createSessionDTO.MovieId} does not exist");
+        }
+        private Task<Session?> GetSessionEntityByIdAsync(int id) 
+        {
+            return _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
         }
     }
 }
