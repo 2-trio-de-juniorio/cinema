@@ -19,17 +19,22 @@ namespace BusinessLogicLayer.Validations
             RuleFor(m => m.ReleaseDate).NotEmpty().WithMessage("Movie release date is required");
 
             RuleFor(m => m.TrailerUrl)
-                .NotEmpty().WithMessage("Movie trailer url is required")
-                .MaximumLength(2083).WithMessage("Movie trailer url must be maximum 2083 characters");
+                .NotEmpty().WithMessage("Movie trailer URL is required")
+                .Must(BeAValidHttpUrl).WithMessage("Movie trailer URL must be valid");
 
             RuleFor(m => m.PosterUrl)
-                .NotEmpty().WithMessage("Movie poster url is required")
-                .MaximumLength(2083).WithMessage("Movie poster url must be maximum 2083 characters");
+                .NotEmpty().WithMessage("Movie poster URL is required")
+                .Must(BeAValidHttpUrl).WithMessage("Movie poster URL must be valid");
 
             RuleFor(m => (decimal)m.Rating)
                 .PrecisionScale(3, 1, ignoreTrailingZeros: true)
                 .WithMessage("Movie rating must be a number with at most 3 digits and 1 decimal place.");
 
+        }
+        private bool BeAValidHttpUrl(string uriString) 
+        {
+            return Uri.TryCreate(uriString, UriKind.Absolute, out _) && 
+                    (uriString.StartsWith("http://") || uriString.StartsWith("https://"));
         }
     }
 }
