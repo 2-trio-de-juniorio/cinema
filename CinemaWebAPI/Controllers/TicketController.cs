@@ -29,7 +29,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of all tickets.</returns>
         [HttpGet]
-        [AllowAnonymous]
+        // [Authorize(Roles = UserRole.Admin)]
         public async Task<ActionResult<List<TicketDTO>>> GetAllTickets()
         {
             var tickets = await _ticketService.GetAllTicketsAsync();
@@ -42,7 +42,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The ID of the ticket.</param>
         /// <returns>The ticket details if found, or a 404 response if not.</returns>
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<TicketDTO>> GetTicketById(int id)
         {
             var ticket = await _ticketService.GetTicketByIdAsync(id);
