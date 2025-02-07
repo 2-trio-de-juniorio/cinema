@@ -33,6 +33,7 @@ namespace DataAccessLayer.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<UserPreference> UserPreferences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -49,6 +50,8 @@ namespace DataAccessLayer.Data
             builder.ApplyConfiguration(new ActorConfiguration());
             builder.ApplyConfiguration(new MovieActorConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserPreferenceConfiguration());
+
         }
     }
 }
