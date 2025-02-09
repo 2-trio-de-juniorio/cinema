@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
     /// </summary>
     [Route("api/userpreferences")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserPreferenceController : ControllerBase
     {
         private readonly IUserPreferenceService _preferenceService;
