@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using DataAccessLayer.Models;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -10,6 +11,7 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -28,43 +30,11 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
-            try
-            {
-                var response = await _authService.RegisterUser(registerDTO, "User");
-                return Ok(response);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch (BadHttpRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        /// <summary>
-        /// Used to registration admin (only for users with "Admin" role)
-        /// </summary>
-        /// <param name="registerDTO"></param>
-        /// <returns></returns>
-        [Authorize(Policy = UserRole.Admin)]
-        [HttpPost("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDTO)
-        {
-            try
-            {
-                var response = await _authService.RegisterUser(registerDTO, "Admin");
-                return Ok(response);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch (BadHttpRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _authService.RegisterUser(registerDTO);
+            return Ok(response);
         }
 
         /// <summary>
@@ -75,15 +45,11 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-            try
-            {
-                var response = await _authService.AuthenticateUserAsync(loginDTO);
-                return Ok(response);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _authService.AuthenticateUserAsync(loginDTO);
+            return Ok(response);
         }
 
         /// <summary>
@@ -94,15 +60,8 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
         {
-            try
-            {
-                var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
-                return Ok(tokens);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
+            var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
+            return Ok(tokens);
         }
 
         /// <summary>
@@ -165,6 +124,30 @@ namespace CinemaWebAPI.Controllers
             catch (UnauthorizedAccessException ex)
             {
                 return Unauthorized(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Used to registration admin (only for users with "Admin" role)
+        /// </summary>
+        /// <param name="registerDTO"></param>
+        /// <returns></returns>
+        [Authorize(Policy = UserRole.Admin)]
+        [HttpPost("register-admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDTO)
+        {
+            try
+            {
+                var response = await _authService.RegisterUser(registerDTO, "Admin");
+                return Ok(response);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
