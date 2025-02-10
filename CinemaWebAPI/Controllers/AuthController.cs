@@ -35,6 +35,7 @@ namespace CinemaWebAPI.Controllers
 
             var response = await _authService.RegisterUser(registerDTO);
             return Ok(response);
+<<<<<<< HEAD
         }
 
         /// <summary>
@@ -107,6 +108,8 @@ namespace CinemaWebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+=======
+>>>>>>> 92859c95b39db5718fb00d9a55701be212934908
         }
 
         /// <summary>
@@ -116,6 +119,7 @@ namespace CinemaWebAPI.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteUser()
         {
+<<<<<<< HEAD
             try
             {
                 await _authService.DeleteUserAsync(User.Identity.Name);
@@ -125,6 +129,13 @@ namespace CinemaWebAPI.Controllers
             {
                 return Unauthorized(ex.Message);
             }
+=======
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
+            var response = await _authService.AuthenticateUserAsync(loginDTO);
+            return Ok(response);
+>>>>>>> 92859c95b39db5718fb00d9a55701be212934908
         }
 
         /// <summary>
@@ -136,6 +147,7 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDTO)
         {
+<<<<<<< HEAD
             try
             {
                 var response = await _authService.RegisterUser(registerDTO, "Admin");
@@ -149,6 +161,10 @@ namespace CinemaWebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+=======
+            var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
+            return Ok(tokens);
+>>>>>>> 92859c95b39db5718fb00d9a55701be212934908
         }
     }
 }

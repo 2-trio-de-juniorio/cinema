@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<List<ActorDTO>> GetAllActorsAsync();
         Task<ActorDTO?> GetActorByIdAsync(int id);
-        Task<int> CreateActorAsync(CreateActorDTO actorDTO);
-        Task<bool> UpdateActorAsync(int id, CreateActorDTO actorDTO);
+        Task<int> CreateActorAsync(CreateActorDTO createActorDTO);
+        Task<bool> UpdateActorAsync(int id, CreateActorDTO createActorDTO);
         Task<bool> RemoveActorAsync(int id);
     }
 }
