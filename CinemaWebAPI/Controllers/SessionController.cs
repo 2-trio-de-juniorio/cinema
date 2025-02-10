@@ -67,22 +67,21 @@ namespace CinemaWebAPI.Controllers
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-                
-            int id = await _sessionService.CreateSessionAsync(createSessionDto);
-            return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
-        }
+            if (ModelState.IsValid)
+            {
+                int id = await _sessionService.CreateSessionAsync(createSessionDto);
+                return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
+            }
 
-        /// <summary>
-        /// Updates the details of an existing session.
-        /// </summary>
-        /// <param name="id">The unique identifier of the session to update.</param>
-        /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
-        /// <returns>
-        /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
-        /// </returns>
-        [HttpPut("{id}")]
+            /// <summary>
+            /// Updates the details of an existing session.
+            /// </summary>
+            /// <param name="id">The unique identifier of the session to update.</param>
+            /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
+            /// <returns>
+            /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
+            /// </returns>
+            [HttpPut("{id}")]
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
@@ -107,7 +106,7 @@ namespace CinemaWebAPI.Controllers
         public async Task<IActionResult> DeleteSessionAsync([FromRoute] int id)
         {
             bool result = await _sessionService.RemoveSessionAsync(id);
-            
+
             if (!result)
             {
                 return NotFound(new { Message = $"Session with ID {id} not found." });
@@ -115,7 +114,7 @@ namespace CinemaWebAPI.Controllers
 
             return NoContent();
         }
-        
+
         /// <summary>
         /// Receives cinema sessions with the filtering option by date.
         /// </summary>
