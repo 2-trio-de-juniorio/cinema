@@ -7,6 +7,8 @@
         public int Capacity { get; set; }
 
         public List<SeatDTO> Seats { get; set; } = new List<SeatDTO>();
+        public HallSeatsDTO HallSeats { get; set; } = new HallSeatsDTO();
+
     }
 }
 

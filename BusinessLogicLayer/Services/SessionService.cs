@@ -1,4 +1,5 @@
 using AutoMapper;
+using BusinessLogic.Models.Movies;
 using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;
@@ -99,7 +100,7 @@ namespace BusinessLogicLayer.Services
             int totalPages = (int)Math.Ceiling((double)totalSessions / pageSize);
             int pageNumber = filter?.Page ?? 1;
 
-            // Ensure the page number is within valid range
+            // Valid range
             if (pageNumber > totalPages) pageNumber = totalPages;
             if (pageNumber < 1) pageNumber = 1;
 
@@ -107,5 +108,77 @@ namespace BusinessLogicLayer.Services
 
             return sessions.Select(m => _mapper.Map<SessionDTO>(m)).ToList();
         }
+
+        public async Task<SessionsByMovieDTO> GetMoviesWithSessionsAsync(DateTime? date, string? genre, int page = 1, int pageSize = 6)
+        {
+            var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
+
+            if (date.HasValue)
+            {
+                sessions = sessions.Where(s => s.StartTime.Date == date.Value.Date).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(genre))
+            {
+                sessions = sessions.Where(s => s.Movie.MovieGenres.Any(g => g.Genre.Name == genre)).ToList();
+            }
+
+            var groupedSessions = sessions
+                .GroupBy(s => s.Movie)
+                .Select(g => new SessionByFilmDTO
+                {
+                    Movie = _mapper.Map<MoviePreviewDTO>(g.Key),
+                    Sessions = g.Select(s => new SessionPreviewDTO
+                    {
+                        Id = s.Id,
+                        Price = (decimal)s.Price,
+                        DateTime = s.StartTime
+                    }).ToList()
+                }).ToList();
+
+            int totalSessions = groupedSessions.Count;
+            int totalPages = (int)Math.Ceiling((double)totalSessions / pageSize);
+            if (page > totalPages) page = totalPages;
+            if (page < 1) page = 1;
+
+            groupedSessions = groupedSessions.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new SessionsByMovieDTO
+            {
+                SessionsGroupedByFilms = groupedSessions,
+                CurrentPage = page,
+                MaxPage = totalPages
+            };
+
+        }
+
+        public async Task<MovieSessionsDTO?> GetSessionsByMovieAsync(int movieId, DateTime? date)
+        {
+            var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
+
+            var filteredSessions = sessions.Where(s => s.Movie.Id == movieId);
+
+            if (date.HasValue)
+            {
+                filteredSessions = filteredSessions.Where(s => s.StartTime.Date == date.Value.Date);
+            }
+
+            var movie = sessions.Select(s => s.Movie).FirstOrDefault(m => m.Id == movieId);
+            if (movie == null) return null;
+
+            var sessionList = filteredSessions.Select(s => new SessionPreviewDTO
+            {
+                Id = s.Id,
+                Price = (decimal)s.Price,
+                DateTime = s.StartTime
+            }).ToList();
+
+            return new MovieSessionsDTO
+            {
+                Movie = _mapper.Map<MoviePreviewDTO>(movie),
+                Sessions = sessionList
+            };
+        }
+
     }
 }

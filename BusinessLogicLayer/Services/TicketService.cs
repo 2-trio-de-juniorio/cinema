@@ -75,11 +75,22 @@ namespace BusinessLogicLayer.Services
                 throw new ArgumentException($"Session with ID {createTicketDto.SessionId} does not exist.");
             }
 
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
-            if (seat == null || seat.IsBooked)
+            var allSeats = await _unitOfWork.GetRepository<Seat>().GetAllAsync();
+            var seats = allSeats.Where(s => createTicketDto.SeatsId.Contains(s.Id)).ToList();
+
+
+            var notFoundSeats = createTicketDto.SeatsId.Except(seats.Select(s => s.Id)).ToList();
+            if (notFoundSeats.Any())
             {
-                throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
+                throw new ArgumentException($"Seats with ID {string.Join(", ", notFoundSeats)} do not exist.");
+            }
+
+            var bookedSeats = seats.Where(s => s.IsBooked).Select(s => s.Id).ToList();
+            if (bookedSeats.Any())
+            {
+                throw new ArgumentException($"Seats with ID {string.Join(", ", bookedSeats)} are already booked.");
             }
         }
+
     }
 }

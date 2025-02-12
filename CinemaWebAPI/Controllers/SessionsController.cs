@@ -1,6 +1,8 @@
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Sessions;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CinemaWebAPI.Controllers
 {
@@ -101,7 +103,7 @@ namespace CinemaWebAPI.Controllers
 
             return NoContent();
         }
-        
+
         /// <summary>
         /// Receives cinema sessions with the filtering option by date.
         /// </summary>
@@ -119,5 +121,32 @@ namespace CinemaWebAPI.Controllers
             }
             return Ok(sessions);
         }
+
+        /// <summary>
+        /// Receives cinema sessions grouped by movies, with the option to filter by date and genre.
+        /// </summary>
+        /// <param name="date">The date to filter sessions by.</param>
+        /// <param name="genre">The genre to filter movies by.</param>
+        /// <returns>List of movies with their sessions matching the filters.</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? date,[FromQuery] string? genre)
+        {
+            var sessions = await _sessionService.GetMoviesWithSessionsAsync(date, genre);
+            return Ok(sessions);
+        }
+
+        /// <summary>
+        /// Receives cinema sessions for a specific movie, with the option to filter by date.
+        /// </summary>
+        /// <param name="movieId">The ID of the movie to get sessions for.</param>
+        /// <param name="date">The date to filter sessions by.</param>
+        /// <returns>List of sessions for the specified movie, filtered by date.</returns>
+        [HttpGet("{movieId}/sessions")]
+        public async Task<IActionResult> GetSessionsByMovie(int movieId, [FromQuery] DateTime? date)
+        {
+            var sessions = await _sessionService.GetSessionsByMovieAsync(movieId, date);
+            return Ok(sessions);
+        }
+
     }
 }
