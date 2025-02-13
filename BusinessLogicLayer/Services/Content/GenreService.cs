@@ -19,15 +19,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<GenreDTO>> GetAllGenresAsync()
         {
-            return (await _unitOfWork.GetRepository<Genre>().GetAllAsync())
-                .Select(genre => _mapper.Map<GenreDTO>(genre))
-                .ToList();
+            return _mapper.Map<List<Genre>, List<GenreDTO>>(
+                await _unitOfWork.GetRepository<Genre>().GetAllAsync());
         }
 
         public async Task<GenreDTO?> GetGenreByIdAsync(int id)
         {
             Genre? genre = await _unitOfWork.GetRepository<Genre>().GetByIdAsync(id);
-            return genre == null ? null : _mapper.Map<GenreDTO>(genre);
+            return genre != null ? _mapper.Map<GenreDTO>(genre) : null;
         }
 
         public async Task<int> CreateGenreAsync(CreateGenreDTO genreDTO)

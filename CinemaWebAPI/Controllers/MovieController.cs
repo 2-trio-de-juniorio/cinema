@@ -2,6 +2,8 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Movies;
+using DataAccessLayer.Models;
+
 
 namespace CinemaWebAPI.Controllers
 {
@@ -11,15 +13,15 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class MoviesController : ControllerBase
+    public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoviesController"/> class.
+        /// Initializes a new instance of the <see cref="MovieController"/> class.
         /// </summary>
         /// <param name="movieService">The service responsible for movie-related business logic.</param>
-        public MoviesController(IMovieService movieService)
+        public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }
@@ -59,32 +61,36 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Creates a new movie.
         /// </summary>
-        /// <param name="MovieDTO">A <see cref="MovieDTO"/> object containing the details of the movie to create.</param>
+        /// <param name="movieDTO">A <see cref="MovieDTO"/> object containing the details of the movie to create.</param>
         /// <returns>An HTTP 201 response if the movie is created successfully.</returns>
         [HttpPost]
         //[Authorize(Policy = UserRole.Admin)]
-        public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO MovieDTO)
+        public async Task<IActionResult> CreateMovieAsync([FromBody] CreateMovieDTO movieDTO)
         {
+            System.Console.WriteLine(User.IsInRole("Admin"));
             if (!ModelState.IsValid)
-                return BadRequest();
-                
-            int id = await _movieService.CreateMovieAsync(MovieDTO);
-            return CreatedAtRoute(nameof(GetMovieById), new { id }, MovieDTO);
+                return BadRequest(ModelState);
+            
+            int id = await _movieService.CreateMovieAsync(movieDTO);
+            return CreatedAtRoute(nameof(GetMovieById), new { id }, movieDTO);
         }
 
         /// <summary>
         /// Updates the details of an existing movie.
         /// </summary>
         /// <param name="id">The unique identifier of the movie to update.</param>
-        /// <param name="MovieDTO">A <see cref="MovieDTO"/> object containing the updated details of the movie.</param>
+        /// <param name="movieDTO">A <see cref="MovieDTO"/> object containing the updated details of the movie.</param>
         /// <returns>
         /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
         /// </returns>
         [HttpPut("{id}")]
         //[Authorize(Policy = UserRole.Admin)]
-        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] CreateMovieDTO MovieDTO)
+        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int id, [FromBody] CreateMovieDTO movieDTO)
         {
-            if (!await _movieService.UpdateMovieAsync(id, MovieDTO))
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _movieService.UpdateMovieAsync(id, movieDTO))
             {
                 return NotFound(new { Message = $"Movie with ID {id} not found." });
             }
@@ -110,7 +116,7 @@ namespace CinemaWebAPI.Controllers
             await _movieService.RemoveMovieAsync(id);
             return NoContent();
         }
-        
+
         /// <summary>
         /// Get a list of movies with filtering and sorting.
         /// </summary>
@@ -126,7 +132,6 @@ namespace CinemaWebAPI.Controllers
             {
                 return NotFound(new { Message = "No movies found for the specified filters." });
             }
-
             return Ok(movies);
         }
 

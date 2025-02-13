@@ -18,7 +18,7 @@ namespace DataAccessLayer.Repositories
             _entities = dbContext.Set<TEntity>();
         }
 
-        public Task<TEntity?> GetByIdAsync(int id, params string[] includes)
+        public Task<TEntity?> GetByIdAsync<TKey>(TKey id, params string[] includes)
         {
             if (typeof(TEntity).GetProperty("Id") == null)
             {

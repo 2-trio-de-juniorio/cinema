@@ -8,6 +8,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessLogicLayer.Validations;
 
 namespace BusinessLogicLayer
 {
@@ -50,8 +51,7 @@ namespace BusinessLogicLayer
         {
             return services
                 .AddFluentValidationAutoValidation()
-                .AddValidatorsFromAssemblyContaining<ActorValidator>()
-                .AddValidatorsFromAssemblyContaining<GenreValidator>();
+                .AddValidatorsFromAssemblyContaining<MovieValidator>(); // adds all validators from this assembly
         }
 
         private static IServiceCollection AddCinemaServices(this IServiceCollection services)

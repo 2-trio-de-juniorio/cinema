@@ -17,33 +17,40 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<int> CreateSeatAsync(SeatDTO seatDto)
+        public async Task<int> CreateSeatAsync(CreateSeatDTO createSeatDTO)
         {
-            var seat = _mapper.Map<Seat>(seatDto);
+            await CheckSeatDTO(createSeatDTO);
+
+            var seat = _mapper.Map<Seat>(createSeatDTO);
+
             await _unitOfWork.GetRepository<Seat>().AddAsync(seat);
             await _unitOfWork.SaveAsync();
+
             return seat.Id;
         }
 
         public async Task<List<SeatDTO>> GetAllSeatsAsync()
         {
-            var seats = await _unitOfWork.GetRepository<Seat>().GetAllAsync();
-            return seats.Select(seat => _mapper.Map<SeatDTO>(seat)).ToList();
+            return _mapper.Map<List<Seat>, List<SeatDTO>>(
+                await _unitOfWork.GetRepository<Seat>().GetAllAsync());
         }
 
         public async Task<SeatDTO?> GetSeatByIdAsync(int id)
         {
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
+            Seat? seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
             return seat != null ? _mapper.Map<SeatDTO>(seat) : null;
         }
 
-        public async Task<bool> UpdateSeatAsync(int id, SeatDTO seatDto)
+        public async Task<bool> UpdateSeatAsync(int id, CreateSeatDTO createSeatDTO)
         {
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
-            if (seat == null)
-                return false;
+            await CheckSeatDTO(createSeatDTO);
 
-            _mapper.Map(seatDto, seat);
+            Seat? seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(id);
+
+            if (seat == null) return false;
+
+            _mapper.Map(createSeatDTO, seat);
+
             _unitOfWork.GetRepository<Seat>().Update(seat);
             await _unitOfWork.SaveAsync();
 
@@ -54,6 +61,13 @@ namespace BusinessLogicLayer.Services
         {
             await _unitOfWork.GetRepository<Seat>().RemoveByIdAsync(id);
             await _unitOfWork.SaveAsync();
+        }
+
+        private async Task CheckSeatDTO(CreateSeatDTO createSeatDTO) 
+        {
+            Hall? hall = await _unitOfWork.GetRepository<Hall>().GetByIdAsync(createSeatDTO.HallId);
+            if (hall == null) 
+                throw new ArgumentException($"Hall with id {createSeatDTO.HallId} does not exist");
         }
     }
 }

@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<List<SessionDTO>> GetAllSessionsAsync();
         Task<SessionDTO?> GetSessionByIdAsync(int id);
-        Task<int> CreateSessionAsync(CreateSessionDTO createSessionDto);
-        Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDto);
+        Task<int> CreateSessionAsync(CreateSessionDTO createSessionDTO);
+        Task<bool> UpdateSessionAsync(int id, CreateSessionDTO createSessionDTO);
         Task<bool> RemoveSessionAsync(int id);
         Task<List<SessionDTO>> GetFilteredSessionsAsync(SessionFilterDTO filter);
         Task<SessionsByMovieDTO> GetMoviesWithSessionsAsync(DateTime? date, string? genre, int page = 1, int pageSize = 6);

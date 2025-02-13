@@ -40,7 +40,7 @@ namespace BusinessLogicLayer.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<LoginResponseDTO> RegisterUser(RegisterDTO registerDTO)
+        public async Task<LoginResponseDTO> RegisterUser(RegisterDTO registerDTO, string role)
         {
             var user = new AppUser
             {
@@ -49,25 +49,27 @@ namespace BusinessLogicLayer.Services
             };
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
-
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new BadHttpRequestException($"Registration failed: {errors}");
             }
-            
-            IdentityResult rolesResult = await _userManager.AddToRoleAsync(user, "User");
 
-            if (!rolesResult.Succeeded)
+            await _userManager.AddToRoleAsync(user, role);
+
+            var accessToken = _tokenService.GenerateAccessToken(user.Id, role);
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            await SaveRefreshTokenAsync(refreshToken, user.Id);
+
+            return new LoginResponseDTO
             {
-                var errors = string.Join(", ", rolesResult.Errors.Select(e => e.Description));
-                throw new BadHttpRequestException($"Registration failed: {errors}");
-            }
-            
-            var loginDTO = _mapper.Map<LoginDTO>(registerDTO);
-            
-            return await AuthenticateUserAsync(loginDTO);
+                Id = user.Id,
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            };
         }
+
 
         public async Task<bool> IsUserValid(LoginDTO userCredentials)
         {
@@ -103,6 +105,46 @@ namespace BusinessLogicLayer.Services
             };
         }
 
+        public async Task<LoginResponseDTO> RegisterAdminAsync(RegisterDTO registerDTO, string currentUserId)
+        {
+            var currentUser = await _userManager.FindByIdAsync(currentUserId);
+
+            if (currentUser == null)
+                throw new UnauthorizedAccessException("Current user not found");
+
+            var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+
+            if (!currentUserRoles.Contains("Admin"))
+                throw new UnauthorizedAccessException("Only admins can register new admins");
+
+            var adminUser = new AppUser
+            {
+                UserName = registerDTO.Username,
+                Email = registerDTO.Email
+            };
+
+            var result = await _userManager.CreateAsync(adminUser, registerDTO.Password);
+
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new BadHttpRequestException($"Registration failed: {errors}");
+            }
+
+            IdentityResult rolesResult = await _userManager.AddToRoleAsync(adminUser, "Admin");
+
+            if (!rolesResult.Succeeded)
+            {
+                var errors = string.Join(", ", rolesResult.Errors.Select(e => e.Description));
+                throw new BadHttpRequestException($"Assigning admin role failed: {errors}");
+            }
+
+            var loginDTO = _mapper.Map<LoginDTO>(registerDTO);
+
+            return await AuthenticateUserAsync(loginDTO);
+        }
+
+
         public async Task<LoginResponseDTO> RefreshAccessTokenAsync(string refreshToken)
         {
             var tokenEntity = _context.RefreshTokens
@@ -136,6 +178,51 @@ namespace BusinessLogicLayer.Services
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken
             };
+        }
+
+        public async Task LogoutAsync(string refreshToken)
+        {
+            var tokenEntity = _context.RefreshTokens.SingleOrDefault(t => t.Token == refreshToken);
+            if (tokenEntity == null)
+                throw new BadHttpRequestException("Invalid or expired refresh token.");
+
+            tokenEntity.IsRevoked = true;
+            _context.RefreshTokens.Update(tokenEntity);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<string> UpdateUserAsync(string username, UpdateUserDTO updateUserDTO)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+                throw new UnauthorizedAccessException("User not found.");
+
+            user.Email = updateUserDTO.Email;
+            user.UserName = updateUserDTO.Username;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new BadHttpRequestException($"Failed to update user: {errors}");
+            }
+
+            return "User information successfully updated.";
+        }
+
+        public async Task DeleteUserAsync(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+                throw new UnauthorizedAccessException("User not found.");
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new BadHttpRequestException($"Failed to delete user: {errors}");
+            }
         }
     }
 }
