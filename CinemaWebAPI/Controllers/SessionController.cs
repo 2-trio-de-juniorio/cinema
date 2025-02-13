@@ -67,21 +67,22 @@ namespace CinemaWebAPI.Controllers
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
-            if (ModelState.IsValid)
-            {
-                int id = await _sessionService.CreateSessionAsync(createSessionDto);
-                return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            /// <summary>
-            /// Updates the details of an existing session.
-            /// </summary>
-            /// <param name="id">The unique identifier of the session to update.</param>
-            /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
-            /// <returns>
-            /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
-            /// </returns>
-            [HttpPut("{id}")]
+            int id = await _sessionService.CreateSessionAsync(createSessionDto);
+            return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
+        }
+
+        /// <summary>
+        /// Updates the details of an existing session.
+        /// </summary>
+        /// <param name="id">The unique identifier of the session to update.</param>
+        /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
+        /// <returns>
+        /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
+        /// </returns>
+        [HttpPut("{id}")]
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
@@ -140,7 +141,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="genre">The genre to filter movies by.</param>
         /// <returns>List of movies with their sessions matching the filters.</returns>
         [HttpGet("SessionsByMovie")]
-        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? date,[FromQuery] string? genre)
+        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? date, [FromQuery] string? genre)
         {
             var sessions = await _sessionService.GetMoviesWithSessionsAsync(date, genre);
             return Ok(sessions);
