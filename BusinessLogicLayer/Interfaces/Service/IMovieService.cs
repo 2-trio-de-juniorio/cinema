@@ -10,5 +10,7 @@ namespace BusinessLogicLayer.Interfaces
         Task<bool> UpdateMovieAsync(int id, CreateMovieDTO movieDto);
         Task RemoveMovieAsync(int id);
         Task<List<MovieDTO>> GetFilteredMoviesAsync(MovieFilterDTO filter);
+        Task<List<MovieDTO>> GetSimilarMoviesAsync(int movieId);
+
     }
 }
