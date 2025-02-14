@@ -1,5 +1,3 @@
-using BusinessLogic.Models.Movies;
-
 namespace BusinessLogic.Models.Sessions
 {
     public class MovieSessionsDTO
