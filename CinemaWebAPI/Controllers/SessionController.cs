@@ -153,7 +153,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="movieId">The ID of the movie to get sessions for.</param>
         /// <param name="date">The date to filter sessions by.</param>
         /// <returns>List of sessions for the specified movie, filtered by date.</returns>
-        [HttpGet("{movieId}/sessions")]
+        [HttpGet("movie/{movieId}")]
         public async Task<IActionResult> GetSessionsByMovie(int movieId, [FromQuery] DateTime? date)
         {
             var sessions = await _sessionService.GetSessionsByMovieAsync(movieId, date);

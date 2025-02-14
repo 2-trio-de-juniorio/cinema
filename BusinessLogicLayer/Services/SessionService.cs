@@ -142,7 +142,8 @@ namespace BusinessLogicLayer.Services
 
             if (!string.IsNullOrEmpty(genre))
             {
-                sessions = sessions.Where(s => s.Movie.MovieGenres.Any(g => g.Genre.Name == genre)).ToList();
+                sessions = sessions.Where(s => s.Movie.MovieGenres.Any(mg => mg.Genre.Name.Equals(genre, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
             }
 
             var groupedSessions = sessions
@@ -171,7 +172,6 @@ namespace BusinessLogicLayer.Services
                 CurrentPage = page,
                 MaxPage = totalPages
             };
-
         }
 
         public async Task<MovieSessionsDTO?> GetSessionsByMovieAsync(int movieId, DateTime? date)
