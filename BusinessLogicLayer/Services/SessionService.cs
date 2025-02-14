@@ -131,13 +131,13 @@ namespace BusinessLogicLayer.Services
             return _unitOfWork.GetRepository<Session>().GetByIdAsync(id, SessionEntityIncludes);
         }
 
-        public async Task<SessionsByMovieDTO> GetMoviesWithSessionsAsync(DateTime? date, string? genre, int page = 1, int pageSize = 6)
+        public async Task<SessionsByMovieDTO> GetMoviesWithSessionsAsync(DateTime? time, string? genre, int page = 1, int pageSize = 6)
         {
             var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
 
-            if (date.HasValue)
+            if (time.HasValue)
             {
-                sessions = sessions.Where(s => s.StartTime.Date == date.Value.Date).ToList();
+                sessions = sessions.Where(s => s.StartTime.Date == time.Value.Date).ToList();
             }
 
             if (!string.IsNullOrEmpty(genre))
@@ -174,6 +174,7 @@ namespace BusinessLogicLayer.Services
             };
         }
 
+
         public async Task<MovieSessionsDTO?> GetSessionsByMovieAsync(int movieId, DateTime? date)
         {
             var sessions = await _unitOfWork.GetRepository<Session>().GetAllAsync(SessionEntityIncludes);
@@ -184,7 +185,10 @@ namespace BusinessLogicLayer.Services
             {
                 filteredSessions = filteredSessions.Where(s => s.StartTime.Date == date.Value.Date);
             }
-
+            if (date.HasValue)
+            {
+                sessions = sessions.Where(s => s.StartTime.Date == date.Value.Date).ToList();
+            }
             var movie = sessions.Select(s => s.Movie).FirstOrDefault(m => m.Id == movieId);
             if (movie == null) return null;
 
