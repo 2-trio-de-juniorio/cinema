@@ -136,15 +136,16 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Receives cinema sessions grouped by movies, with the option to filter by date and genre.
         /// </summary>
-        /// <param name="date">The date to filter sessions by.</param>
+        /// <param name="time">The date to filter sessions by.</param>
         /// <param name="genre">The genre to filter movies by.</param>
         /// <returns>List of movies with their sessions matching the filters.</returns>
         [HttpGet("SessionsByMovie")]
-        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? date, [FromQuery] string? genre)
+        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? time, [FromQuery] string? genre)
         {
-            var sessions = await _sessionService.GetMoviesWithSessionsAsync(date, genre);
+            var sessions = await _sessionService.GetMoviesWithSessionsAsync(time, genre);
             return Ok(sessions);
         }
+
 
         /// <summary>
         /// Receives cinema sessions for a specific movie, with the option to filter by date.
