@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
-using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

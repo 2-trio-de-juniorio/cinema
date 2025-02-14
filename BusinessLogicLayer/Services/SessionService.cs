@@ -1,5 +1,4 @@
 using AutoMapper;
-using BusinessLogic.Models.Movies;
 using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
 using DataAccess.Models.Movies;

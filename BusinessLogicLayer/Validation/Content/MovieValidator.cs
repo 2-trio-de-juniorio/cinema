@@ -1,6 +1,5 @@
 using BusinessLogic.Models.Movies;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace BusinessLogicLayer.Validations
 {
