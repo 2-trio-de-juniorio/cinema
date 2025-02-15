@@ -86,21 +86,26 @@ namespace BusinessLogicLayer.Services
                 throw new ArgumentException($"Session with ID {createTicketDto.SessionId} does not exist.");
             }
 
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
-            if (seat == null)
+            foreach (var seatId in createTicketDto.SeatsId)
             {
-                throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
+                var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(seatId);
+                if (seat == null)
+                {
+                    throw new ArgumentException($"Seat with ID {seatId} is not available.");
+                }
             }
 
             var user = await _unitOfWork.GetRepository<AppUser>().GetByIdAsync(createTicketDto.UserId);
-            if (user == null) 
+            if (user == null)
             {
-                throw new ArgumentException($"User with ID {createTicketDto.UserId} does not exist");
+                throw new ArgumentException($"User with ID {createTicketDto.UserId} does not exist.");
             }
         }
+
         private Task<Ticket?> GetTicketEntityByIdAsync(int id) 
         {
             return _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
         }
+
     }
 }

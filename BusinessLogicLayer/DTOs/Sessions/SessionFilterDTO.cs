@@ -7,4 +7,4 @@
         public string? SortOrder { get; set; } // "asc", "desc"
         public int? Page { get; set; }
     }
-}
+}   

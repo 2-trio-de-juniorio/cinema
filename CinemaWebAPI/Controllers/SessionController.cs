@@ -2,7 +2,6 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Sessions;
 using Microsoft.AspNetCore.Authorization;
-using DataAccessLayer.Models;
 
 
 namespace CinemaWebAPI.Controllers
@@ -67,21 +66,22 @@ namespace CinemaWebAPI.Controllers
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> CreateSessionAsync([FromBody] CreateSessionDTO createSessionDto)
         {
-            if (ModelState.IsValid)
-            {
-                int id = await _sessionService.CreateSessionAsync(createSessionDto);
-                return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            /// <summary>
-            /// Updates the details of an existing session.
-            /// </summary>
-            /// <param name="id">The unique identifier of the session to update.</param>
-            /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
-            /// <returns>
-            /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
-            /// </returns>
-            [HttpPut("{id}")]
+            int id = await _sessionService.CreateSessionAsync(createSessionDto);
+            return CreatedAtRoute(nameof(GetSessionById), new { id }, createSessionDto);
+        }
+
+        /// <summary>
+        /// Updates the details of an existing session.
+        /// </summary>
+        /// <param name="id">The unique identifier of the session to update.</param>
+        /// <param name="createSessionDto">A <see cref="CreateSessionDTO"/> object containing the updated details of the session.</param>
+        /// <returns>
+        /// An HTTP 204 response if the <paramref name="id"/> was found and HTTP 404 otherwise.
+        /// </returns>
+        [HttpPut("{id}")]
         // [Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateSessionAsync([FromRoute] int id, [FromBody] CreateSessionDTO createSessionDto)
         {
@@ -132,5 +132,33 @@ namespace CinemaWebAPI.Controllers
             }
             return Ok(sessions);
         }
+
+        /// <summary>
+        /// Receives cinema sessions grouped by movies, with the option to filter by date and genre.
+        /// </summary>
+        /// <param name="time">The date to filter sessions by.</param>
+        /// <param name="genre">The genre to filter movies by.</param>
+        /// <returns>List of movies with their sessions matching the filters.</returns>
+        [HttpGet("SessionsByMovie")]
+        public async Task<IActionResult> GetSessionsByMovies([FromQuery] DateTime? time, [FromQuery] string? genre)
+        {
+            var sessions = await _sessionService.GetMoviesWithSessionsAsync(time, genre);
+            return Ok(sessions);
+        }
+
+
+        /// <summary>
+        /// Receives cinema sessions for a specific movie, with the option to filter by date.
+        /// </summary>
+        /// <param name="movieId">The ID of the movie to get sessions for.</param>
+        /// <param name="date">The date to filter sessions by.</param>
+        /// <returns>List of sessions for the specified movie, filtered by date.</returns>
+        [HttpGet("movie/{movieId}")]
+        public async Task<IActionResult> GetSessionsByMovie(int movieId, [FromQuery] DateTime? date)
+        {
+            var sessions = await _sessionService.GetSessionsByMovieAsync(movieId, date);
+            return Ok(sessions);
+        }
+
     }
 }

@@ -2,7 +2,6 @@ using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Models.Movies;
-using DataAccessLayer.Models;
 
 
 namespace CinemaWebAPI.Controllers
@@ -134,5 +133,8 @@ namespace CinemaWebAPI.Controllers
             }
             return Ok(movies);
         }
+
+        
+
     }
 }

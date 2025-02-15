@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using AutoMapper;
 using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
