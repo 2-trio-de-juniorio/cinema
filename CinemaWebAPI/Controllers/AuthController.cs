@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using DataAccessLayer.Models;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -27,9 +29,77 @@ namespace CinemaWebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _authService.RegisterUser(registerDTO, "User");
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Used to log in as common user
+        /// </summary>
+        /// <param name="loginDTO"></param>
+        /// <returns></returns>
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _authService.AuthenticateUserAsync(loginDTO);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Used to refresh token
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
+        {
+            var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
+            return Ok(tokens);
+        }
+
+        /// <summary>
+        /// Logout user
+        /// </summary>
+        /// <param name="refreshToken">Refresh token to be revoked</param>
+        /// <returns>Success message</returns>
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] string refreshToken)
+        {
             try
             {
-                var response = await _authService.RegisterUser(registerDTO);
+                await _authService.LogoutAsync(refreshToken);
+                return Ok("Logged out successfully.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update user information
+        /// </summary>
+        [Authorize]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDTO updateUserDTO)
+        {
+            try
+            {
+                if (User.Identity?.Name == null)
+                {
+                    throw new InvalidOperationException("User name is required.");
+                }
+                var response = await _authService.UpdateUserAsync(User.Identity.Name, updateUserDTO);
                 return Ok(response);
             }
             catch (UnauthorizedAccessException ex)
@@ -43,40 +113,53 @@ namespace CinemaWebAPI.Controllers
         }
 
         /// <summary>
-        /// Used to log in as common user
+        /// Delete user account
         /// </summary>
-        /// <param name="loginDTO"></param>
-        /// <returns></returns>
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        [Authorize]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteUser()
         {
             try
             {
-                var response = await _authService.AuthenticateUserAsync(loginDTO);
+                if (User.Identity?.Name == null)
+                {
+                    throw new InvalidOperationException("User name is required.");
+                }
+                await _authService.DeleteUserAsync(User.Identity.Name);
+                return Ok("Account successfully deleted.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Used to registration admin (only for users with "Admin" role)
+        /// </summary>
+        /// <param name="registerDTO"></param>
+        /// <returns></returns>
+        [Authorize(Policy = UserRole.Admin)]
+        [HttpPost("register-admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDTO)
+        {
+            try
+            {
+                var response = await _authService.RegisterUser(registerDTO, "Admin");
                 return Ok(response);
             }
             catch (UnauthorizedAccessException ex)
             {
                 return Unauthorized(ex.Message);
             }
-        }
-
-        /// <summary>
-        /// Used to refresh token
-        /// </summary>
-        /// <param name="refreshToken"></param>
-        /// <returns></returns>
-        [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
-        {
-            try
+            catch (BadHttpRequestException ex)
             {
-                var tokens = await _authService.RefreshAccessTokenAsync(refreshToken);
-                return Ok(tokens);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }

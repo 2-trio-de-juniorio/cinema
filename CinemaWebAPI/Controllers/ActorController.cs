@@ -1,7 +1,7 @@
+using BusinessLogic.Models.Movies;
 using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CreateActorDTO = BusinessLogic.Models.Movies.CreateActorDTO;
 
 namespace CinemaWebAPI.Controllers
 {
@@ -10,15 +10,14 @@ namespace CinemaWebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class ActorsController : ControllerBase
+    public class ActorController : ControllerBase
     {
         private readonly IActorService _actorService;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActorsController"/> class.
+        /// Initializes a new instance of the <see cref="ActorController"/> class.
         /// </summary>
         /// <param name="actorService">The service responsible for actor-related business logic.</param>
-        public ActorsController(IActorService actorService)
+        public ActorController(IActorService actorService)
         {
             _actorService = actorService;
         }
@@ -26,13 +25,12 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Retrieves a list of all actors.
         /// </summary>
-        /// <returns>A list of <see cref="BusinessLogic.Models.Movies.ActorDTO"/> objects representing all actors.</returns>
+        /// <returns>A list of <see cref="ActorDTO"/> objects representing all actors.</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllActors()
         {
-            List<BusinessLogic.Models.Movies.ActorDTO> actors = await _actorService.GetAllActorsAsync();
-
+            List<ActorDTO> actors = await _actorService.GetAllActorsAsync();
             return Ok(actors);
         }
 
@@ -40,32 +38,35 @@ namespace CinemaWebAPI.Controllers
         /// Retrieves details of a actor by its identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the actor.</param>
-        /// <returns>A <see cref="BusinessLogic.Models.Movies.ActorDTO"/> object representing the actor, or HTTP 404 if not found.</returns>
+        /// <returns>A <see cref="ActorDTO"/> object representing the actor, or HTTP 404 if not found.</returns>
         [HttpGet("{id}", Name = "GetActorById")]
         [AllowAnonymous]
         public async Task<IActionResult> GetActorById([FromRoute] int id)
         {
-            BusinessLogic.Models.Movies.ActorDTO? actor = await _actorService.GetActorByIdAsync(id);
+            ActorDTO? actorDTO = await _actorService.GetActorByIdAsync(id);
 
-            if (actor == null)
+            if (actorDTO == null)
             {
                 return NotFound(new { Message = $"Actor with ID {id} not found." });
             }
 
-            return Ok(actor);
+            return Ok(actorDTO);
         }
 
         /// <summary>
         /// Creates a new actor.
         /// </summary>
-        /// <param name="ActorDTO">A <see cref="ActorDTO"/> object containing the details of the actor to create.</param>
+        /// <param name="createActorDTO">A <see cref="CreateActorDTO"/> object containing the details of the actor to create.</param>
         /// <returns>An HTTP 201 response if the actor is created successfully.</returns>
         [HttpPost]
         //[Authorize(Policy = UserRole.Admin)]
-        public async Task<IActionResult> CreateActorAsync([FromBody] CreateActorDTO ActorDTO)
+        public async Task<IActionResult> CreateActorAsync([FromBody] CreateActorDTO createActorDTO)
         {
-            int id = await _actorService.CreateActorAsync(ActorDTO);
-            return CreatedAtRoute(nameof(GetActorById), new { id }, ActorDTO);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            int id = await _actorService.CreateActorAsync(createActorDTO);
+            return CreatedAtRoute(nameof(GetActorById), new { id }, createActorDTO);
         }
 
         /// <summary>
@@ -80,6 +81,9 @@ namespace CinemaWebAPI.Controllers
         //[Authorize(Policy = UserRole.Admin)]
         public async Task<IActionResult> UpdateActorAsync([FromRoute] int id, [FromBody] CreateActorDTO createActorDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
             if (!await _actorService.UpdateActorAsync(id, createActorDto))
             {
                 return NotFound(new { Message = $"Actor with ID {id} not found." });

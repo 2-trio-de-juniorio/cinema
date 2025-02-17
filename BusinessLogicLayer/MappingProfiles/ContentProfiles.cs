@@ -15,6 +15,8 @@ namespace BusinessLogicLayer.Profiles
             CreateMap<Genre, GenreDTO>();
             CreateMap<CreateGenreDTO, Genre>();
 
+            CreateMap<Movie, MoviePreviewDTO>();
+
             CreateMap<Movie, MovieDTO>()
                 .ForMember(dest => dest.Genres, opt => opt.MapFrom(src =>
                     src.MovieGenres.Select(mg => mg.Genre)))

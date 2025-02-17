@@ -171,10 +171,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("HallId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_booked");
-
                     b.Property<int>("RowNumber")
                         .HasColumnType("int")
                         .HasColumnName("row_number");

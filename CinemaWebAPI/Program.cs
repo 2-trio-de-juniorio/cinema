@@ -1,12 +1,29 @@
 using System.Reflection;
 using BusinessLogicLayer;
+using CinemaWebAPI;
 using DataAccessLayer;
 using Microsoft.OpenApi.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ExceptionHandler>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("dev",
+        corsPolicyBuilder =>
+        {
+            corsPolicyBuilder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,7 +72,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("dev");
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

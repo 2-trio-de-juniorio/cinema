@@ -1,16 +1,24 @@
 ﻿using BusinessLogic.Models.Sessions;
 using BusinessLogicLayer.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaWebAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class SeatsController : ControllerBase
+    public class SeatController : ControllerBase
     {
         private readonly ISeatService _seatService;
 
-        public SeatsController(ISeatService seatService)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="seatService"></param>
+        public SeatController(ISeatService seatService)
         {
             _seatService = seatService;
         }
@@ -20,6 +28,7 @@ namespace CinemaWebAPI.Controllers
         /// </summary>
         /// <returns>A list of seats</returns>
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(List<SeatDTO>), 200)]
         public async Task<IActionResult> GetAllSeats()
         {
@@ -33,6 +42,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the seat</param>
         /// <returns>The seat details</returns>
         [HttpGet("{id}", Name = "GetSeatById")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(SeatDTO), 200)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetSeatById([FromRoute] int id)
@@ -50,13 +60,17 @@ namespace CinemaWebAPI.Controllers
         /// <summary>
         /// Create a new seat.
         /// </summary>
-        /// <param name="seatDto">The seat data for creation</param>
+        /// <param name="createSeatDTO">The seat data for creation</param>
         /// <returns>The created seat</returns>
         [HttpPost]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(typeof(SeatDTO), 201)]
-        public async Task<IActionResult> CreateSeatAsync([FromBody] SeatDTO seatDto)
+        public async Task<IActionResult> CreateSeatAsync([FromBody] CreateSeatDTO createSeatDTO)
         {
-            int id = await _seatService.CreateSeatAsync(seatDto);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            int id = await _seatService.CreateSeatAsync(createSeatDTO);
             var createdSeat = await _seatService.GetSeatByIdAsync(id); // Отримати створене місце
 
             return CreatedAtRoute(nameof(GetSeatById), new { id }, createdSeat);
@@ -67,14 +81,18 @@ namespace CinemaWebAPI.Controllers
         /// Update a seat's details.
         /// </summary>
         /// <param name="id">The unique identifier of the seat to update</param>
-        /// <param name="seatDto">The updated seat data</param>
+        /// <param name="createSeatDTO">The updated seat data</param>
         /// <returns>The result of the update operation</returns>
         [HttpPut("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] SeatDTO seatDto)
+        public async Task<IActionResult> UpdateSeatAsync([FromRoute] int id, [FromBody] CreateSeatDTO createSeatDTO)
         {
-            if (!await _seatService.UpdateSeatAsync(id, seatDto))
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
+            if (!await _seatService.UpdateSeatAsync(id, createSeatDTO))
             {
                 return NotFound(new { Message = $"Seat with ID {id} not found." });
             }
@@ -87,6 +105,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="id">The unique identifier of the seat to delete</param>
         /// <returns>The deletion status</returns>
         [HttpDelete("{id}")]
+        // [Authorize(Policy = UserRole.Admin)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteSeatAsync([FromRoute] int id)

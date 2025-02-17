@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using BusinessLogic.Models.Tickets;
 using BusinessLogicLayer.Interfaces;
+using DataAccess.Models.Movies;
+using DataAccess.Models.Movies.Actors;
 using DataAccess.Models.Sessions;
 using DataAccess.Models.Tickets;
+using DataAccess.Models.Users;
 using DataAccessLayer.Interfaces;
 
 namespace BusinessLogicLayer.Services
@@ -12,8 +15,15 @@ namespace BusinessLogicLayer.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        private readonly string[] TicketEntityIncludes = [nameof(Ticket.Session), nameof(Ticket.Seat)];
+        private readonly string[] TicketEntityIncludes = 
+        [
+            $"{nameof(Ticket.Session)}.{nameof(Session.Movie)}.{nameof(Movie.MovieActors)}.{nameof(MovieActor.Actor)}", 
+            $"{nameof(Ticket.Session)}.{nameof(Session.Movie)}.{nameof(Movie.MovieGenres)}.{nameof(MovieGenre.Genre)}",
+            $"{nameof(Ticket.Session)}.{nameof(Session.Hall)}",
 
+            nameof(Ticket.Seat)
+
+        ];
         public TicketService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -22,14 +32,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<List<TicketDTO>> GetAllTicketsAsync()
         {
-            var tickets = await _unitOfWork.GetRepository<Ticket>().GetAllAsync(TicketEntityIncludes);
-            return tickets.Select(t => _mapper.Map<TicketDTO>(t)).ToList();
+            return _mapper.Map<List<Ticket>, List<TicketDTO>>(
+                await _unitOfWork.GetRepository<Ticket>().GetAllAsync(TicketEntityIncludes));
         }
 
         public async Task<TicketDTO?> GetTicketByIdAsync(int id)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
-            return ticket == null ? null : _mapper.Map<TicketDTO>(ticket);
+            var ticket = await GetTicketEntityByIdAsync(id);
+            return ticket != null ? _mapper.Map<TicketDTO>(ticket) : null;
         }
 
         public async Task<int> CreateTicketAsync(CreateTicketDTO createTicketDto)
@@ -46,13 +56,14 @@ namespace BusinessLogicLayer.Services
 
         public async Task<bool> UpdateTicketAsync(int id, CreateTicketDTO updateTicketDto)
         {
-            var ticket = await _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id);
+            await CheckTicketDTO(updateTicketDto);
+
+            var ticket = await GetTicketEntityByIdAsync(id);
             if (ticket == null)
                 return false;
 
-            await CheckTicketDTO(updateTicketDto);
-
             _mapper.Map(updateTicketDto, ticket);
+            
             _unitOfWork.GetRepository<Ticket>().Update(ticket);
 
             await _unitOfWork.SaveAsync();
@@ -75,11 +86,26 @@ namespace BusinessLogicLayer.Services
                 throw new ArgumentException($"Session with ID {createTicketDto.SessionId} does not exist.");
             }
 
-            var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(createTicketDto.SeatId);
-            if (seat == null || seat.IsBooked)
+            foreach (var seatId in createTicketDto.SeatsId)
             {
-                throw new ArgumentException($"Seat with ID {createTicketDto.SeatId} is not available.");
+                var seat = await _unitOfWork.GetRepository<Seat>().GetByIdAsync(seatId);
+                if (seat == null)
+                {
+                    throw new ArgumentException($"Seat with ID {seatId} is not available.");
+                }
+            }
+
+            var user = await _unitOfWork.GetRepository<AppUser>().GetByIdAsync(createTicketDto.UserId);
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {createTicketDto.UserId} does not exist.");
             }
         }
+
+        private Task<Ticket?> GetTicketEntityByIdAsync(int id) 
+        {
+            return _unitOfWork.GetRepository<Ticket>().GetByIdAsync(id, TicketEntityIncludes);
+        }
+
     }
 }

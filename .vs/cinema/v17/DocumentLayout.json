@@ -3,48 +3,128 @@
   "WorkspaceRootPath": "C:\\Users\\priko\\source\\repos\\cinema\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Profiles\\AuthProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Profiles\\AuthProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\AuthenticationExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\AuthenticationExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\HallsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\HallsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\TicketController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\TicketController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SessionsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\SessionsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SeatController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\SeatController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SessionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Services\\SessionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\AuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Services\\AuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\BusinessLogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\BusinessLogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\CinemaWebAPI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\ServiceExtension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\ServiceExtension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\TokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Services\\TokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Models\\Movies\\MovieGenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SeatService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Services\\SeatService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\GenresController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\GenresController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\MoviesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\MoviesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\ActorsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Controllers\\ActorsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\AuthenticationExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\AuthenticationExtensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Data\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Data\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\RoleConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Configurations\\RoleConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\CinemaWebAPI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Profiles\\AuthProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Profiles\\AuthProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\BusinessLogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\BusinessLogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\ServiceExtension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\ServiceExtension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\LoginResponseDTO.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -59,10 +139,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BusinessLogicLayer\\DTOs\\LoginDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaWebAPI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Interfaces\\Repositories\\IRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Interfaces\\Repositories\\IRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -73,10 +149,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Models\\Users\\AppUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Data\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Data\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,10 +173,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Models\\Movies\\Genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DataAccessLayer\\Models\\Movies\\MovieGenre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -114,21 +182,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 37,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 20,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs",
               "RelativeDocumentMoniker": "CinemaWebAPI\\Program.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Program.cs",
               "RelativeToolTip": "CinemaWebAPI\\Program.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAoAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAABgAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-24T10:04:15.428Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -136,7 +203,214 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SessionService.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SessionService.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\Services\\SessionService.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SessionService.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\Services\\SessionService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T13:55:57.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IActorService.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\Interfaces\\Service\\IActorService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:42:08.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\DTOs\\Users\\LoginDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:40:48.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RegisterDTO.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\DTOs\\Users\\RegisterDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:40:47.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\DTOs\\Users\\LoginResponseDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:40:47.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UpdateUserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\DTOs\\Users\\UpdateUserDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:40:32.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SeatService.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SeatService.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\Services\\SeatService.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\SeatService.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\Services\\SeatService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:39:35.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MoviesController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\MoviesController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\MoviesController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\MoviesController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\MoviesController.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAFIAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:32:05.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GenresController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\GenresController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\GenresController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\GenresController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\GenresController.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T10:31:48.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ActorsController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\ActorsController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAAEoAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T15:09:19.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TicketController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\TicketController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\TicketController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\TicketController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\TicketController.cs",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGEAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T15:09:13.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "HallsController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\HallsController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\HallsController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\HallsController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\HallsController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAwHIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T15:08:57.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SeatController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SeatController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\SeatController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SeatController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\SeatController.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T15:05:45.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AppUserConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs",
+              "RelativeToolTip": "DataAccessLayer\\Configurations\\Users\\AppUserConfiguration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T15:19:02.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ISeatService.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs",
+              "RelativeDocumentMoniker": "BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs",
+              "RelativeToolTip": "BusinessLogicLayer\\Interfaces\\Service\\ISeatService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T15:07:02.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SessionsController.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SessionsController.cs",
+              "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\SessionsController.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\SessionsController.cs",
+              "RelativeToolTip": "CinemaWebAPI\\Controllers\\SessionsController.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAwIgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T15:01:56.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "RoleConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\RoleConfiguration.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Configurations\\RoleConfiguration.cs",
+              "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Configurations\\RoleConfiguration.cs",
+              "RelativeToolTip": "DataAccessLayer\\Configurations\\RoleConfiguration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T14:59:58.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "AuthProfile.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Profiles\\AuthProfile.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\Profiles\\AuthProfile.cs",
@@ -144,12 +418,11 @@
               "RelativeToolTip": "BusinessLogicLayer\\Profiles\\AuthProfile.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-28T11:12:06.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-28T11:12:06.97Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 31,
               "Title": "LoginResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\LoginResponseDTO.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\LoginResponseDTO.cs",
@@ -161,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 32,
               "Title": "RegisterDTO.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\RegisterDTO.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\RegisterDTO.cs",
@@ -173,19 +446,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 19,
               "Title": "AuthenticationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\AuthenticationExtensions.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\AuthenticationExtensions.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\AuthenticationExtensions.cs",
               "RelativeToolTip": "BusinessLogicLayer\\AuthenticationExtensions.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAADIAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD4AAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T01:36:04.634Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 33,
               "Title": "LoginDTO.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\DTOs\\LoginDTO.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\DTOs\\LoginDTO.cs",
@@ -197,19 +470,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\Services\\AuthService.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Services\\AuthService.cs",
               "RelativeToolTip": "BusinessLogicLayer\\Services\\AuthService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEwAAAAAAAAA",
+              "ViewState": "AQIAALQAAAAAAAAAAAAowLYAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T00:57:40.42Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 34,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Interfaces\\Repositories\\IRepository.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Interfaces\\Repositories\\IRepository.cs",
@@ -221,19 +494,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 7,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs",
               "RelativeToolTip": "BusinessLogicLayer\\Interfaces\\Service\\IAuthService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T00:49:20.858Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 30,
               "Title": "ITokenGeneratorService.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\Interfaces\\Service\\ITokenGeneratorService.cs",
@@ -245,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 29,
               "Title": "ServiceExtension.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\ServiceExtension.cs",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\ServiceExtension.cs",
@@ -257,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 41,
               "Title": "BuisnessLogic.csproj",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BuisnessLogic\\BuisnessLogic.csproj",
               "RelativeDocumentMoniker": "BuisnessLogic\\BuisnessLogic.csproj",
@@ -269,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 39,
               "Title": "MovieActor.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Actors\\MovieActor.cs",
@@ -281,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 28,
               "Title": "BusinessLogic.csproj",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\BusinessLogicLayer\\BusinessLogic.csproj",
               "RelativeDocumentMoniker": "BusinessLogicLayer\\BusinessLogic.csproj",
@@ -293,19 +566,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 25,
               "Title": "CinemaWebAPI.csproj",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
               "RelativeDocumentMoniker": "CinemaWebAPI\\CinemaWebAPI.csproj",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\CinemaWebAPI.csproj",
               "RelativeToolTip": "CinemaWebAPI\\CinemaWebAPI.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABRAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-01-24T13:39:10.951Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 40,
               "Title": "ServiceExtensions.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\ServiceExtensions.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\ServiceExtensions.cs",
@@ -317,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 42,
               "Title": "Genre.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Genre.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Genre.cs",
@@ -329,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 38,
               "Title": "Movie.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Movie.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Movie.cs",
@@ -341,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 37,
               "Title": "Actor.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\Actors\\Actor.cs",
@@ -353,15 +626,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "CinemaWebAPI\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\Controllers\\AuthController.cs",
               "RelativeToolTip": "CinemaWebAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAiAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-24T10:41:46.056Z"
+              "WhenOpened": "2025-01-24T10:41:46.056Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -377,7 +651,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 9,
               "Title": "MovieGenre.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Movies\\MovieGenre.cs",
@@ -389,7 +663,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 35,
               "Title": "RefreshToken.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Users\\RefreshToken.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Users\\RefreshToken.cs",
@@ -401,31 +675,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\appsettings.json",
               "RelativeDocumentMoniker": "CinemaWebAPI\\appsettings.json",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\CinemaWebAPI\\appsettings.json",
               "RelativeToolTip": "CinemaWebAPI\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAA1AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-01-24T10:15:56.274Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Data\\AppDbContext.cs",
               "RelativeToolTip": "DataAccessLayer\\Data\\AppDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAFAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABAAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-24T10:02:54.473Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 36,
               "Title": "AppUser.cs",
               "DocumentMoniker": "C:\\Users\\priko\\source\\repos\\cinema\\DataAccessLayer\\Models\\Users\\AppUser.cs",
               "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Users\\AppUser.cs",
