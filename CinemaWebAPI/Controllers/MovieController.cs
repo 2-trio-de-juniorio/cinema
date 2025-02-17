@@ -134,7 +134,23 @@ namespace CinemaWebAPI.Controllers
             return Ok(movies);
         }
 
-        
+        /// <summary>
+        /// Retrieves similar movies based on genres.
+        /// </summary>
+        /// <param name="id">Movie ID</param>
+        /// <returns>List of 4 movies with most common genres</returns>
+        [HttpGet("{id}/similar")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetSimilarMovies([FromRoute] int id)
+        {
+            var similarMovies = await _movieService.GetSimilarMoviesAsync(id);
 
+            if (similarMovies.Count == 0)
+            {
+                return NotFound(new { Message = $"No similar movies found for movie ID {id}." });
+            }
+
+            return Ok(similarMovies);
+        }
     }
 }
