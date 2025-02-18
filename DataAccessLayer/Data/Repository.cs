@@ -3,14 +3,13 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-
 namespace DataAccessLayer.Repositories
 {
-    internal sealed class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        private readonly AppDbContext _dbContext;
-        private readonly DbSet<TEntity> _entities;
+        protected readonly AppDbContext _dbContext;
+        protected readonly DbSet<TEntity> _entities;
 
         public Repository(AppDbContext dbContext)
         {
@@ -79,7 +78,7 @@ namespace DataAccessLayer.Repositories
             TEntity? entity = await GetByIdAsync(id).ConfigureAwait(false);
 
             if (entity == null) return false;
-            
+
             Remove(entity);
             return true;
         }
@@ -87,6 +86,11 @@ namespace DataAccessLayer.Repositories
         public void Update(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _entities.CountAsync(predicate);
         }
     }
 }

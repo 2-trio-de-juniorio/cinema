@@ -121,7 +121,7 @@ namespace CinemaWebAPI.Controllers
         /// <param name="filter">Filters to search for sessions</param>
         /// <returns>List of sessions matching the filters</returns>
         [HttpGet("filter")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetSessions([FromQuery] SessionFilterDTO filter)
         {
             List<SessionDTO> sessions = await _sessionService.GetFilteredSessionsAsync(filter);

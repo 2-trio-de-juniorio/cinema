@@ -127,5 +127,32 @@ namespace BusinessLogicLayer.Services
                     throw new ArgumentException($"Genre with id {genreId} does not exist");
             }
         }
+        public async Task<List<MovieDTO>> GetSimilarMoviesAsync(int movieId)
+        {
+            var selectedMovie = await GetMovieEntityByIdAsync(movieId);
+            if (selectedMovie == null || !selectedMovie.MovieGenres.Any())
+            {
+                return new List<MovieDTO>();
+            }
+
+            var allMovies = await _unitOfWork.GetRepository<Movie>().GetAllAsync(MovieEntityIncludes);
+            var otherMovies = allMovies.Where(m => m.Id != movieId).ToList();
+
+            var similarMovies = otherMovies
+                .Select(movie => new
+                {
+                    Movie = movie,
+                    CommonGenres = movie.MovieGenres.Select(g => g.GenreId)
+                        .Intersect(selectedMovie.MovieGenres.Select(g => g.GenreId)).Count()
+                })
+                .Where(m => m.CommonGenres > 0)
+                .OrderByDescending(m => m.CommonGenres)
+                .Take(4)
+                .Select(m => _mapper.Map<MovieDTO>(m.Movie))
+                .ToList();
+
+            return similarMovies;
+        }
+
     }
 }

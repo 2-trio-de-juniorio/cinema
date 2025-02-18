@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace DataAccessLayer.Interfaces
 {
     // Currently implemented as an interface. In future, class-based repositories might be used
@@ -11,5 +13,7 @@ namespace DataAccessLayer.Interfaces
         void Update(TEntity entity);
         void Remove(TEntity entity);
         Task<bool> RemoveByIdAsync(int id);
+
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }
